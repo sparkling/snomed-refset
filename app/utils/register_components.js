@@ -9,6 +9,7 @@ function registerComponents(container) {
   for (var prop in templates) {
     if (match = prop.match(/templates\/components\/(.*)$/)) {
       require(prop, null, null, true);
+      Ember.Logger.log('initialising: ' + match[1]);
       registerComponent(container, match[1]);
     }
   }

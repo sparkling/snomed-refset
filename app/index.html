@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>App</title>
+  <title>Refsets</title>
+
+  <script type="text/javascript" >
+  ENV = {
+    EXPERIMENTAL_CONTROL_HELPER: true
+  };
+  </script>  
+
+<link rel="stylesheet" href="/assets/refset.css">
+
+  
 
   <!-- build:css(tmp/result) assets/app.min.css -->
   <link rel="stylesheet" href="/assets/app.css">
+  <link rel="stylesheet" href="/assets/textSearch.css">
+  <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css">
   <!-- endbuild -->
 
   <!-- for more details visit: https://github.com/yeoman/grunt-usemin -->
@@ -12,6 +24,8 @@
   <!-- build:js(tmp/result) assets/vendor.min.js -->
 
     <script src="/vendor/jquery/jquery.js"></script>
+    <script src="/vendor/bootstrap/dist/js/bootstrap.js"></script>  
+    <script src="/vendor/momentjs/moment.js"></script>  
 
     <!-- @if dist=false -->
     <script src="/vendor/handlebars/handlebars.js"></script>
@@ -68,9 +82,13 @@
   <!-- @endif -->
 
   <!-- @if tests=false -->
+
   <script>
     window.App = require('appkit/app')["default"].create();
   </script>
+
+  <script type="text/javascript" src="//use.typekit.net/yny4pvk.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <!-- @endif -->
 
 </body>

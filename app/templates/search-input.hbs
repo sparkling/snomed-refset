@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="syntax">
+      <small>
+        <a href="http://lucene.apache.org/core/3_5_0/queryparsersyntax.html" target="_blank">Help</a>
+      </small>
+    </div>
+    {{view Ember.TextField valueBinding="query" tabindex=1 label="" placeholder="Search Concepts"}}
+    {{#if searchResults.total}}<div class="total">{{searchResults.total}}</div>{{/if}}
+  </div>
+</div>
