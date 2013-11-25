@@ -1,7 +1,7 @@
 {
   "name": "app-kit",
   "namespace": "appkit",
-  "version": "0.0.0",
+  "version": "0.0.0-1",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -51,5 +51,9 @@
     "grunt-contrib-sass": "~0.5.0",
     "grunt-contrib-coffee": "~0.7.0",
     "less": "~1.5.1"
+  },
+  "subdomain": "refset2",
+  "engines": {
+    "node": "0.10.x"
   }
 }
