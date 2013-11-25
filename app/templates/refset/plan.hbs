@@ -1,0 +1,13 @@
+<secion id="plan">
+  <h2>Plan
+  {{#link-to 'refset.concepts' refset}}<button class="toggle btn btn-sm btn-default">Show Concepts</button>{{/link-to}}
+  </h2>
+  <ul class="list-group">
+  {{#each rule in rules}}
+    <li class="list-group-item">
+    {{show-rule rule}}
+    </li>
+  {{/each}}
+  </ul>
+  <div class="terminal">Terminal: {{terminal}}</div>
+</section>

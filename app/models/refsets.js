@@ -50,6 +50,7 @@ var toEmberObject = function(plainObject) {
 };
 
 var Refsets = Ember.Object.extend({
+  concepts: 'concepts-not-set'
 });
 
 Refsets.reopenClass({
