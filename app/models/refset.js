@@ -1,4 +1,5 @@
 var Refset = Ember.Object.extend({});
+var baseUrl = 'http://refset.snomedtools.com/';
 
 var toType = function(obj) {
   return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
@@ -57,7 +58,7 @@ Refset.reopenClass({
       if (refset != null) {
         return p.resolve(refset);
       }
-      return p.resolve($.getJSON('http://localhost:8080/refsets/api/refsets/' + publicId).then(function(res) {
+      return p.resolve($.getJSON(baseUrl + 'api/refsets/' + publicId).then(function(res) {
         refset = Ember.Object.create(res);
         Ember.Logger.log("res: " + res);
         _this.set('refset', refset);
@@ -74,7 +75,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: "http://localhost:8080/refsets/api/refsets/" + refset.publicId + "/concepts.json",
+        url: baseUrl + "api/refsets/" + refset.publicId + "/concepts.json",
         type: "GET",
         data: '',
         dataType: "json"
@@ -99,7 +100,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: "http://localhost:8080/refsets/api/refsets/" + refset.publicId + "/plan.json",
+        url: baseUrl + "api/refsets/" + refset.publicId + "/plan.json",
         type: "GET",
         data: '',
         dataType: "json"

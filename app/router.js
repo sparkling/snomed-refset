@@ -1,17 +1,12 @@
-var Router = Ember.Router.extend(); // ensure we don't share routes between all Router instances
+var Router = Ember.Router.extend();
 
 Router.map(function() {
-  this.resource('refsets', {path:'/' }, function(){
-    this.route('index',  {path:''});
-  });
-  this.resource('create',  {path:'/create'}, function(){
-    this.route('index',  {path:''});
-  });
+  this.resource('refsets', {path:'/'});
+  this.resource('create',  {path:'/create'}, function(){});
   this.resource('refset',  {path:'/:publicId'}, function(){
-    this.route('concepts',  {path:'/'});
+    this.route('concepts',  {path:''});
     this.route('plan',  {path:'plan'});
   });
-
 });
 
 Router.reopen({

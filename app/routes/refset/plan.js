@@ -3,9 +3,15 @@ import Refset from 'appkit/models/refset';
 export default Ember.Route.extend({
   model: function() {
     Ember.Logger.log('Loading plan in router');
-    return Refset.getPlan(this.modelFor('refset'), this);
+    var plan = this.get('model');
+    Ember.Logger.log('Cached plans are: ' + JSON.stringify(plan));
+    if (typeof plan !== 'undefined'){
+      Ember.Logger.log('CALLING');
+      plan = Refset.getPlan(this.modelFor('refset'), this);
+    }
+    return plan;
   },
-  renderTemplate: function(){
-    this.render({outlet:'details'});
-  }  
+//  renderTemplate: function(){
+//    this.render({outlet:'details'});
+//  }  
 });
