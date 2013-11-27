@@ -100,7 +100,7 @@ Refsets.reopenClass({
         //This should be passed in as a success function instead
         //Does not belong here
         _this.get('controllers.refsets.model').pushObject(refset);
-        _this.transitionToRoute('refset', refset);
+        _this.transitionToRoute('refset.plan', refset);
       }), function(error) {
         var parsed;
         Ember.Logger.log('fail: ' + JSON.stringify(error));
