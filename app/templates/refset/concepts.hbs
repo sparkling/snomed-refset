@@ -1,8 +1,11 @@
-<section id="plan">
+<section id="concepts">
   <h2>Concepts
-  {{#link-to 'refset.plan'}}<button class="first toggle btn btn-sm btn-default">Plan</button>{{/link-to}}
-  {{#link-to 'refset.plan'}}<button class="last toggle btn btn-sm btn-default">Snapshots</button>{{/link-to}}
+  
+  {{#link-to 'refset.snapshots'}}<button class="first toggle btn btn-default btn-info">Snapshots</button>{{/link-to}}  
+  {{#link-to 'plan.show' refset}}<button class="toggle btn btn-default btn-info">Plan</button>{{/link-to}}
+  {{#link-to 'refset.concepts' refset}}<button class="last disabled toggle btn btn-default btn-info">Concepts</button>{{/link-to}}
   </h2>
+  <button class="btn take-snapshot btn-sm btn-default">Take Snapshot</button>
   <table id="forums" class="table table-striped">
     <thead>
       <th>Title</th>

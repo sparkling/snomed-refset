@@ -5,7 +5,11 @@ Router.map(function() {
   this.resource('create',  {path:'/create'}, function(){});
   this.resource('refset',  {path:'/:publicId'}, function(){
     this.route('concepts',  {path:'concepts'});
-    this.route('plan',  {path:'plan'});
+    this.resource('plan',  {path:'plan'}, function(){
+      this.route('edit',  {path:'edit'});
+      this.route('show',  {path:'show'});
+    });
+    this.route('snapshots',  {path:'snapshots'});
   });
 });
 
