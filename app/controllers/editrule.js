@@ -11,8 +11,7 @@ export default Ember.ObjectController.extend({
   }.property('type'),
   isSetOperation: function(){
     var type = this.get('type');
-    return (type === 'union') || (type === 'intersection')
-        || (type === 'difference') || (type === 'symDifference');
+    return (type === 'union') || (type === 'intersection') || (type === 'difference') || (type === 'symDifference');
   }.property('type')
 
 });
