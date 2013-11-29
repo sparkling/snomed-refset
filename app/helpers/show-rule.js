@@ -1,6 +1,6 @@
 export default Ember.Handlebars.makeBoundHelper(function(rule) {
   if (rule.get('type') === 'LIST'){
-    return new window.Handlebars.SafeString("<span style=\"color: lightgrey\">" + rule.get('id') + "</span>&nbsp;&nbsp; List <span style=\"padding-left: 0.5em;color:grey\">[" + rule.get('concepts').length + "]</span>");
+    return new window.Handlebars.SafeString("<span style=\"color: lightgrey\">" + rule.get('id') + "</span>&nbsp;<span style=\"padding-left: 0.5em;color:grey\">" + rule.get('concepts').length + " concepts</span>");
   }
   else if (rule.get('type') === 'UNION'){
     return new window.Handlebars.SafeString("<span style=\"color: lightgrey\">" + rule.get('id') + "</span>&nbsp;&nbsp; Rule " + rule.get('left') + " Union Rule " + rule.get('right'));
