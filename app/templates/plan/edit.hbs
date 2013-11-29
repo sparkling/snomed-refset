@@ -1,31 +1,52 @@
-<h4>Rules
-  <button {{action "newrule"}} type="button" data-toggle="modal" href="#editRuleModal" class="btn add-rule btn-default btn-sm">Add Rule</button>
-  <!--   
-  <div id="newrule" class="dropdown">
-    <button type="button" data-toggle="dropdown" class="add-rule btn btn-default btn-sm">Add Rule</button>   
-    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2">
-      <li role="presentation" class="dropdown-header">Source Rules</li>
-      <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
-      <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
-      <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
-      <li role="presentation"><a role="menuitem" {{action 'listRule' this}} data-toggle="modal" href="#listRuleModal" tabindex="-1">List Concepts</a></li>
-      <li role="presentation" class="divider"></li>
-      <li role="presentation" class="dropdown-header">Set Operations</li>
-      <li role="presentation"><a role="menuitem" {{action 'unionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
-      <li role="presentation"><a role="menuitem" {{action 'intersectionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
-      <li role="presentation"><a role="menuitem" {{action 'differenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
-      <li role="presentation"><a role="menuitem" {{action 'symDifferenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
+<section class="rules">
+  <div class="rules-list">
+    <div class="plan-actions clearfix">
+      {{#link-to 'plan.show'}}<button class="btn cancel btn-default">Cancel</button>{{/link-to}}
+      <div class="dropdown">
+        <button type="button" data-toggle="dropdown" class="dropdown-toggle add-rule btn btn-default btn-sm">Add Rule</button>   
+        <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2">
+          <li role="presentation" class="dropdown-header">Source Rules</li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'listRule' this}} data-toggle="modal" href="#listRuleModal" tabindex="-1">List Concepts</a></li>
+          <li role="presentation" class="divider"></li>
+          <li role="presentation" class="dropdown-header">Set Operations</li>
+          <li role="presentation"><a role="menuitem" {{action 'unionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'intersectionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'differenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'symDifferenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
+        </ul>
+      </div>
+      <!--   
+      <div id="newrule" class="dropdown">
+        <button type="button" data-toggle="dropdown" class="add-rule btn btn-default btn-sm">Add Rule</button>   
+        <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2">
+          <li role="presentation" class="dropdown-header">Source Rules</li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'listRule' this}} data-toggle="modal" href="#listRuleModal" tabindex="-1">List Concepts</a></li>
+          <li role="presentation" class="divider"></li>
+          <li role="presentation" class="dropdown-header">Set Operations</li>
+          <li role="presentation"><a role="menuitem" {{action 'unionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'intersectionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'differenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'symDifferenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
+        </ul>
+      </div>
+      -->  
+    </div>
+    <ul class="list-group list-rules">
+    {{#each rule in model.rules}}
+      <li class="list-group-item rule">
+        {{render "editrule" rule}}
+      </li>
+    {{/each}}
     </ul>
+  </rules-list>
+  <div class="actions">
+    <button class="btn validate btn-success">Validate</button>
+    <button disabled="disabled" class="btn save btn-success btn-default">Save</button>
   </div>
-  -->  
-</h4>
-<ul class="list-group rules">
-{{#each rule in model.rules}}
-  <li class="list-group-item rule">
-    {{render "editrule" rule}}
-  </li>
-{{/each}}
-</ul>
-<div class="terminal">Terminal: {{model.terminal}}</div>
-<button class="btn save disabled btn-default">Save</button>
-{{#link-to 'plan.show'}}<button class="btn cancel btn-default">Cancel</button>{{/link-to}}
+</section>

@@ -44,5 +44,8 @@ export default Ember.ObjectController.extend({
     var type = this.get('type');
     return (type === 'LIST');
   }.property('type'),
+  isTerminal: function(){
+    return this.get('plan.terminal') === this.get('id');
+  }
 
 });

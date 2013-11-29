@@ -2,7 +2,7 @@
   <div class="list edit btn-group">
     <!-- ID -->
     <div class="btn-group">
-      <button type="button" disabled="disabled" class="btn-lg disabled btn btn-default">{{id}}</button> 
+      <button type="button" disabled="disabled" class="btn-lg id btn btn-default">{{id}}</button> 
     </div>  
     <div class="btn-group">
       <button type="button" {{action "list"}} class="btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
@@ -15,7 +15,7 @@
   
   <!-- ID -->
   <div class="btn-group">
-    <button type="button" disabled="disabled" class="disabled btn-lg btn btn-default">{{id}}</button> 
+    <button type="button" disabled="disabled" class="id btn-lg btn btn-default">{{id}}</button> 
   </div>  
   <!-- LEFT -->
   <div class="btn-group">
@@ -55,22 +55,10 @@
       {{/each}}
     </ul>                    
   </div>
-</div>
-{{/if}}
 
-<div class="dropdown change-rule-type">
-  <button type="button" data-toggle="dropdown" class="add-rule btn btn-default btn-sm">Add Rule</button>   
-  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2">
-    <li role="presentation" class="dropdown-header">Source Rules</li>
-    <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
-    <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
-    <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
-    <li role="presentation"><a role="menuitem" {{action 'listRule' this}} data-toggle="modal" href="#listRuleModal" tabindex="-1">List Concepts</a></li>
-    <li role="presentation" class="divider"></li>
-    <li role="presentation" class="dropdown-header">Set Operations</li>
-    <li role="presentation"><a role="menuitem" {{action 'unionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
-    <li role="presentation"><a role="menuitem" {{action 'intersectionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
-    <li role="presentation"><a role="menuitem" {{action 'differenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
-    <li role="presentation"><a role="menuitem" {{action 'symDifferenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
-  </ul>
-</div>
+  <div class="btn-group">
+    {{#if isTerminal}}
+      <button type="button" disabled="disabled" class="terminus btn btn-lg btn-default">T</button>
+    {{/if}}
+  </div>
+{{/if}}
