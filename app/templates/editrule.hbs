@@ -2,10 +2,10 @@
   <div class="list edit btn-group">
     <!-- ID -->
     <div class="btn-group">
-      <button type="button" disabled="disabled" class="disabled btn btn-default">{{id}}</button> 
+      <button type="button" disabled="disabled" class="btn-lg disabled btn btn-default">{{id}}</button> 
     </div>  
     <div class="btn-group">
-      <button type="button" {{action "list"}} class="btn btn-default">{{concepts.length}} Concepts</button> 
+      <button type="button" {{action "list"}} class="btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
     </div>
   </div>
 {{/if}}
@@ -15,14 +15,14 @@
   
   <!-- ID -->
   <div class="btn-group">
-    <button type="button" disabled="disabled" class="disabled btn btn-default">{{id}}</button> 
+    <button type="button" disabled="disabled" class="disabled btn-lg btn btn-default">{{id}}</button> 
   </div>  
   <!-- LEFT -->
   <div class="btn-group">
     {{#if left}}
-    <button type="button" data-toggle="dropdown" class="btn btn-default">{{show-rule leftRule}}</button>
+    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule leftRule}}</button>
     {{else}}
-    <button type="button" data-toggle="dropdown" class="btn btn-default">Select Rule</button>
+    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule</button>
     {{/if}}
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
       {{#each rule in plan.rules}}
@@ -33,7 +33,7 @@
 
   <!-- OPERATION -->
   <div class="btn-group">
-    <button type="button" data-toggle="dropdown" class="btn btn-default">{{rule-type type}}</button>
+    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{rule-type type}}</button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
       <li role="presentation"><a role="menuitem" {{action "type" "UNION"}} tabindex="-1" href="#">Union</a></li>
       <li role="presentation"><a role="menuitem" {{action "type" "INTERSECTION"}} tabindex="-1" href="#">Intersection</a></li>
@@ -45,9 +45,9 @@
   <!-- RIGHT -->
   <div class="btn-group">
     {{#if right}}
-    <button type="button" data-toggle="dropdown" class="btn btn-default">{{show-rule rightRule}}</button>
+    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule rightRule}}</button>
     {{else}}
-    <button type="button" data-toggle="dropdown" bind-attr class="btn btn-default">Select Rule</button>
+    <button type="button" data-toggle="dropdown" bind-attr class="btn btn-lg btn-default">Select Rule</button>
     {{/if}}
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
       {{#each rule in plan.rules}}
