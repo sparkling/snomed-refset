@@ -15,7 +15,7 @@ export default Ember.ObjectController.extend({
       this.set("right", rule.id);
     },
     list: function(){
-      Ember.Logger.log('NOT handling event [list] with rule: ' + rule.id);
+      Ember.Logger.log('NOT handling event [list]');
     }    
   },
   leftRule: function(){
