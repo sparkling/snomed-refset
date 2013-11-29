@@ -1,7 +1,3 @@
-
-{{render "editrule"}}
-
-
 <h4>Rules
   <button {{action "newrule"}} type="button" data-toggle="modal" href="#editRuleModal" class="btn add-rule btn-default btn-sm">Add Rule</button>
   <!--   
@@ -23,13 +19,13 @@
   </div>
   -->  
 </h4>
-<div class="list-group">
+<ul class="list-group rules">
 {{#each rule in model.rules}}
-  <a href="#" {{action "edit" rule}} class="list-group-item">
-    {{show-rule rule}}
-  </a>
+  <li class="list-group-item rule">
+    {{render "editrule" rule}}
+  </li>
 {{/each}}
-</div>
+</ul>
 <div class="terminal">Terminal: {{model.terminal}}</div>
 <button class="btn save disabled btn-default">Save</button>
 {{#link-to 'plan.show'}}<button class="btn cancel btn-default">Cancel</button>{{/link-to}}

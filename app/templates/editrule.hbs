@@ -1,34 +1,76 @@
-{{#modal-box action="created" modalid="editRuleModal"}}
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4>Edit Rule</h4>
-  </div>
-  <div class="modal-body">
-    {{#if type}}
-      <h4 class="type">{{rule-type type}}</h4>
-    {{/if}}
-    <div {{bind-attr class="hasType:has-type :dropdown :type"}}>
-      <button type="button" data-toggle="dropdown" {{bind-attr class=":select-rule-type :btn :btn-default :btn-sm"}}>{{#if hasType}}Change{{else}}Select Type{{/if}}</button>   
-      <ul {{bind-attr class=":dropdown-menu hasType:pull-right"}} role="menu" aria-labelledby="dropdownMenu2">
-        <li role="presentation" class="dropdown-header">Source Rules</li>
-        <li role="presentation"><a role="menuitem" {{action "type" "import"}} tabindex="-1" href="#">Import Snapshot</a></li>        
-        <li role="presentation"><a role="menuitem" {{action "type" "list"}} tabindex="-1" href="#">List of Concept</a></li>
-        <li role="presentation" class="divider"></li>
-        <li role="presentation" class="dropdown-header">Set Operations</li>
-        <li role="presentation"><a role="menuitem" {{action "type" "union"}} tabindex="-1" href="#">Union</a></li>
-        <li role="presentation"><a role="menuitem" {{action "type" "intersection"}} tabindex="-1" href="#">Intersection</a></li>
-        <li role="presentation"><a role="menuitem" {{action "type" "difference"}} tabindex="-1" href="#">Difference</a></li>
-        <li role="presentation"><a role="menuitem" {{action "type" "symDifference"}} tabindex="-1" href="#">Symmetric Difference</a></li>        
-      </ul>
+{{#if isListOperation}} 
+  <div class="list edit btn-group">
+    <!-- ID -->
+    <div class="btn-group">
+      <button type="button" disabled="disabled" class="disabled btn btn-default">{{id}}</button> 
     </div>  
-    {{#if isSetOperation}} 
-      <div class="set clearfix">
-        I'm a set
-      </div>
-    {{/if}}
+    <div class="btn-group">
+      <button type="button" {{action "list"}} class="btn btn-default">{{concepts.length}} Concepts</button> 
+    </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-sm"  {{action "created" model}} data-dismiss="modal">Create</button>
-    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+{{/if}}
+
+{{#if isSetOperation}} 
+<div class="set edit btn-group">
+  
+  <!-- ID -->
+  <div class="btn-group">
+    <button type="button" disabled="disabled" class="disabled btn btn-default">{{id}}</button> 
   </div>  
-{{/modal-box}}
+  <!-- LEFT -->
+  <div class="btn-group">
+    {{#if left}}
+    <button type="button" data-toggle="dropdown" class="btn btn-default">{{show-rule leftRule}}</button>
+    {{else}}
+    <button type="button" data-toggle="dropdown" class="btn btn-default">Select Rule</button>
+    {{/if}}
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
+      {{#each rule in plan.rules}}
+      <li role="presentation"><a role="menuitem" {{action "left" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
+      {{/each}}
+    </ul>          
+  </div>
+
+  <!-- OPERATION -->
+  <div class="btn-group">
+    <button type="button" data-toggle="dropdown" class="btn btn-default">{{rule-type type}}</button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+      <li role="presentation"><a role="menuitem" {{action "type" "UNION"}} tabindex="-1" href="#">Union</a></li>
+      <li role="presentation"><a role="menuitem" {{action "type" "INTERSECTION"}} tabindex="-1" href="#">Intersection</a></li>
+      <li role="presentation"><a role="menuitem" {{action "type" "DIFFERENCE"}} tabindex="-1" href="#">Difference</a></li>
+      <li role="presentation"><a role="menuitem" {{action "type" "SYMDIFFERENCE"}} tabindex="-1" href="#">Symmetric Difference</a></li>        
+    </ul>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="btn-group">
+    {{#if right}}
+    <button type="button" data-toggle="dropdown" class="btn btn-default">{{show-rule rightRule}}</button>
+    {{else}}
+    <button type="button" data-toggle="dropdown" bind-attr class="btn btn-default">Select Rule</button>
+    {{/if}}
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
+      {{#each rule in plan.rules}}
+        <li role="presentation"><a role="menuitem" {{action "right" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
+      {{/each}}
+    </ul>                    
+  </div>
+</div>
+{{/if}}
+
+<div class="dropdown change-rule-type">
+  <button type="button" data-toggle="dropdown" class="add-rule btn btn-default btn-sm">Add Rule</button>   
+  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2">
+    <li role="presentation" class="dropdown-header">Source Rules</li>
+    <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
+    <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
+    <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
+    <li role="presentation"><a role="menuitem" {{action 'listRule' this}} data-toggle="modal" href="#listRuleModal" tabindex="-1">List Concepts</a></li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation" class="dropdown-header">Set Operations</li>
+    <li role="presentation"><a role="menuitem" {{action 'unionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
+    <li role="presentation"><a role="menuitem" {{action 'intersectionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
+    <li role="presentation"><a role="menuitem" {{action 'differenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
+    <li role="presentation"><a role="menuitem" {{action 'symDifferenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
+  </ul>
+</div>

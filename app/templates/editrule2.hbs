@@ -1,0 +1,48 @@
+{{#if isSetOperation}} 
+<div class="set edit btn-group">
+  
+  <!-- ID -->
+  <button type="button" disabled="disabled" class="btn btn-default">{{id}}</button> 
+  
+  <!-- LEFT -->
+  <div class="btn-group">
+    {{#if left}}
+    <button type="button" data-toggle="dropdown" class="btn btn-default">{{show-rule leftRule}}</button>
+    {{else}}
+    <button type="button" data-toggle="dropdown" class="btn btn-default">Select Rule</button>
+    {{/if}}
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
+      {{#each rule in plan.rules}}
+      <li role="presentation"><a role="menuitem" {{action "left" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
+      {{/each}}
+    </ul>          
+  </div>
+
+  <!-- OPERATION -->
+  <div class="btn-group">
+    <button type="button" data-toggle="dropdown" class="btn btn-default">{{rule-type type}}</button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+      <li role="presentation"><a role="menuitem" {{action "type" "UNION"}} tabindex="-1" href="#">Union</a></li>
+      <li role="presentation"><a role="menuitem" {{action "type" "INTERSECTION"}} tabindex="-1" href="#">Intersection</a></li>
+      <li role="presentation"><a role="menuitem" {{action "type" "DIFFERENCE"}} tabindex="-1" href="#">Difference</a></li>
+      <li role="presentation"><a role="menuitem" {{action "type" "SYMDIFFERENCE"}} tabindex="-1" href="#">Symmetric Difference</a></li>        
+    </ul>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="btn-group">
+    {{#if right}}
+    <button type="button" data-toggle="dropdown" class="btn btn-default">{{show-rule rightRule}}</button>
+    {{else}}
+    <button type="button" data-toggle="dropdown" bind-attr class="btn btn-default">Select Rule</button>
+    {{/if}}
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
+      {{#each rule in plan.rules}}
+        <li role="presentation"><a role="menuitem" {{action "right" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
+      {{/each}}
+    </ul>                    
+  </div>
+</div>
+{{/if}}
+
+
