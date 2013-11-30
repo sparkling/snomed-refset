@@ -1,5 +1,5 @@
-var Refset = Ember.Object.extend({});
-//var baseUrl = 'http://refset.snomedtools.com/';
+//var Refset = Ember.Object.extend({});
+var baseUrl = 'http://refset.snomedtools.com/';
 var baseUrl = 'http://localhost:8080/refsets/';
 
 var toType = function(obj) {
