@@ -1,7 +1,21 @@
 export default Ember.ObjectController.extend({
   needs: ["plan","editrule"],
   model: Ember.computed.alias("controllers.plan.model"),
+  counter: -1,
   actions:{
+    addrule: function(){
+      Ember.Logger.log('Handling event [addRule]');
+      var counter = this.get('counter');
+      var rule = Ember.Object.extend({
+        id: counter,
+        type: '',
+        left: '',
+        right: '',
+        concepts: Ember.A()
+      }).create();
+      this.set('counter', --counter);
+      this.get('model.rules').pushObject(rule);
+    },  
     newrule: function(){
       Ember.Logger.log('handling [newrule] in plan.edit');
       var rule = Ember.Object.extend({

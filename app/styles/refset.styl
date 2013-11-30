@@ -65,8 +65,8 @@ h4
 
 #plan .rule.list-group-item{
   border: none
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 
@@ -93,17 +93,29 @@ h4
 
 #plan .btn.terminus
   min-width: 0
-  background-color: lightgoldenrodyellow
+  background-color: papayawhip
   //color: black
   font-family : museo-sans-1, museo-sans-2 , Georgia, Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif
 
+
+#plan .icon.btn
+  min-width: 0
+  opacity: 0.75
+
+#plan .icon.btn .glyphicon
+  font-size: 0.9em !important
+  color: #5cb85c
+
+#plan .delete.icon.btn .glyphicon  
+  color: crimson
 
 #plan .btn.id
   background-color: ghostwhite
   color: grey
   min-width: 0
 
-
+#plan .refset-actions
+  margin-top: -0.9em
 
 #plan .btn.edit-plan
     float: right    
@@ -111,7 +123,14 @@ h4
 #plan .rules .rules-list
   //position: relative
 
+#plan .rules h4
+  //color: #5cb85c;
+  color: lightgray;
+  margin: 4em 0 0em 0
+  padding: 0
+
 #plan .rules .rules-list .plan-actions
+  margin-top: -0.9em
   //float: right
   //position: absolute
   //z-index: 10
@@ -123,9 +142,9 @@ h4
 #plan .rules .rules-list .plan-actions .btn.cancel
   float: right
 
-#plan .rules .rules-list .plan-actions .dropdown
+#plan .rules .rules-list .plan-actions .btn
   float: right
-  margin-right: 1em  
+  margin-right: 0.5em  
 
 #plan .rules .rules-list .list-rules
   //position: absolute
@@ -135,10 +154,11 @@ h4
   float: left
   width: 100%
 
-
+#plan .rules 
+  margin-top: 4em
 
 #plan .rules .actions
-  margin-top: 2em
+  margin-top: 1em
   float: left
 
 #plan .rules .actions .btn.validate

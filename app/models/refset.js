@@ -1,16 +1,17 @@
 var Refset = Ember.Object.extend({});
-var baseUrl = 'http://refset.snomedtools.com/';
+//var baseUrl = 'http://refset.snomedtools.com/';
+var baseUrl = 'http://localhost:8080/refsets/';
 
 var toType = function(obj) {
   return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 };
 
 var toEmberObject = function(plainObject) {
-  var data, emberArray, i, key, result, type, value;
-  //Ember.Logger.log('********************************************');
-  //Ember.Logger.log('toEmber: ' + JSON.stringify(plainObject));
-  //Ember.Logger.log('toEmber type: ' + Ember.typeOf(plainObject));
-  //Ember.Logger.log('********************************************');
+  var data, i, key, result, type, value;
+  Ember.Logger.log('********************************************');
+  Ember.Logger.log('toEmber: ' + JSON.stringify(plainObject));
+  Ember.Logger.log('toEmber type: ' + Ember.typeOf(plainObject));
+  Ember.Logger.log('********************************************');
   if (!plainObject) {
     return plainObject;
   }
@@ -18,25 +19,27 @@ var toEmberObject = function(plainObject) {
   for (key in plainObject) {
     value = plainObject[key];
     type = Ember.typeOf(value);
-    //Ember.Logger.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-    //Ember.Logger.log('key: ' + JSON.stringify(key));
-    //Ember.Logger.log('value: ' + JSON.stringify(value));
-    //Ember.Logger.log('emberType (value): ' + type);
-    //Ember.Logger.log('toType (value): ' + toType(value));
+    Ember.Logger.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+    Ember.Logger.log('key: ' + JSON.stringify(key));
+    Ember.Logger.log('value: ' + JSON.stringify(value));
+    Ember.Logger.log('emberType (value): ' + type);
+    Ember.Logger.log('toType (value): ' + toType(value));
     if (type === "array") {
-      emberArray = Ember.A();
+      var emberArray = Ember.A();
       i = 0;
-      //Ember.Logger.log('value.length: ' + value.length);
+      Ember.Logger.log('value.length: ' + value.length);
       while (i < value.length) {
         if (Ember.typeOf(value[i]) === 'object') {
-          //Ember.Logger.log('pushing: toEmberObject(' + value[i] + ')');
+          Ember.Logger.log('pushing: toEmberObject(' + value[i] + ')');
           emberArray.pushObject(toEmberObject(value[i]));
         } else {
-          //Ember.Logger.log('pushing: ' + value[i]);
+          Ember.Logger.log('pushing: ' + value[i]);
           emberArray.pushObject(value[i]);
         }
         ++i;
       }
+      Ember.Logger.log('WAAAH! End of array! key: ' + key + ', emberArray type is: ' + emberArray.constructor.toString());
+      Ember.Logger.log('Ember array type: ' + Ember.typeOf(Ember.A()));
       data[key] = emberArray;
     } else if (type === "object") {
       data[key] = toEmberObject(value);
@@ -68,7 +71,7 @@ Refset.reopenClass({
   },
   getConcepts: function(refset, _this) {
     var concepts = Ember.A();
-    Ember.Logger.log('GETing concepts for: ' + JSON.stringify(refset));
+    Ember.Logger.log('GETing concepts for: ' + refset.publicId);
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
@@ -93,7 +96,7 @@ Refset.reopenClass({
   }, 
    getPlan: function(refset, _this) {
     var plan = Ember.Object.create();
-    Ember.Logger.log('GETing plan for: ' + JSON.stringify(refset));
+    Ember.Logger.log('GETing plan for: ' + refset.publicId);
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
@@ -105,9 +108,10 @@ Refset.reopenClass({
         data: '',
         dataType: "json"
       }).then((function(success) {
-        Ember.Logger.log('success: ' + JSON.stringify(success));
+        //Ember.Logger.log('success: ' + JSON.stringify(success));
         var returned = toEmberObject(success);
-        Ember.Logger.log('plan found and parsed: ' + JSON.stringify(returned));
+        Ember.Logger.log('returned plan has rules of type: ' + Ember.typeOf(returned.get('rules')));
+        //Ember.Logger.log('plan found and parsed: ' + JSON.stringify(returned));
         plan.setProperties(returned);
       }), function(error) {
         Ember.Logger.log('fail: ' + JSON.stringify(error));
