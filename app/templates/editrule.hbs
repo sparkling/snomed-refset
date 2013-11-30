@@ -9,14 +9,18 @@
     </div>
 
     <!--config -->
+    {{#if isEdit}}
     <div class="btn-group">
       <button type="button" {{action "resetType"}} class="edit icon btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
     </div>
+    {{/if}}
 
     <!-- delete -->
+    {{#if isEdit}}
     <div class="btn-group">
       <button type="button" {{action "delete"}} class="delete icon btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
-    </div>    
+    </div>
+    {{/if}}
 
     <!-- terminal -->
     {{#if isTerminal}}
@@ -74,14 +78,18 @@
   </div>
 
   <!-- config -->
+  {{#if isEdit}}
   <div class="btn-group">
     <button type="button" {{action "resetType"}} class="edit icon btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
   </div>    
-
+  {{/if}}
+  
   <!-- delete -->
+  {{#if isEdit}}
   <div class="btn-group">
     <button type="button" {{action "delete"}} class="delete icon btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
   </div>    
+  {{/if}}
 
   <!-- terminal -->
   {{#if isTerminal}}
@@ -116,8 +124,10 @@
     </div>
 
     <!-- delete -->
-    <div class="btn-group">
-      <button type="button" {{action "delete"}} class="delete icon btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
-    </div>        
+    {{#if isDelete}}
+      <div class="btn-group">
+        <button type="button" {{action "delete"}} class="delete icon btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
+      </div>        
+    {{/if}}
   </div>
 {{/if}}

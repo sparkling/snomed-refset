@@ -2,23 +2,7 @@
   <div class="rules-list">
     <h4>Rules
       <div class="plan-actions clearfix">
-        {{#link-to 'plan.show'}}<button class="btn cancel btn-default">Cancel</button>{{/link-to}}
-        
-        <button type="button" {{action "addrule"}} class="add-rule btn btn-default btn-sm">Add Rule</button>   
-        <!--ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2">
-          <li role="presentation" class="dropdown-header">Source Rules</li>
-          <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
-          <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
-          <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
-          <li role="presentation"><a role="menuitem" {{action 'listRule' this}} data-toggle="modal" href="#listRuleModal" tabindex="-1">List Concepts</a></li>
-          <li role="presentation" class="divider"></li>
-          <li role="presentation" class="dropdown-header">Set Operations</li>
-          <li role="presentation"><a role="menuitem" {{action 'unionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
-          <li role="presentation"><a role="menuitem" {{action 'intersectionRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
-          <li role="presentation"><a role="menuitem" {{action 'differenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
-          <li role="presentation"><a role="menuitem" {{action 'symDifferenceRule' this}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
-        </ul-->
-      {{log rules}}
+        {{#link-to 'plan.show'}}<button class="btn cancel btn-sm btn-default">Cancel</button>{{/link-to}}
       </h4>
     </div>
     <ul class="list-group list-rules">
@@ -27,10 +11,13 @@
         {{render "editrule" rule}}
       </li>
     {{/each}}
+    <li class="list-group-item rule">
+      <button type="button" {{action "addrule"}} class="add-rule icon btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+    </li>
     </ul>
   </rules-list>
   <div class="actions">
-    <button class="btn validate btn-success">Validate</button>
-    <button disabled="disabled" class="btn save btn-success btn-default">Save</button>
+    <button class="btn validate btn-lg btn-success">Validate</button>
+    <button disabled="disabled" class="btn btn-lg save btn-success btn-default">Save</button>
   </div>
 </section>

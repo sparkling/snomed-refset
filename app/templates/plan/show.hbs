@@ -1,11 +1,16 @@
-<h4>Rules
-  {{#link-to 'plan.edit'}}<button class="btn edit-plan btn-sm btn-default">Edit</button>{{/link-to}}
-</h4>
-<ul >
-{{#each rule in model.rules}}
-  <li>
-  {{show-rule rule}}
-  </li>
-{{/each}}
-</ul>
-<div class="terminal">Terminal: {{model.terminal}}</div>
+<section class="rules">
+  <div class="rules-list">
+    <h4>Rules
+      <div class="plan-actions clearfix">
+        {{#link-to 'plan.edit'}}<button class="btn edit-plan btn-sm btn-default">Edit</button>{{/link-to}}
+      </h4>
+    </div>
+    <ul class="list-group list-rules">
+    {{#each rule in model.rules}}
+      <li class="list-group-item rule">
+        {{render "editrule" rule}}
+      </li>
+    {{/each}}
+    </ul>
+  </rules-list>
+</section>

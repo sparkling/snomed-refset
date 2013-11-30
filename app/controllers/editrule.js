@@ -26,6 +26,10 @@ export default Ember.ObjectController.extend({
       Ember.Logger.log('NOT handling event [list]');
     }
   },
+  isEdit: function(){
+    Ember.Logger.log('WAAAAH!!' + this.get('controllers.plan.isEdit'));
+    return this.get('controllers.plan.isEdit');
+  }.property(),
   leftRule: function(){
     return this.get('controllers.plan.rules').findBy('id', this.get('left'));
   }.property('left'),
