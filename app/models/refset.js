@@ -1,6 +1,6 @@
-//var Refset = Ember.Object.extend({});
+var Refset = Ember.Object.extend({});
 var baseUrl = 'http://refset.snomedtools.com/';
-var baseUrl = 'http://localhost:8080/refsets/';
+//var baseUrl = 'http://localhost:8080/refsets/';
 
 var toType = function(obj) {
   return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
