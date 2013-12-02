@@ -4,7 +4,51 @@ export default Ember.ObjectController.extend({
   counter: -1,
   selectConceptsModalId: 'selectConceptsModalId',
   editRule: '',
-  actions:{
+  plan: Ember.computed.alias("controllers.plan.model"), 
+  actions:{ 
+    undo: function(){
+      Ember.Logger.log('Handling undo event in select concepts component');
+      
+      var alert = this.get('plan.alert');
+      Ember.Logger.log('alert: ' + alert);
+      if (alert === undefined){
+        Ember.Logger.log('alert box is empty. This should not happen. Not handling event');
+        return;
+      }
+      
+      var entity = alert.get('entity');
+      Ember.Logger.log('entity: ' + entity);
+      if (entity === undefined){
+        Ember.Logger.log('alert entity is empty. This should not happen. Not handling event');
+        return;
+      }
+
+      var action = alert.get('action');
+      Ember.Logger.log('action: ' + action);  
+      if (action === undefined){
+        Ember.Logger.log('alert action is empty. This should not happen. Not handling event');
+        return;
+      }
+
+      var collectionIndex = alert.get('collectionIndex');
+      Ember.Logger.log('collectionIndex: ' + collectionIndex); 
+
+      if (action === 'DELETE'){
+        if (collectionIndex !== undefined){
+          this.get('model.rules').insertAt(collectionIndex, entity);
+        }else{
+          this.get('model.rules').pushObject(entity);
+        }
+      } else if (action === 'PARAM_CHANGE'){
+        var paramName = alert.get('paramName');
+        var paramValue = alert.get('paramValue');
+        var newRule = this.get('controllers.plan.rules').findBy('id', entity.get('id'));
+        newRule.set(paramName, paramValue);
+      } else{
+        Ember.Logger.log('Failed to handle undo action ' + action + ' for entity ' + entity);
+      }
+      this.set('plan.alert', undefined);
+    },
     showlist: function(rule){ 
         Ember.Logger.log('Handling showlist event in select concepts component');
         //Ember.Logger.log('Rendering components/select-concepts');

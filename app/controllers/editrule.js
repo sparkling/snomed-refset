@@ -1,14 +1,35 @@
+import Alert from 'appkit/models/alert';
+
 export default Ember.ObjectController.extend({
-  needs: ["plan","editrule"],
+  needs: ["plan","plan.edit", "editrule"],
   plan: Ember.computed.alias("controllers.plan.model"), 
   actions:{
     resetType: function(){
-      Ember.Logger.log('handling event [edit]');
+      Ember.Logger.log('handling event resetType');
+      var alert = Alert.create();
+      var rule = this.get('model');
+      alert.set('action', 'PARAM_CHANGE');
+      alert.set('entity', rule);
+      alert.set('paramName', 'type');
+      alert.set('paramValue', rule.get('type'));
+      
+      //var formatted = Ember.Handlebars.helpers.showRule.call(rule);
+      alert.set('message', "Succesfully Reset Rule " + rule.get('id'));// + ': ' + formatted);
+      
       this.set('type', '');
+      this.get('controllers.plan').set('alert', alert);
     },
     delete: function(){
       Ember.Logger.log('handling event [delete]');
-      this.get('plan.rules').removeObject(this.get('model'));
+      var rule = this.get('plan.rules').findBy('id', this.get('model.id'));
+      var oldIndex = this.get('plan.rules').indexOf(rule, 0);
+      this.get('plan.rules').removeObject(rule);
+      var alert = Alert.create();
+      alert.set('action', 'DELETE');
+      alert.set('entity', rule);
+      alert.set('collectionIndex', oldIndex);
+      alert.set('message', "Succeffully Deleted Rule " + rule.get('id'));
+      this.get('controllers.plan').set('alert', alert);
     },
     type: function(type){
       Ember.Logger.log('handling event [type] with value: ' + type);

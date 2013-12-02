@@ -53,7 +53,11 @@
         <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{show-rule leftRule}}</button>
       {{/if}}
     {{else}}
-    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule</button>
+      {{#if isEdit}}
+        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule</button>
+      {{else}}  
+        <button type="button" disabled="disabled" class="btn btn-lg btn-default">Select Rule</button>
+      {{/if}}
     {{/if}}
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
       {{#each rule in plan.rules}}
@@ -86,7 +90,11 @@
         <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{show-rule rightRule}}</button>
       {{/if}}
     {{else}}
-    <button type="button" data-toggle="dropdown" bind-attr class="btn btn-lg btn-default">Select Rule</button>
+      {{#if isEdit}}
+        <button type="button" data-toggle="dropdown" bind-attr class="btn btn-lg btn-default">Select Rule</button>
+      {{else}}
+        <button type="button" disabled="diabled" bind-attr class="btn btn-lg btn-default">Select Rule</button>
+      {{/if}}
     {{/if}}
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
       {{#each rule in plan.rules}}
@@ -125,27 +133,28 @@
       <button type="button" disabled="disabled" class="btn-lg id btn btn-default">{{id}}</button> 
     </div>  
     <div class="dropdown btn-group">
-      <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule Type</button>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-        <li role="presentation" class="dropdown-header">Source Rules</li>
-        <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
-        <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
-        <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
-        <li role="presentation"><a role="menuitem" {{action 'type' 'LIST'}} tabindex="-1">List Concepts</a></li>
-        <li role="presentation" class="divider"></li>
-        <li role="presentation" class="dropdown-header">Set Operations</li>
-        <li role="presentation"><a role="menuitem" {{action 'type' 'UNION'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
-        <li role="presentation"><a role="menuitem" {{action 'type' 'INTERSECTION'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
-        <li role="presentation"><a role="menuitem" {{action 'type' 'DIFFERENCE'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
-        <li role="presentation"><a role="menuitem" {{action 'type' 'SYMDIFFERENCE'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
-      </ul>  
+      {{#if isEdit}}
+        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule Type</button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+          <li role="presentation" class="dropdown-header">Source Rules</li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Simple Query (tbd)</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1">Structured Query (tbd)</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'type' 'LIST'}} tabindex="-1">List Concepts</a></li>
+          <li role="presentation" class="divider"></li>
+          <li role="presentation" class="dropdown-header">Set Operations</li>
+          <li role="presentation"><a role="menuitem" {{action 'type' 'UNION'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Union</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'type' 'INTERSECTION'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'type' 'DIFFERENCE'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
+          <li role="presentation"><a role="menuitem" {{action 'type' 'SYMDIFFERENCE'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
+        </ul>  
+        <!-- delete -->
+        
+        <button type="button" {{action "delete"}} class="delete icon new-rule btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
+      
+      {{else}}
+        <button type="button" disabled="disabled" class="btn btn-lg btn-default">Select Rule Type</button>
+      {{/if}}
     </div>
-
-    <!-- delete -->
-    {{#if isDelete}}
-      <div class="btn-group">
-        <button type="button" {{action "delete"}} class="delete icon btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
-      </div>        
-    {{/if}}
   </div>
 {{/if}}

@@ -19,15 +19,15 @@ export default Em.Component.extend({
       Ember.Logger.log('Popped');
     },
     selected: function(concept){
-      console.log('handling concept selected event with concept ' + JSON.stringify(concept));
+      Ember.Logger.log('handling concept selected event with concept ' + JSON.stringify(concept));
       var found = this.get('model.concepts').findBy('id', concept.get('id'));
-      console.log('Found concept ' + found);
+      Ember.Logger.log.log('Found concept ' + found);
       var concepts = this.get('model.concepts');
       if (found === undefined){
         concepts.pushObject(concept);
         this.set('isSearching', false);
       }else{
-        console.log('can not add concept that already exists in selection');
+        Ember.Logger.log.log('can not add concept that already exists in selection');
       }
       return false;
     }    
