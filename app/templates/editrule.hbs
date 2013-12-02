@@ -4,8 +4,14 @@
     <div class="btn-group">
       <button type="button" disabled="disabled" class="btn-lg id btn btn-default">{{id}}</button> 
     </div>  
+
+    <!-- description -->
     <div class="btn-group">
-      <button type="button" {{action "list"}} class="btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
+      {{#if isEdit}}
+        <button type="button" {{action "showlist" model}} class="btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
+      {{else}}
+        <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
+      {{/if}}
     </div>
 
     <!--config -->
@@ -41,7 +47,11 @@
   <!-- LEFT -->
   <div class="btn-group">
     {{#if left}}
-    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule leftRule}}</button>
+      {{#if isEdit}}
+        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule leftRule}}</button>
+      {{else}}
+        <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{show-rule leftRule}}</button>
+      {{/if}}
     {{else}}
     <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule</button>
     {{/if}}
@@ -54,6 +64,7 @@
 
   <!-- OPERATION -->
   <div class="btn-group">
+    {{#if isEdit}}
     <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{rule-type type}}</button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
       <li role="presentation"><a role="menuitem" {{action "type" "UNION"}} tabindex="-1" href="#">Union</a></li>
@@ -61,12 +72,19 @@
       <li role="presentation"><a role="menuitem" {{action "type" "DIFFERENCE"}} tabindex="-1" href="#">Difference</a></li>
       <li role="presentation"><a role="menuitem" {{action "type" "SYMDIFFERENCE"}} tabindex="-1" href="#">Symmetric Difference</a></li>        
     </ul>
+    {{else}}
+      <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{rule-type type}}</button>
+    {{/if}}
   </div>
 
   <!-- RIGHT -->
   <div class="btn-group">
     {{#if right}}
-    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule rightRule}}</button>
+      {{#if isEdit}}
+        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule rightRule}}</button>
+      {{else}}
+        <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{show-rule rightRule}}</button>
+      {{/if}}
     {{else}}
     <button type="button" data-toggle="dropdown" bind-attr class="btn btn-lg btn-default">Select Rule</button>
     {{/if}}

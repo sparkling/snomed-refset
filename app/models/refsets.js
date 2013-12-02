@@ -74,7 +74,7 @@ Refsets.reopenClass({
       }));
     });
   },
-  createRefset: function(refset, _this) {
+  createRefset: function(refset, _this) { 
     var result;
     Ember.Logger.log('POSTing: ' + JSON.stringify(refset));
     result = Ember.Object.create({});
@@ -101,7 +101,7 @@ Refsets.reopenClass({
         //This should be passed in as a success function instead
         //Does not belong here
         _this.get('controllers.refsets.model').pushObject(refset);
-        _this.transitionToRoute('refset.plan', refset);
+        _this.transitionToRoute('plan.edit', refset);
       }), function(error) {
         var parsed;
         Ember.Logger.log('fail: ' + JSON.stringify(error));

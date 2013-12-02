@@ -2,7 +2,19 @@ export default Ember.ObjectController.extend({
   needs: ["plan","editrule"],
   model: Ember.computed.alias("controllers.plan.model"),
   counter: -1,
+  selectConceptsModalId: 'selectConceptsModalId',
+  editRule: '',
   actions:{
+    showlist: function(rule){ 
+        Ember.Logger.log('Handling showlist event in select concepts component');
+        //Ember.Logger.log('Rendering components/select-concepts');
+        //this.render('components/select-concepts', { into: 'application', outlet: 'modal' });
+        //Ember.Logger.log('Rendering components/select-concepts complete');
+        Ember.Logger.log('setting editRule to ' + JSON.stringify(rule));
+        this.set('editRule', rule);
+        Ember.Logger.log('modal id: ' + this.get('selectConceptsModalId'));
+        $('#' + this.get('selectConceptsModalId')).modal('show');
+    },    
     addrule: function(){
       Ember.Logger.log('Handling event [addRule]');
       var counter = this.get('counter');

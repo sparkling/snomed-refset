@@ -1,0 +1,15 @@
+{{#modal-box action="selected" modalid=modalid}}
+  <div class="modal-header">
+    <h4>Select Concepts</h4>
+  </div>
+  <div class="modal-body">
+    {{#if isSearching}}
+      {{view "selectConceptsSearch"}}
+    {{else}}
+      {{view "selectConceptsList"}}
+    {{/if}}
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+</div>    
+{{/modal-box}} 

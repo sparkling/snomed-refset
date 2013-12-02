@@ -1,0 +1,13 @@
+<div class="concepts">
+  <div class="mode-action">
+    <button type="button" {{action 'showsearch'}} class="btn btn-default mode">Search</button>    
+  </div>
+  <div class="list-group clearfix">
+    {{#each concept in model.concepts}}
+      <a  {{bind-attr href=concept.url}} target="_blank" class="list-group-item">
+        {{concept.title}} <small style="color: lightgrey; padding-left: 0.5em">{{concept.id}}</small>
+        <button type="button" {{action 'removeconcept' concept}} class="close" aria-hidden="true">&times;</button>
+      </a>
+    {{/each}}
+  </div>
+</div>
