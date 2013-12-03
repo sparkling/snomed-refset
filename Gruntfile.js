@@ -105,7 +105,10 @@ module.exports = function(grunt) {
   //                   'clean:debug', 'build:debug', 'karma:test' ]);
 
   grunt.registerTask('test:ci', "Run your app's tests in PhantomJS. For use in continuous integration (i.e. Travis CI).", [
-                     'clean:debug', 'build:debug', 'karma:ci' ]);
+                     'clean:debug', 'build:debug' ]);
+
+  //grunt.registerTask('test:ci', "Run your app's tests in PhantomJS. For use in continuous integration (i.e. Travis CI).", [
+  //                 'clean:debug', 'build:debug', 'karma:ci' ]);
 
   grunt.registerTask('test:browsers', "Run your app's tests in multiple browsers (see tasks/options/karma.js for configuration).", [
                      'clean:debug', 'build:debug', 'karma:browsers' ]);
