@@ -52,10 +52,12 @@
     "grunt-contrib-coffee": "~0.7.0",
     "less": "~1.5.1",
     "grunt-contrib-less": "~0.8.2",
-    "compass": "~0.1.0"
   },
   "subdomain": "refset2",
   "engines": {
     "node": "0.10.x"
+  },
+  "dependencies": {
+    "grunt-contrib-compass": "~0.6.0"
   }
 }
