@@ -1,3 +1,4 @@
+
 {
   "name": "app-kit",
   "namespace": "appkit",
@@ -56,8 +57,5 @@
   "subdomain": "refset2",
   "engines": {
     "node": "0.10.x"
-  },
-  "dependencies": {
-    "grunt-contrib-compass": "~0.6.0"
   }
 }

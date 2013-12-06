@@ -1,11 +1,55 @@
+import Refset from 'appkit/models/refset';
+import Alert from 'appkit/models/alert';
+
 export default Ember.ObjectController.extend({
-  needs: ["plan","editrule"],
+  needs: ["plan", "editrule", "refset"],
   model: Ember.computed.alias("controllers.plan.model"),
   counter: -1,
   selectConceptsModalId: 'selectConceptsModalId',
   editRule: '',
-  plan: Ember.computed.alias("controllers.plan.model"), 
+  validationResult: '',
+  fieldErrors: Ember.computed.alias('validationResult.fieldErrors'),
+  globalErrors: Ember.computed.alias('validationResult.globalErrors'),
+  plan: Ember.computed.alias("controllers.plan"), 
+  refset: Ember.computed.alias("controllers.refset"), 
+  isDirty: false,
+
+  isValid: function(){
+    Ember.Logger.log('in isInvalid');
+    Ember.Logger.log('validationResult: ' + this.get('validationResult'));
+    Ember.Logger.log('validationResult.status: ' + this.get('validationResult.status'));
+    if (this.get('validationResult.status') !== ''){
+      return (this.get('validationResult.status') === 'VALIDATED');
+    }
+    return false;
+  }.property('validationResult.status'),
+
+  dirty: function(){
+    Ember.Logger.log('clearing validation result');
+    this.set('validationResult', '');
+    this.set('isDirty', true);
+  },
+
   actions:{ 
+    save: function(){
+      var plan = this.get('model');
+      Ember.Logger.log('handling save event');
+      var publicId = this.get('refset.publicId');
+      Ember.Logger.log('public id: ' + publicId);
+      var alert = Alert.create();
+      alert.set('action', 'SAVE');
+      alert.set('entity', plan);
+      alert.set('showUndo', false);
+      var response = Refset.savePlan(plan, publicId, alert);
+      this.set('model', response);
+      this.set('controllers.plan.alert', alert);
+      this.dirty();
+    },
+    validate: function(){
+      Ember.Logger.log('Handling validate event');
+      var response = Refset.validatePlan(this.get('model'));
+      this.set('validationResult', response);
+    },
     undo: function(){
       Ember.Logger.log('Handling undo event in select concepts component');
       
@@ -48,6 +92,7 @@ export default Ember.ObjectController.extend({
         Ember.Logger.log('Failed to handle undo action ' + action + ' for entity ' + entity);
       }
       this.set('plan.alert', undefined);
+      this.dirty();
     },
     showlist: function(rule){ 
         Ember.Logger.log('Handling showlist event in select concepts component');
@@ -71,6 +116,7 @@ export default Ember.ObjectController.extend({
       }).create();
       this.set('counter', --counter);
       this.get('model.rules').pushObject(rule);
+      this.dirty();
     },  
     newrule: function(){
       Ember.Logger.log('handling [newrule] in plan.edit');

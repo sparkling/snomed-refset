@@ -1,8 +1,12 @@
 import Alert from 'appkit/models/alert';
 
 export default Ember.ObjectController.extend({
-  needs: ["plan","plan.edit", "editrule"],
+  needs: ["plan","plan/edit", "editrule"],
   plan: Ember.computed.alias("controllers.plan.model"), 
+  planEditController: Ember.computed.alias("controllers.plan/edit"), 
+  validationResult: Ember.computed.alias("controllers.plan/edit.validationResult"), 
+  fieldErrors: Ember.computed.alias("controllers.plan/edit.validationResult.fieldErrors"), 
+
   actions:{
     resetType: function(){
       Ember.Logger.log('handling event resetType');
@@ -18,6 +22,7 @@ export default Ember.ObjectController.extend({
       
       this.set('type', '');
       this.get('controllers.plan').set('alert', alert);
+      this.get('planEditController').dirty();
     },
     delete: function(){
       Ember.Logger.log('handling event [delete]');
@@ -29,26 +34,44 @@ export default Ember.ObjectController.extend({
       alert.set('entity', rule);
       alert.set('collectionIndex', oldIndex);
       alert.set('message', "Succeffully Deleted Rule " + rule.get('id'));
-      this.get('controllers.plan').set('alert', alert);
+      this.set('controllers.plan.alert', alert);
+      this.get('planEditController').dirty();
     },
     type: function(type){
       Ember.Logger.log('handling event [type] with value: ' + type);
       this.set("type", type);
+      this.get('planEditController').dirty();
     },
     left: function(rule){
       Ember.Logger.log('handling event [left] with value: ' + rule.id);
       this.set("left", rule.id);
+      this.get('planEditController').dirty();
     },
     right: function(rule){
       Ember.Logger.log('handling event [right] with value: ' + rule.id);
       this.set("right", rule.id);
+      this.get('planEditController').dirty();
     },
     list: function(){
-      Ember.Logger.log('NOT handling event [list]');
+      Ember.Logger.log('handling event [list]');
     }
   },
+  fErrors: function(){
+      var errors = this.get('validationResult.fieldErrors');
+      var ruleId = this.get('id');
+      if (errors === undefined){
+        //Ember.Logger.log('No field errors found at all');
+        return '';
+      }
+      if (errors.get(ruleId.toString()) === undefined){
+        //Ember.Logger.log('No field errors found for rule ' + ruleId);
+        return '';
+      }
+      Ember.Logger.log('We have a field error for rule ' + ruleId);
+      return errors.get(ruleId.toString());
+
+  }.property('validationResult.fieldErrors'),
   isEdit: function(){
-    Ember.Logger.log('WAAAAH!!' + this.get('controllers.plan.isEdit'));
     return this.get('controllers.plan.isEdit');
   }.property(),
   leftRule: function(){
@@ -78,9 +101,6 @@ export default Ember.ObjectController.extend({
     return (type === 'LIST');
   }.property('type'),
   isTerminal: function(){
-    Ember.Logger.log('Handling isTerminal');
-    Ember.Logger.log('plan.terminal: ' + this.get('plan.terminal'));
-    Ember.Logger.log('this rule id: ' + this.get('id'));
     return this.get('plan.terminal') === this.get('id');
   }.property('refset.terminal'),
   emptyType: function(){

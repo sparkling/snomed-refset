@@ -4,5 +4,7 @@ export default Ember.Object.extend({
   action: undefined,
   collectionIndex: undefined,
   paramName: undefined,
-  paramValue: undefined
+  paramValue: undefined,
+  status: undefined,
+  showUndo: true
 });

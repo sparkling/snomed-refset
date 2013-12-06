@@ -1,11 +1,11 @@
 var Refset = Ember.Object.extend({});
-var baseUrl = 'http://refset.snomedtools.com/';
-//var baseUrl = 'http://localhost:8080/refsets/';
+//var baseUrl = 'http://refset.snomedtools.com/';
+var baseUrl = 'http://localhost:8080/refsets/';
 
 var toType = function(obj) {
   return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 };
-
+ 
 var toEmberObject = function(plainObject) {
   var data, i, key, result, type, value;
   //Ember.Logger.log('********************************************');
@@ -120,6 +120,61 @@ Refset.reopenClass({
     });
     return plan;
   },    
+  savePlan: function(plan, refsetPublicId, alert) {
+    var response = Ember.Object.create();
+    Ember.Logger.log('Saving plan: ' + JSON.stringify(plan));
+    Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+                  "Content-Type": "application/json; charset=utf-8"
+        },
+        url: baseUrl + "api/refsets/" + refsetPublicId + "/plan",
+        type: "PUT",
+        data: JSON.stringify(plan),
+        dataType: "json"
+      }).then((function(success) {
+        Ember.Logger.log('success: ' + JSON.stringify(success));
+        var returned = toEmberObject(success.refsetPlan);
+        response.setProperties(returned);
+        alert.set('status', 'SUCCESS');
+        alert.set('message', "Successfully updated rules");
+      }), function(error) {
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        var returned = toEmberObject(JSON.parse(error.responseText));
+        response.setProperties(returned.get('refsetPlan'));
+        alert.set('status', 'FAIL');
+        alert.set('message', "Failed updating rules");
+      }));
+    });
+    return response;
+  },
+  validatePlan: function(plan) {
+    var response = Ember.Object.create();
+    Ember.Logger.log('Validating plan: ' + JSON.stringify(plan));
+    Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+                  "Content-Type": "application/json; charset=utf-8"
+        },
+        url: baseUrl + "api/refsets/validate",
+        type: "PUT",
+        data: JSON.stringify(plan),
+        dataType: "json"
+      }).then((function(success) {
+        Ember.Logger.log('success: ' + JSON.stringify(success));
+        var returned = toEmberObject(success);
+        response.setProperties(returned);
+      }), function(error) {
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        var returned = toEmberObject(JSON.parse(error.responseText));
+        response.setProperties(returned);
+        //_this.set('validation', toEmberObject(JSON.parse(error.responseText)));
+      }));
+    });
+    return response;
+  },   
 });
 
 export default Refset;

@@ -1,140 +1,93 @@
-{{#if isListOperation}} 
-  <div class="list edit btn-group">
-    <!-- ID -->
-    <div class="btn-group">
-      <button type="button" disabled="disabled" class="btn-lg id btn btn-default">{{id}}</button> 
-    </div>  
+<div {{bind-attr class=":rule fErrors:has-error :btn-group"}}>
 
-    <!-- description -->
-    <div class="btn-group">
+
+  <!-- Id -->
+  <span class="btn-group"><button type="button" disabled="disabled" {{bind-attr class=":btn-lg :id :btn :btn-default fErrors:error"}}>{{id}}</button></span>
+
+
+  <!-- List -->
+  {{#if isListOperation}} 
+    <span class="list edit btn-group">
+      
+      <!-- Description -->
       {{#if isEdit}}
-        <button type="button" {{action "showlist" model}} class="btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
+        <button type="button" {{action "showlist" model}} class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
       {{else}}
-        <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
+        <button type="button" disabled="disabled" class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button>
       {{/if}}
-    </div>
+    </span>
+  {{/if}}
 
-    <!--config -->
-    {{#if isEdit}}
-    <div class="btn-group">
-      <button type="button" {{action "resetType"}} class="edit icon btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
-    </div>
-    {{/if}}
+  {{#if isSetOperation}} 
+    <span class="set edit btn-group">
 
-    <!-- delete -->
-    {{#if isEdit}}
-    <div class="btn-group">
-      <button type="button" {{action "delete"}} class="delete icon btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
-    </div>
-    {{/if}}
-
-    <!-- terminal -->
-    {{#if isTerminal}}
-      <div class="btn-group">
-        <button type="button" disabled="disabled" class="terminus btn btn-lg btn-default">t</button>
+      <!-- Left -->
+      <div class="dropdown btn-group">
+      {{#if left}}
+        {{#if isEdit}}
+          <button type="button" data-toggle="dropdown" class="description btn btn-lg btn-default">{{show-rule leftRule}}</button>
+        {{else}}
+          <button type="button" disabled="disabled" class="description btn btn-lg btn-default">{{show-rule leftRule}}</button>
+        {{/if}}
+      {{else}}
+        {{#if isEdit}}
+          <button type="button" data-toggle="dropdown" class="btn description btn-lg btn-default">Select Rule</button>
+        {{else}}  
+          <button type="button" disabled="disabled" class="btn description btn-lg btn-default">Select Rule</button>
+        {{/if}}
+      {{/if}}
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
+        {{#each rule in plan.rules}}
+        <li role="presentation"><a role="menuitem" {{action "left" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
+        {{/each}}
+      </ul>
       </div>
-    {{/if}}
-  </div>
-{{/if}}
 
-{{#if isSetOperation}} 
-<div class="set edit btn-group">
-  
-  <!-- ID -->
-  <div class="btn-group">
-    <button type="button" disabled="disabled" class="id btn-lg btn btn-default">{{id}}</button> 
-  </div>  
-  <!-- LEFT -->
-  <div class="btn-group">
-    {{#if left}}
+      <!-- Operation -->
       {{#if isEdit}}
-        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule leftRule}}</button>
+        <div class="dropdown btn-group">
+          <button type="button" data-toggle="dropdown" class="description btn btn-lg btn-default">{{rule-type type}}</button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+            <li role="presentation"><a role="menuitem" {{action "type" "UNION"}} tabindex="-1" href="#">Union</a></li>
+            <li role="presentation"><a role="menuitem" {{action "type" "INTERSECTION"}} tabindex="-1" href="#">Intersection</a></li>
+            <li role="presentation"><a role="menuitem" {{action "type" "DIFFERENCE"}} tabindex="-1" href="#">Difference</a></li>
+            <li role="presentation"><a role="menuitem" {{action "type" "SYMDIFFERENCE"}} tabindex="-1" href="#">Symmetric Difference</a></li>        
+          </ul>
+        </div>
       {{else}}
-        <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{show-rule leftRule}}</button>
+        <button type="button" disabled="disabled" class="btn description btn-lg btn-default">{{rule-type type}}</button>
       {{/if}}
-    {{else}}
-      {{#if isEdit}}
-        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule</button>
-      {{else}}  
-        <button type="button" disabled="disabled" class="btn btn-lg btn-default">Select Rule</button>
-      {{/if}}
-    {{/if}}
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
-      {{#each rule in plan.rules}}
-      <li role="presentation"><a role="menuitem" {{action "left" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
-      {{/each}}
-    </ul>          
-  </div>
-
-  <!-- OPERATION -->
-  <div class="btn-group">
-    {{#if isEdit}}
-    <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{rule-type type}}</button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-      <li role="presentation"><a role="menuitem" {{action "type" "UNION"}} tabindex="-1" href="#">Union</a></li>
-      <li role="presentation"><a role="menuitem" {{action "type" "INTERSECTION"}} tabindex="-1" href="#">Intersection</a></li>
-      <li role="presentation"><a role="menuitem" {{action "type" "DIFFERENCE"}} tabindex="-1" href="#">Difference</a></li>
-      <li role="presentation"><a role="menuitem" {{action "type" "SYMDIFFERENCE"}} tabindex="-1" href="#">Symmetric Difference</a></li>        
-    </ul>
-    {{else}}
-      <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{rule-type type}}</button>
-    {{/if}}
-  </div>
-
-  <!-- RIGHT -->
-  <div class="btn-group">
-    {{#if right}}
-      {{#if isEdit}}
-        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">{{show-rule rightRule}}</button>
-      {{else}}
-        <button type="button" disabled="disabled" class="btn btn-lg btn-default">{{show-rule rightRule}}</button>
-      {{/if}}
-    {{else}}
-      {{#if isEdit}}
-        <button type="button" data-toggle="dropdown" bind-attr class="btn btn-lg btn-default">Select Rule</button>
-      {{else}}
-        <button type="button" disabled="diabled" bind-attr class="btn btn-lg btn-default">Select Rule</button>
-      {{/if}}
-    {{/if}}
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
-      {{#each rule in plan.rules}}
-        <li role="presentation"><a role="menuitem" {{action "right" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
-      {{/each}}
-    </ul>                    
-  </div>
-
-  <!-- config -->
-  {{#if isEdit}}
-  <div class="btn-group">
-    <button type="button" {{action "resetType"}} class="edit icon btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
-  </div>    
-  {{/if}}
-  
-  <!-- delete -->
-  {{#if isEdit}}
-  <div class="btn-group">
-    <button type="button" {{action "delete"}} class="delete icon btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
-  </div>    
+    
+      <!-- right -->
+      <div class="dropdown btn-group">
+        {{#if right}}
+          {{#if isEdit}}
+            <button type="button" data-toggle="dropdown" class="btn description btn-lg btn-default">{{show-rule rightRule}}</button>
+          {{else}}
+            <button type="button" disabled="disabled" class="btn description btn-lg btn-default">{{show-rule rightRule}}</button>
+          {{/if}}
+        {{else}}
+          {{#if isEdit}}
+            <button type="button" data-toggle="dropdown" bind-attr class="btn description btn-lg btn-default">Select Rule</button>
+          {{else}}
+            <button type="button" disabled="diabled" bind-attr class="btn btn-lg description btn-default">Select Rule</button>
+          {{/if}}
+        {{/if}}
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">      
+          {{#each rule in plan.rules}}
+            <li role="presentation"><a role="menuitem" {{action "right" rule}} tabindex="-1" href="#">{{show-rule rule}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    </span>
   {{/if}}
 
-  <!-- terminal -->
-  {{#if isTerminal}}
-    <div class="btn-group">
-      <button type="button" disabled="disabled" class="terminus btn btn-lg btn-default">t</button>
-    </div>
-  {{/if}} 
-
-{{/if}}
-
-{{#if emptyType}}
-  <div class="btn-group">
-    <!-- ID -->
-    <div class="btn-group">
-      <button type="button" disabled="disabled" class="btn-lg id btn btn-default">{{id}}</button> 
-    </div>  
-    <div class="dropdown btn-group">
+  {{#if emptyType}}
+    <span class="btn-group empty">
+      
+      <!-- type -->    
       {{#if isEdit}}
-        <button type="button" data-toggle="dropdown" class="btn btn-lg btn-default">Select Rule Type</button>
+        <button type="button" data-toggle="dropdown" class="description btn btn-lg btn-default">Select Rule Type</button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
           <li role="presentation" class="dropdown-header">Source Rules</li>
           <li role="presentation"><a role="menuitem"  tabindex="-1">Import Concepts (tbd)</a></li>
@@ -147,14 +100,39 @@
           <li role="presentation"><a role="menuitem" {{action 'type' 'INTERSECTION'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Intersection</a></li>
           <li role="presentation"><a role="menuitem" {{action 'type' 'DIFFERENCE'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Difference</a></li>
           <li role="presentation"><a role="menuitem" {{action 'type' 'SYMDIFFERENCE'}} data-toggle="modal" href="#setRuleModal" tabindex="-1">Symmetric Difference</a></li>          
-        </ul>  
-        <!-- delete -->
-        
-        <button type="button" {{action "delete"}} class="delete icon new-rule btn btn-lg btn-default"><span class="glyphicon glyphicon-fire"></span></button>
-      
+        </ul>
       {{else}}
-        <button type="button" disabled="disabled" class="btn btn-lg btn-default">Select Rule Type</button>
+        <button type="button" disabled="disabled" class="btn btn-lg btn-default">Not configured</button>
       {{/if}}
-    </div>
-  </div>
-{{/if}}
+    </span>
+  {{/if}}
+
+  <span class="btn-group">
+    <!-- config -->
+    {{#if isEdit}}
+      {{#if hasType}}
+        <button type="button" {{action "resetType"}} class="edit icon btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span></button>
+      {{/if}}
+    {{/if}}
+    
+    <!-- delete -->
+    {{#if isEdit}}
+      <button type="button" {{action "delete"}} {{bind-attr class="noType:empty :delete :icon :btn :btn-lg :btn-default"}}><span class="glyphicon glyphicon-trash"></span></button>
+    {{/if}}
+
+    <!-- errors -->
+    {{!#if fErrors}}
+        <!--button type="button" {{action "delete"}} class="delete icon new-rule btn btn-lg btn-default"><span class="glyphicon glyphicon-minus-sign"></span></button-->
+    {{!/if}}   
+
+    <!-- terminal -->
+    {{#if isTerminal}}
+        <button type="button" disabled="disabled" class="terminus btn btn-lg btn-default">t</button>
+    {{/if}} 
+  </span>
+
+  {{#each e in fErrors }}
+    <div class="error-message">{{e}}</div>
+  {{/each}}
+
+</div>

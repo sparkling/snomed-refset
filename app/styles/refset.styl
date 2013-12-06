@@ -37,7 +37,7 @@ h4
   font-size: 12px;
 
 #details .rule .btn
-  min-width: 10em;
+  min-width: 12em;
   font-size: 12px;  
 
 #details .toggle.btn
@@ -69,8 +69,8 @@ h4
 
 #plan .rule.list-group-item{
   border: none
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 
@@ -123,9 +123,16 @@ h4
   color: black
   opacity: none
 
+#plan .rule .btn.description
+  border-left: none
+
+#plan .rule .btn.delete.empty
+  border-left: none
+
 #plan .icon.btn.edit
   border-right: 0
   border-left: 0
+  opacity: 0.75
 
 #plan .icon.btn.add-rule
   background-color: ghostwhite  
@@ -137,20 +144,45 @@ h4
   font-size: 0.7em !important
   //opacity: 0.9
 
-#plan .icon.btn .glyphicon
+#plan .icon.btn.edit .glyphicon
   font-size: 0.9em
   color: #5cb85c
+  top: 2px
+  opacity: 0.75
 
 #plan .delete.new-rule.icon.btn
   border-left: 0
 
-#plan .delete.icon.btn .glyphicon  
+#plan .delete.icon .glyphicon  
   color: tomato
+  font-size: 0.75em
+  opacity: 0.75
+
+#plan .concepts .delete.icon .glyphicon  
+  font-size: 1em
+
+#plan .concepts .delete.icon
+  float: right
+
+#plan .error.icon.btn
+  background-color: tomato
+
+#plan .error.icon.btn .glyphicon  
+  color: white
+
+#plan .error-message{
+  color: crimson
+}
 
 #plan .btn.id
   background-color: ghostwhite
   color: grey
-  min-width: 0
+  min-width: 5em
+
+#plan .btn.id.error
+  background-color: tomato
+  border-color: tomato
+  color: white
 
 #plan .refset-actions
   margin-top: -0.9em
@@ -164,7 +196,7 @@ h4
 #plan .rules h4
   //color: #5cb85c;
   color: lightgray;
-  margin: 1em 0 0em 0
+  margin: 1em 0 0.5em 0
   padding: 0
 
 
@@ -202,7 +234,7 @@ h4
   font-size: 1.2em
 
 #plan .rules .modal .concepts .list-group-item
-  padding: 0.4em
+  padding: 0.5em
   border: none
   font-family: proxima-nova-1, proxima-nova-2, verdana
   color: grey
