@@ -6,7 +6,6 @@ export default Ember.Route.extend({
     var plan = this.get('model');
     Ember.Logger.log('Cached plans are: ' + JSON.stringify(plan));
     if (typeof plan !== 'undefined'){
-      Ember.Logger.log('CALLING');
       plan = Refset.getPlan(this.modelFor('refset'), this);
     }
     return plan;
