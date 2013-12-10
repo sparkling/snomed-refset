@@ -20,7 +20,7 @@ export default Ember.ObjectController.extend({
       //var formatted = Ember.Handlebars.helpers.showRule.call(rule);
       alert.set('message', "Succesfully Reset Rule " + rule.get('id'));// + ': ' + formatted);
       
-      this.set('type', '');
+      this.set('type', 'NOT_SET');
       this.get('controllers.plan').set('alert', alert);
       this.get('planEditController').dirty();
     },
@@ -104,7 +104,7 @@ export default Ember.ObjectController.extend({
     return this.get('plan.terminal') === this.get('id');
   }.property('refset.terminal'),
   emptyType: function(){
-    return (this.get('type') === '');
+    return (this.get('type') === 'NOT_SET');
   }.property('type')
 
 });
