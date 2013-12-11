@@ -1,4 +1,4 @@
-var baseUrl = 'http://api.sparklingideas.co.uk';
+var baseUrl = 'http://api.sparklingideas.co.uk/';
 //var baseUrl = 'http://localhost:8080/';
  
 var toType = function(obj) {
