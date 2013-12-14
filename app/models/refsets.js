@@ -1,4 +1,4 @@
-var baseUrl = 'http://api.sparklingideas.co.uk/';
+var baseUrl = 'http://api.sparklingideas.co.uk/refsets';
 //var baseUrl = 'http://localhost:8080/';
  
 var toType = function(obj) {
@@ -64,7 +64,7 @@ Refsets.reopenClass({
         Ember.Logger.log('Found refsets in cache');
         return p.resolve(refsets);
       }
-      return p.resolve($.getJSON(baseUrl + 'api/refsets').then(function(res) {
+      return p.resolve($.getJSON(baseUrl).then(function(res) {
         Ember.Logger.log('Json request returned');
         return res.map(function(i) {
           var x = Ember.Object.create(i);
@@ -85,7 +85,7 @@ Refsets.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "api/refsets",
+        url: baseUrl,
         type: "POST",
         data: JSON.stringify(refset),
         dataType: "json"
@@ -122,7 +122,7 @@ Refsets.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "api/refsets/" + refset.get('publicId'),
+        url: baseUrl + '/' + refset.get('publicId'),
         type: "DELETE",
         data: '',
         dataType: "json"

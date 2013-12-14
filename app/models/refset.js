@@ -1,5 +1,5 @@
 var Refset = Ember.Object.extend({});
-var baseUrl = 'http://api.sparklingideas.co.uk/';
+var baseUrl = 'http://api.sparklingideas.co.uk/refsets';
 //var baseUrl = 'http://localhost:8080/';
 
 var toType = function(obj) {
@@ -61,7 +61,7 @@ Refset.reopenClass({
       if (refset != null) {
         return p.resolve(refset);
       }
-      return p.resolve($.getJSON(baseUrl + 'api/refsets/' + publicId).then(function(res) {
+      return p.resolve($.getJSON(baseUrl + '/' + publicId).then(function(res) {
         refset = Ember.Object.create(res);
         Ember.Logger.log("res: " + res);
         _this.set('refset', refset);
@@ -78,7 +78,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "api/refsets/" + refset.publicId + "/concepts.json",
+        url: baseUrl + "/" + refset.publicId + "/concepts.json",
         type: "GET",
         data: '',
         dataType: "json"
@@ -103,7 +103,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "api/refsets/" + refset.publicId + "/plan.json",
+        url: baseUrl + "/" + refset.publicId + "/plan.json",
         type: "GET",
         data: '',
         dataType: "json"
@@ -129,7 +129,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
                   "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "api/refsets/" + refsetPublicId + "/plan",
+        url: baseUrl + "/" + refsetPublicId + "/plan",
         type: "PUT",
         data: JSON.stringify(plan),
         dataType: "json"
@@ -158,7 +158,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
                   "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "api/refsets/validate",
+        url: baseUrl + "/validate",
         type: "PUT",
         data: JSON.stringify(plan),
         dataType: "json"
