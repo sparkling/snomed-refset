@@ -1,5 +1,7 @@
-export default Ember.ObjectController.extend({
-  snapshotResponse: 'plan-response-not-set',
+import Snapshot from 'appkit/models/snapshot';
+
+export default Ember.ArrayController.extend({
   needs: "refset",
-  refset: Ember.computed.alias("controllers.refset")
+  refset: Ember.computed.alias("controllers.refset.model")
 });
+

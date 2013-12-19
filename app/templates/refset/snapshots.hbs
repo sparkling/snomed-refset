@@ -4,5 +4,16 @@
   {{#link-to 'plan.show' refset}}<button class="toggle btn btn-lg btn-info">Plan</button>{{/link-to}}
   {{#link-to 'refset.concepts' refset}}<button class="last toggle btn btn-lg btn-info">Concepts</button>{{/link-to}}
   </h2>
-
+  <table class="table table-striped">
+    <thead>
+      <th>Title</th>
+    <thead>
+    <tbody>
+      {{#each snapshot in controller}}
+      <tr>
+        <td>{{snapshot.title}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </section>
