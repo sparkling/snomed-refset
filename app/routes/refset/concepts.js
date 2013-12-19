@@ -1,4 +1,5 @@
 import Refset from 'appkit/models/refset';
+import Snapshot from 'appkit/models/snapshot';
 
 export default Ember.Route.extend({
   model: function() {
@@ -10,7 +11,9 @@ export default Ember.Route.extend({
     }
     return concepts;
   },
-//  renderTemplate: function(){
-//    this.render({outlet:'details'});
-//  }
+  setupController: function(controller, model) {
+    Ember.Logger.log('In Concept setupController');
+    controller.set('model', model);
+    controller.set('snapshot', Snapshot.create());
+  }
 });

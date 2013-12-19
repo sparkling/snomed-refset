@@ -1,16 +1,13 @@
-import Refset from 'appkit/models/refset';
+import Snapshot from 'appkit/models/snapshot';
 
 export default Ember.Route.extend({
   model: function() {
     Ember.Logger.log('Loading snapshots in router');
-    var plan = this.get('model');
-    Ember.Logger.log('Cached snapshots are: ' + JSON.stringify(plan));
-    if (typeof plan !== 'undefined'){
-      plan = Refset.getPlan(this.modelFor('refset'), this);
+    var snapshots = this.get('model');
+    Ember.Logger.log('Cached snapshots are: ' + JSON.stringify(snapshots));
+    if (typeof snapshots !== 'undefined'){
+      snapshots = Snapshot.getSnapshots(this.modelFor('refset'), this);
     }
-    return plan;
-  },
-//  renderTemplate: function(){
-//    this.render({outlet:'details'});
-//  }  
+    return snapshots;
+  }
 });
