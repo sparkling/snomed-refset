@@ -1,6 +1,7 @@
-var Refset = Ember.Object.extend({});
 var baseUrl = 'http://api.sparklingideas.co.uk/refsets';
 //var baseUrl = 'http://localhost:8080/refsets';
+
+var Refset = Ember.Object.extend({});
 
 var toType = function(obj) {
   return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();

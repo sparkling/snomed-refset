@@ -1,6 +1,11 @@
+<ol class="breadcrumb">
+  <li>{{#link-to 'refsets'}}Refsets{{/link-to}}</li>
+  <li>{{#link-to 'refset.concepts'}}{{refset.title}}{{/link-to}}</li>
+  <li class="active">Snapshots</li>
+</ol>
 <section id="snapshots">
   <h2>Snapshots
-  {{#link-to 'refset.snapshots'}}<button disabled="disabled" class="first toggle btn btn-lg btn-info">Snapshots</button>{{/link-to}}  
+  {{#link-to 'snapshots'}}<button disabled="disabled" class="first toggle btn btn-lg btn-info">Snapshots</button>{{/link-to}}  
   {{#link-to 'plan.show' refset}}<button class="toggle btn btn-lg btn-info">Plan</button>{{/link-to}}
   {{#link-to 'refset.concepts' refset}}<button class="last toggle btn btn-lg btn-info">Concepts</button>{{/link-to}}
   </h2>
@@ -11,7 +16,7 @@
     <tbody>
       {{#each snapshot in controller}}
       <tr>
-        <td>{{snapshot.title}}</td>
+        <td>{{#link-to 'snapshot' snapshot action='gosnapshot' actionParam=snapshot}}{{snapshot.title}}{{/link-to}}</td>
       </tr>
       {{/each}}
     </tbody>

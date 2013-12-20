@@ -9,7 +9,10 @@ Router.map(function() {
       this.route('edit',  {path:'edit'});
       this.route('show',  {path:'show'});
     });
-    this.route('snapshots',  {path:'snapshots'});
+    this.resource('snapshots',  {path:'snapshots'});
+    this.resource('snapshot',  {path:'snapshot'}, function(){
+      this.route('index',  {path:':snapshotId'});
+    });    
   });
 });
 

@@ -100,6 +100,43 @@ Snapshot.reopenClass({
     });
     return result;
   },
+  getSnapshot: function(refsetId, snapshotId, _this) {
+    var result;
+    Ember.Logger.log('Getting snapshot for refset ' + refsetId + " and snapshot " + snapshotId);
+    result = Ember.Object.create({});
+    Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        url: baseUrl + '/' + refsetId + '/snapshot/' + snapshotId,
+        type: "GET",
+        data: '',
+        dataType: "json"
+      }).then((function(success) {
+        Ember.Logger.log('success: ' + JSON.stringify(success));
+        Ember.Logger.log('snapshot: ' + JSON.stringify(success));
+        var jsParsed = success;
+        Ember.Logger.log('JSON parsed: ' + JSON.stringify(jsParsed));
+        var snapshot = toEmberObject(jsParsed);
+        Ember.Logger.log('after toEmber: ' + JSON.stringify(snapshot));
+        //return result.setProperties(parsed);
+        //This should be passed in as a success function instead
+        //Does not belong here
+        //_this.get('controllers.concepts.model').pushObject(snapshot);
+        //_this.transitionToRoute('plan.edit', snapshot);
+        return result.setProperties(snapshot);
+      }), function(error) {
+        var parsed;
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        parsed = toEmberObject(JSON.parse(error.responseText));
+        Ember.Logger.log('after toEmber: ' + JSON.stringify(parsed));
+        return result.setProperties(parsed);
+      }));
+    });
+    return result;
+  },  
   getSnapshots: function(refset, _this) {
     Ember.Logger.log('getting all snapshots');
     return Ember.Deferred.promise(function(p) {

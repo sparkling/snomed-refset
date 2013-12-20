@@ -9,5 +9,5 @@ export default Ember.Route.extend({
       snapshots = Snapshot.getSnapshots(this.modelFor('refset'), this);
     }
     return snapshots;
-  }
+  } 
 });
