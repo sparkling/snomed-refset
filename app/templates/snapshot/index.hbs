@@ -1,28 +1,40 @@
 <ol class="breadcrumb">
   <li>{{#link-to 'refsets'}}Refsets{{/link-to}}</li>
-  <li>{{#link-to 'refset.concepts'}}{{refset.title}}{{/link-to}}</li>
+  <li>{{#link-to 'plan.concepts'}}{{refset.title}}{{/link-to}}</li>
   <li>{{#link-to 'snapshots'}}Publications{{/link-to}}</li>
   <li class="active">{{title}}</li>
 </ol>
 <section id="snapshot">
-  <h2>Snapshot {{publicId}}
-  {{#link-to 'snapshots'}}<button disabled="disabled" class="first toggle btn btn-lg btn-info">Publications</button>{{/link-to}}  
-  {{#link-to 'plan.show' refset}}<button class="toggle btn btn-lg btn-info">Rules</button>{{/link-to}}
-  
+  <h2 class="clearfix"><span class="title">{{refset.title}}</span>
+    <div class="refset-actions clearfix">
+      {{#link-to 'plan.show' refset}}<button class="last toggle btn btn-lg btn-info">Rules</button>{{/link-to}}
+      {{#link-to 'snapshots'}}<button disabled="disabled" class="toggle btn btn-lg btn-info">Publications</button>{{/link-to}}  
+    <div class="refset-actions">
   </h2>
+  <h4 class="snapshot clearfix">{{title}}
+  </h4>
+  <h4 class="heading clearfix">Concepts
   {{#link-to 'snapshots'}}<button type="button" class="btn btn-default btn-large close-snapshot">Return</button>{{/link-to}}
-  <table class="table table-striped">
-    <thead>
-      <th>Title</th>
-      <th>id</th>
-    <thead>
-    <tbody>
-      {{#each concept in conceptDtos}}
-      <tr>
-        <td>{{concept.title}}</td>
-        <td>{{concept.id}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  </h4>
+  <section class="concepts clearfix">
+    <table class="table table-striped">
+      <thead>
+        <th class="title">Title</th>
+        <th class="id">Snomed Id</th>
+        <th class="effectiveOn">Effective on</th>
+      <thead>
+      <tbody>
+        {{#each concept in conceptDtos}}
+        <tr>
+          <td class="title">
+            {{concept-link concept}}
+          </td>
+          <td class="id">{{concept.id}}</td>
+          {{log concept}}
+          <td class="effectiveOn">{{date-format concept.effectiveTime}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </section>
 </section>

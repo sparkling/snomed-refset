@@ -2,23 +2,26 @@
 
 
   <!-- Id -->
-  <span class="btn-group"><button type="button" disabled="disabled" {{bind-attr class=":btn-lg :id :btn :btn-default fErrors:error"}}>{{id}}</button></span>
+  <span class="btn-group">
+    <button type="button" disabled="disabled" {{bind-attr class=":btn-lg :id :btn :btn-default fErrors:error"}}>{{id}}</button>
+  </span>
 
 
   <!-- List -->
-  {{#if isListOperation}} 
-    <span class="list edit">
-     <div class="btn-group">
-        
-        <!-- Description -->
-        {{#if isEdit}}
-          <button type="button" {{action "showlist" model}} class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
-        {{else}}
-          <button type="button" disabled="disabled" class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button>
-        {{/if}}
-      </div>
-    </span>
-  {{/if}}
+  
+    {{#if isListOperation}} 
+      <span class="list">
+          <!-- Description -->
+          {{#if isEdit}}
+            <div class="btn-group">
+              <button type="button" {{action "showlist" model}} class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
+            </div>
+          {{else}}
+            <button type="button" disabled="disabled" class="description btn btn-lg btn-default">{{concepts.length}} Concepts</button>
+          {{/if}}
+      </span>
+    {{/if}}
+  
 
   {{#if isSetOperation}} 
     <span class="set edit btn-group">

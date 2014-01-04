@@ -89,7 +89,8 @@ Snapshot.reopenClass({
         //_this.get('controllers.concepts.model').pushObject(snapshot);
         //_this.transitionToRoute('plan.edit', snapshot);
         $('#snapshot').modal('hide');
-        _this.get('controllers.refset/snapshots.model').pushObject(snapshot);
+        _this.get('controllers.snapshots.model').pushObject(snapshot);
+        _this.transitionToRoute('snapshots', refset);
       }), function(error) {
         var parsed;
         Ember.Logger.log('fail: ' + JSON.stringify(error));
@@ -141,11 +142,6 @@ Snapshot.reopenClass({
     Ember.Logger.log('getting all snapshots');
     return Ember.Deferred.promise(function(p) {
       var snapshots;
-      snapshots = _this.get('controller.model');
-      if (snapshots != null) {
-        Ember.Logger.log('Found snapshots in cache');
-        return p.resolve(snapshots);
-      }
       return p.resolve($.getJSON(baseUrl + '/' + refset.get('publicId') + '/snapshots').then(function(res) {
         Ember.Logger.log('Json request returned with ' + JSON.stringify(res));
         return res.map(function(i) {

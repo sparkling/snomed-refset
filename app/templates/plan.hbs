@@ -3,14 +3,12 @@
   <li>{{#link-to 'snapshots'}}{{refset.title}}{{/link-to}}</li>
   <li class="active">Rules</li>
 </ol>
-<section id="plan">
-  <h2>{{refset.title}}
+<section id="plan" class="clearfix">
+  <h2 class="clearfix"><span class="title">{{refset.title}}</span>
+    <div class="refset-actions clearfix">
+      {{#link-to 'plan.edit' refset}}<button disabled="disabled" class="last toggle btn btn-lg btn-info">Rules</button>{{/link-to}}
+      {{#link-to 'snapshots'}}<button class="toggle btn btn-lg btn-info">Publications</button>{{/link-to}}  
     <div class="refset-actions">
-      
-      
-      {{#link-to 'plan.show' refset}}<button  class="first toggle btn btn-lg btn-info"  disabled="disabled">Rules</button>{{/link-to}}
-      {{#link-to 'snapshots'}}<button class="toggle btn btn-lg btn-info">Publications</button>{{/link-to}}
-    </div>
   </h2>
   {{outlet}}
   {{render "select-concepts" modalid=selectConceptsModalId}}

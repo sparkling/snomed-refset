@@ -3,7 +3,7 @@ import Snapshot from 'appkit/models/snapshot';
 export default Ember.ArrayController.extend({
   conceptsResponse: 'concepts-response-not-set',
   error: '',
-  needs: ["refset", "refset/snapshots"],
+  needs: ["refset", "snapshots"],
   refset: Ember.computed.alias("controllers.refset.model"),
 
   actions: {

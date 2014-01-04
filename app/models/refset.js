@@ -58,10 +58,6 @@ Refset.reopenClass({
   loadRefset: function(publicId, _this) {
     return Ember.Deferred.promise(function(p) {
       var refset;
-      refset = _this.get('refset');
-      if (refset != null) {
-        return p.resolve(refset);
-      }
       return p.resolve($.getJSON(baseUrl + '/' + publicId).then(function(res) {
         refset = Ember.Object.create(res);
         Ember.Logger.log("res: " + res);
