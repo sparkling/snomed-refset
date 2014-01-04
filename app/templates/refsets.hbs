@@ -15,7 +15,7 @@
 
       {{#each refset in controller}}
       <tr>
-        <td>{{#link-to 'refset.concepts' refset}}{{refset.title}}{{/link-to}}</td>
+        <td>{{#link-to 'plan.edit' refset}}{{refset.title}}{{/link-to}}</td>
         <td>{{date-format refset.created}}</td>
 
         <td><button type="button" {{action "deleteRefset" refset}} class="close">&times;</button></td>

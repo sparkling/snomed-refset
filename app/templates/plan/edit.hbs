@@ -1,4 +1,3 @@
-
 <section class="rules">
   {{#if plan.alert}}
     <div class="alert alert-warning alert-dismissable">
@@ -15,7 +14,9 @@
   <div class="rules-list">
     <h4>Rules
       <div class="plan-actions clearfix">
-        {{#link-to 'plan.show'}}<button class="btn cancel btn-sm btn-default">Close</button>{{/link-to}}
+        {{#link-to 'plan.concepts'}}<button class="first toggle btn cancel btn-sm btn-default">Results</button>{{/link-to}}
+        {{#link-to 'plan.edit'}}<button class="toggle btn edit-plan btn-sm btn-default" disabled="disabled">Edit</button>{{/link-to}}
+        {{#link-to 'plan.show'}}<button class="toggle btn edit-plan btn-sm btn-default">View</button>{{/link-to}}
       </div>
     </h4>
 

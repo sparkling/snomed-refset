@@ -1,13 +1,13 @@
 <ol class="breadcrumb">
   <li>{{#link-to 'refsets'}}Refsets{{/link-to}}</li>
-  <li>{{#link-to 'refset.concepts'}}{{refset.title}}{{/link-to}}</li>
-  <li class="active">Snapshots</li>
+  <li>{{#link-to 'snapshots'}}{{refset.title}}{{/link-to}}</li>
+  <li class="active">Publications</li>
 </ol>
 <section id="snapshots">
-  <h2>Snapshots
-  {{#link-to 'snapshots'}}<button disabled="disabled" class="first toggle btn btn-lg btn-info">Snapshots</button>{{/link-to}}  
-  {{#link-to 'plan.show' refset}}<button class="toggle btn btn-lg btn-info">Plan</button>{{/link-to}}
-  {{#link-to 'refset.concepts' refset}}<button class="last toggle btn btn-lg btn-info">Concepts</button>{{/link-to}}
+  <h2>{{refset.title}}
+  
+  {{#link-to 'plan.edit' refset}}<button class="first toggle btn btn-lg btn-info">Rules</button>{{/link-to}}
+  {{#link-to 'snapshots'}}<button disabled="disabled" class="toggle btn btn-lg btn-info">Publications</button>{{/link-to}}  
   </h2>
   <table class="table table-striped">
     <thead>

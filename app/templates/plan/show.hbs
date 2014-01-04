@@ -2,7 +2,10 @@
   <div class="rules-list">
     <h4>Rules
       <div class="plan-actions clearfix">
-        {{#link-to 'plan.edit'}}<button class="btn edit-plan btn-sm btn-default">Edit</button>{{/link-to}}
+        {{#link-to 'plan.concepts'}}<button class="first toggle btn edit-plan btn-sm btn-default">Results</button>{{/link-to}}
+        {{#link-to 'plan.edit'}}<button class="btn toggle edit-plan btn-sm btn-default">Edit</button>{{/link-to}}
+        {{#link-to 'plan.show'}}<button class="btn toggle edit-plan btn-sm btn-default" disabled="disabled">View</button>{{/link-to}}
+
       </h4>
     </div>
     <ul class="list-group list-rules">
@@ -12,5 +15,5 @@
       </li>
     {{/each}}
     </ul>
-  </rules-list>
+  </div>
 </section>

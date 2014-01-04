@@ -7,14 +7,16 @@
 
   <!-- List -->
   {{#if isListOperation}} 
-    <span class="list edit btn-group">
-      
-      <!-- Description -->
-      {{#if isEdit}}
-        <button type="button" {{action "showlist" model}} class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
-      {{else}}
-        <button type="button" disabled="disabled" class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button>
-      {{/if}}
+    <span class="list edit">
+     <div class="btn-group">
+        
+        <!-- Description -->
+        {{#if isEdit}}
+          <button type="button" {{action "showlist" model}} class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button> 
+        {{else}}
+          <button type="button" disabled="disabled" class="description  btn btn-lg btn-default">{{concepts.length}} Concepts</button>
+        {{/if}}
+      </div>
     </span>
   {{/if}}
 
