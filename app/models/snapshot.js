@@ -1,4 +1,4 @@
-var baseUrl = 'http://api.sparklingideas.co.uk/refsets';
+var baseUrl = 'https://api.sparklingideas.co.uk/refsets';
 //var baseUrl = 'http://localhost:8080/refsets';
 
 var Snapshot = Ember.Object.extend({
