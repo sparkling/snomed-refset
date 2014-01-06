@@ -50,6 +50,10 @@ export default Ember.ObjectController.extend({
       var response = Refset.validatePlan(this.get('model'));
       this.set('validationResult', response);
     },
+    dismiss: function(){
+      Ember.Logger.log('Handling dismiss event in select concepts component');
+      this.set('plan.alert', '');
+    },
     undo: function(){
       Ember.Logger.log('Handling undo event in select concepts component');
       

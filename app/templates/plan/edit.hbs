@@ -5,7 +5,7 @@
       {{#if plan.alert.showUndo}}
         <button type="text" {{action "undo"}} data-dismiss="alert" class="btn btn-link undo-action">Undo</button>
       {{/if}}
-      <button type="text" class="btn btn-link dismiss" data-dismiss="alert" aria-hidden="true">Dismiss</button>
+      <button {{action "dismiss"}} type="text" class="btn btn-link dismiss" data-dismiss="alert" aria-hidden="true">Dismiss</button>
     </div>
   {{/if}}
 
