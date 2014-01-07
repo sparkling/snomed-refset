@@ -1,14 +1,17 @@
 <div class="concepts">
-  <div class="mode-action">
-    <button type="button" {{action 'showsearch'}} class="btn btn-primary mode">Search</button>    
+  <div class="modal-header">
+    <h3>Selected
+      <button type="button" {{action 'showsearch'}} class="btn btn-default mode">Search</button>    
+    </h3>
   </div>
-  <h3>Selected</h3>
-  <div class="list-group clearfix">
-    {{#each concept in model.concepts}}
-      <a  {{bind-attr href=concept.url}} target="_blank" class="list-group-item">
-        {{concept.title}} <small style="color: lightgrey; padding-left: 0.5em">{{concept.id}}</small>
-        <span {{action 'removeconcept' concept}} class="delete icon" aria-hidden="true"><span class="glyphicon glyphicon-trash"></span></span>
-      </a>
-    {{/each}}
+  <div class="modal-body">
+    <div class="list-group clearfix">
+      {{#each concept in model.concepts}}
+        <a  {{bind-attr href=concept.url}} target="_blank" class="list-group-item">
+          {{concept.title}} <small style="color: lightgrey; padding-left: 0.5em">{{concept.id}}</small>
+          <span {{action 'removeconcept' concept}} class="delete icon" aria-hidden="true"><span class="glyphicon glyphicon-trash"></span></span>
+        </a>
+      {{/each}}
+    </div>
   </div>
 </div>

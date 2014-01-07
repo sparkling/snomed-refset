@@ -1,7 +1,8 @@
-<div class="mode-action">
-  <button type="button" {{action 'showconcepts'}} class="btn btn-primary mode">List</button>
+<div class="modal-header">
+  <h3>Find
+    <button type="button" {{action 'showconcepts'}} class="btn btn-default mode">List</button>    
+  </h3>
 </div>
-<h3 class="find">Find</h3>
-<div id="textSearchTemplate">
+<div class="modal-body">
   {{text-search action="selected"}}
 </div>

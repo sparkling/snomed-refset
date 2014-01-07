@@ -1,14 +1,9 @@
 {{#modal-box action="selected" modalid=modalid}}
-  <div class="modal-header">
-    <h4>Concepts</h4>
-  </div>
-  <div class="modal-body">
-    {{#if isSearching}}
-      {{view "selectConceptsSearch"}}
-    {{else}}
-      {{view "selectConceptsList"}}
-    {{/if}}
-</div>
+  {{#if isSearching}}
+    {{view "selectConceptsSearch"}}
+  {{else}}
+    {{view "selectConceptsList"}}
+  {{/if}}
 <div class="modal-footer">
   <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
 </div>    

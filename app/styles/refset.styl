@@ -25,8 +25,8 @@ h2 .title
 h3
   font-family : museo-sans-1, museo-sans-2 , Georgia, Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif
 h4
-  padding-bottom: 0.5em !important
-  font-family proxima-nova-1, proxima-nova-2, sans-serif !important
+  padding-bottom: 0.5em 
+  font-family proxima-nova-1, proxima-nova-2, sans-serif
 
 h4 .title
   float: left
@@ -138,13 +138,9 @@ ol.breadcrumb
 #plan .rule .btn.delete.empty
   border-left: none
 
-.set.btn-group button, .list .btn-group button
-  border-left: 0 !important
-
 .list .description
   border-top-left-radius: 0
   border-bottom-left-radius: 0
-  border-left: 0 !important
 
 #plan .icon.btn.edit
   border-right: 0
@@ -179,10 +175,6 @@ ol.breadcrumb
   float: right
 
 
-
-#plan .concepts 
-  margin-top: 1em
-
 #plan .error.icon.btn
   background-color: tomato
 
@@ -197,6 +189,7 @@ ol.breadcrumb
   background-color: ghostwhite
   color: grey
   min-width: 5em
+  border-right: 0
 
 #plan .btn.id.error
   background-color: tomato
@@ -209,19 +202,6 @@ ol.breadcrumb
 
 .refset-actions .btn
   float: right
-
-#plan h4, #snapshots h4
-  //color: #5cb85c;
-  color: lightgray;
-  padding: 0
-  margin: 0
-
-.modal-header h4
-  color: black !important
-  font-family : museo-sans-1, museo-sans-2 , Georgia, Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif !important
-  font-weight: bold
-  margin-bottom: 0 !important
-  margin-top: 0.5em !important
 
 #details .alert
   margin-top: 1em
@@ -238,18 +218,18 @@ ol.breadcrumb
 
 #plan .rules .modal h3
   color: skyblue;
-  margin: 0
-  margin-bottom: 0.5em
-  margin-top: 0em
+  margin-bottom: 0
+  margin-top: 0.5em
+
+#plan .rules .modal .modal-body .list-group
+  margin-bottom: 0  
+
+#plan .rules .modal h3 .btn
+  float: right
+  margin-top: -0.5em
 
 #plan .rules .modal h3.find
-  margin-bottom: 0
 
-
-#plan .rules .modal h4
-  color: blue;
-  //color: darkolivegreen;
-  margin: 0
 
 #plan .rules .modal .concepts .list-group-item .close
   color: tomato
@@ -266,13 +246,6 @@ ol.breadcrumb
   width: 100%
   text-align: right
 
-#plan .rules .modal .modal-header
-  padding-bottom: 1em
-  padding-top: 2.5em  
-
-#plan .rules .modal .modal-body
-  padding-top: 0
-  padding-bottom: 0
 
 #plan .rules .modal .mode-action .btn
   margin-top: -7em  
