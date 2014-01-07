@@ -1,7 +1,9 @@
+import Concept from 'appkit/models/concept';
+
 export default Ember.Route.extend({
   model: function() {
     return {
-      concept: undefined,
+      concept: '138875005',
       title: '',
       description: '',
       publicId: ''

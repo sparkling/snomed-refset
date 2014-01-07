@@ -7,14 +7,14 @@
 
 <section class="inputs">
   <form class="form-group" {{action 'save' on="submit"}}>
-    <div {{bind-attr class=":form-group :concept error.fieldErrors.concept:has-error"}}>
+    <!--div {{bind-attr class=":form-group :concept error.fieldErrors.concept:has-error"}}>
       <label>Concept</label>
       <button data-toggle="modal" {{bind-attr href=hashedFindConceptModalId}} {{bind-attr class=":btn :btn-default :btn-sm concept:has-concept"}}>Find Concept</button>
       <div class="title">{{conceptDisplayName}}</div>
       {{#each e in error.fieldErrors.concept }}
         <span class="help-block">{{e}}</span>
       {{/each}}
-    </div>  
+    </div-->  
     <div {{bind-attr class=":form-group error.fieldErrors.title:has-error"}}>
       <label>Title</label>
       {{input type="text" name="title" class="form-control" value=title placeholder="Enter Title"}}
