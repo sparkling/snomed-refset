@@ -1,5 +1,5 @@
-//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
-var baseUrl = 'http://localhost:8080/refsets';
+var baseUrl = 'https://refset-api.snomedtools.info/refsets';
+//var baseUrl = 'http://localhost:8080/refsets';
  
 var toType = function(obj) {
   return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();

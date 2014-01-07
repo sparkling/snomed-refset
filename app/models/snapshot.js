@@ -1,5 +1,5 @@
-//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
-var baseUrl = 'http://localhost:8080/refsets';
+var baseUrl = 'https://refset-api.snomedtools.info/refsets';
+//var baseUrl = 'http://localhost:8080/refsets';
 
 var Snapshot = Ember.Object.extend({
   title: '',
