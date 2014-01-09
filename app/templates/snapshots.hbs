@@ -7,20 +7,28 @@
   <h2 class="clearfix"><span class="title">{{refset.title}}</span>
     <div class="refset-actions clearfix">
       {{#link-to 'plan.show' refset}}<button class="last toggle btn btn-lg btn-info">Rules</button>{{/link-to}}
-      {{#link-to 'snapshots'}}<button disabled="disabled" class="toggle btn btn-lg btn-info">Versions</button>{{/link-to}}  
+      {{#link-to 'snapshots'}}<button disabled="disabled" class="toggle btn btn-lg btn-info">Versions</button>{{/link-to}}
     <div class="refset-actions">
   </h2>
   <h4 class="clearfix"><span class="title">Versions</span></h4>
   <table class="table table-striped">
     <thead>
-      <th>Title</th>
+      <th class="title">Title</th>
+      <th class="action"></th>
     <thead>
     <tbody>
       {{#each snapshot in controller}}
       <tr>
-        <td>{{#link-to 'snapshot' snapshot action='gosnapshot' actionParam=snapshot}}{{snapshot.title}}{{/link-to}}</td>
+        <td class="title">{{#link-to 'snapshot' snapshot action='gosnapshot' actionParam=snapshot}}{{snapshot.title}}{{/link-to}}</td>
+        <td class="action">
+          <div class="btn-group snapshot-actions">
+            <a href="#" class="action download iconf first"><span class="glyphicon glyphicon-cloud-download"></span></a>
+            <a href="#" class="action delete icon"><span class="glyphicon glyphicon-trash"></span></button></a>
+          </button>
+        </td>
       </tr>
       {{/each}}
     </tbody>
   </table>
+  <button type="button" data-toggle="modal" href="#import-snapshot" class="import btn btn-sm btn-success">Import Version</button>    
 </section>

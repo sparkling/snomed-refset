@@ -63,9 +63,19 @@ ol.breadcrumb
 #details h2
   margin: 1em 0;
 
-#details .btn
+#details .refset-actions .btn,
+#details .plan-actions .btn
   min-width: 6em;
   font-size: 12px;
+
+.snapshot-actions .action
+  font-size: 1em
+
+.snapshot-actions .action
+  font-size: 1.1em
+
+.snapshot-actions .action.download
+  color: skyblue
 
 #details .rule .btn
   min-width: 12em;
@@ -90,6 +100,9 @@ ol.breadcrumb
 .concepts .table
   display: inline-table
   
+#snapshots .table .action
+  width: 12em
+  text-align: right
 
 .concepts .table .effectiveOn
   width: 9em
@@ -167,10 +180,13 @@ ol.breadcrumb
 #plan .delete.new-rule.icon.btn
   border-left: 0
 
-#plan .delete.icon .glyphicon  
+.delete.icon .glyphicon  
   color: tomato
-  font-size: 0.75em
   opacity: 0.75
+
+#plan .delete.icon .glyphicon  
+  font-size: 0.75em
+  
 
 #plan .concepts .delete.icon .glyphicon  
   font-size: 1em
@@ -279,8 +295,14 @@ ol.breadcrumb
   
   padding-bottom: 0 !important
 
-#snapshot .btn.close-snapshot
-  float: right
+#snapshots .action
+  min-width: 4em
+
+#snapshots .action
+  margin-left: 1em
+
+#snapshots .action.first
+  margin-left: 0  
 
 .concept .btn
   display: block
