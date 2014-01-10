@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Refsets</title>
+  <meta name="description" content="Refset Editor for Snomed">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script type="text/javascript" >
   ENV = {
@@ -9,9 +13,8 @@
   };
   </script>  
 
-<link rel="stylesheet" href="/assets/refset.css">
-
-  <!-- build:css(tmp/result) assets/app.min.css -->
+  <link rel="stylesheet" href="/assets/refset.css">
+  <!-- build:css(tmp/result) /assets/app.min.css -->
   <link rel="stylesheet" href="/assets/app.css">
   <link rel="stylesheet" href="/assets/textSearch.css">
   <link rel="stylesheet" href="/assets/bootstrap.css">
@@ -20,7 +23,24 @@
 
   <!-- for more details visit: https://github.com/yeoman/grunt-usemin -->
 
-  <!-- build:js(tmp/result) assets/vendor.min.js -->
+  <!-- build:js(tmp/result) /assets/config.min.js -->
+
+    <script src="/config/environment.js"></script>
+    <!-- @if tests=false -->
+
+      <!-- @if dist=false -->
+      <script src="/config/environments/development.js"></script>
+      <!-- @endif --><!-- @if dist=true -->
+      <script src="/config/environments/production.js"></script>
+      <!-- @endif -->
+
+    <!-- @endif --><!-- @if tests=true -->
+      <script src="/config/environments/test.js"></script>
+    <!-- @endif -->
+
+  <!-- endbuild -->
+
+  <!-- build:js(tmp/result) /assets/vendor.min.js -->
 
     <script src="/vendor/jquery/jquery.js"></script>
     <script src="/vendor/bootstrap-3.0.3/dist/js/bootstrap.js"></script>  
@@ -37,10 +57,11 @@
     <script src="/vendor/ember-data/ember-data.js"></script>
     <script src="/vendor/loader.js"></script>
     <script src="/vendor/ember-resolver/dist/ember-resolver.js"></script>
+    <script src="/vendor/ic-ajax/main.js"></script>
 
   <!-- endbuild -->
 
-  <!-- build:js(tmp/result) assets/app.min.js -->
+  <!-- build:js(tmp/result) /assets/app.min.js -->
 
     <script src="/assets/app.js"></script>
     <script src="/assets/templates.js"></script>
@@ -71,6 +92,13 @@
 
 </head>
 <body>
+  <!--[if lt IE 8]>
+    <p class="browsehappy">
+      You are using an <strong>outdated</strong> browser. Please
+      <a href="http://browsehappy.com/">upgrade your browser</a>
+      to improve your experience.
+    </p>
+  <![endif]-->
 
   <!-- @if tests=true -->
   <div id="qunit"></div>
@@ -78,6 +106,7 @@
   <script src="/tests/tests.js"></script>
   <script src="/tests/test_helper.js"></script>
   <script src="/tests/test_loader.js"></script>
+  <script src="/testem.js"></script>
   <!-- @endif -->
 
   <!-- @if tests=false -->

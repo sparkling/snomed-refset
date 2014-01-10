@@ -28,15 +28,8 @@ var App = Ember.Application.extend({
   }
 });
 
-Ember.RSVP.configure('onerror', function(error) {
-  // ensure unhandled promises raise awareness.
-  // may result in false negatives, but visibility is more important
-  if (error instanceof Error) {
-    Ember.Logger.assert(false, error);
-    Ember.Logger.error(error.stack);
-  }
-});
-
+// See:
+// https://stackoverflow.com/questions/16124381/combine-linkto-and-action-helpers-in-ember-js
 Ember.LinkView.reopen({
   action: null,
   _invoke: function(event){
@@ -56,15 +49,4 @@ Ember.LinkView.reopen({
   }
 });
 
-//App.deferReadiness();
-App.initializer(registerComponents);
-
-var createApp = function() {
-  App.initializer(registerComponents);
-  return App.create();
-};
-
 export default App;
-//export default App;
-
-
