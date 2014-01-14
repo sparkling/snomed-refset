@@ -111,7 +111,7 @@ Snapshot.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + '/' + refsetId + '/snapshot/' + snapshotId,
+        url: baseUrl + '/' + refsetId + '/snapshot/' + snapshotId + '.json',
         type: "GET",
         data: '',
         dataType: "json"
