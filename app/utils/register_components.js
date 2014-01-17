@@ -12,7 +12,7 @@ function registerComponents(container) {
       Ember.Logger.log('initialising: ' + match[1]);
       registerComponent(container, match[1]);
     }
-  }
+  } 
 }
 
 

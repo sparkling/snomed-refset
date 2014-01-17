@@ -1,59 +1,11 @@
-var baseUrl = 'https://refset-api.snomedtools.info/refsets';
-//var baseUrl = 'http://localhost:8080/refsets';
+import toEmberObject from 'appkit/utils/to_ember_object';
+import toType from 'appkit/utils/to_type';
+
+//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
+var baseUrl = 'http://localhost:8080/refsets';
 
 var Refset = Ember.Object.extend({});
-
-var toType = function(obj) {
-  return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-};
  
-var toEmberObject = function(plainObject) {
-  var data, i, key, result, type, value;
-  //Ember.Logger.log('********************************************');
-  //Ember.Logger.log('toEmber: ' + JSON.stringify(plainObject));
-  //Ember.Logger.log('toEmber type: ' + Ember.typeOf(plainObject));
-  //Ember.Logger.log('********************************************');
-  if (!plainObject) {
-    return plainObject;
-  }
-  data = {};
-  for (key in plainObject) {
-    value = plainObject[key];
-    type = Ember.typeOf(value);
-    //Ember.Logger.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-    //Ember.Logger.log('key: ' + JSON.stringify(key));
-    //Ember.Logger.log('value: ' + JSON.stringify(value));
-    //Ember.Logger.log('emberType (value): ' + type);
-    //Ember.Logger.log('toType (value): ' + toType(value));
-    if (type === "array") {
-      var emberArray = Ember.A();
-      i = 0;
-      //Ember.Logger.log('value.length: ' + value.length);
-      while (i < value.length) {
-        if (Ember.typeOf(value[i]) === 'object') {
-          //Ember.Logger.log('pushing: toEmberObject(' + value[i] + ')');
-          emberArray.pushObject(toEmberObject(value[i]));
-        } else {
-          //Ember.Logger.log('pushing: ' + value[i]);
-          emberArray.pushObject(value[i]);
-        }
-        ++i;
-      }
-      //Ember.Logger.log('WAAAH! End of array! key: ' + key + ', emberArray type is: ' + emberArray.constructor.toString());
-      //Ember.Logger.log('Ember array type: ' + Ember.typeOf(Ember.A()));
-      data[key] = emberArray;
-    } else if (type === "object") {
-      data[key] = toEmberObject(value);
-    } else {
-      if (type === "string" || type === "number" || type === "boolean") {
-        data[key] = value;
-      }
-    }
-  }
-  result = Ember.Object.create(data);
-  return result;
-};
-
 Refset.reopenClass({
   loadRefset: function(publicId, _this) {
     return Ember.Deferred.promise(function(p) {

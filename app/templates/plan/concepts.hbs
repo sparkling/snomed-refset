@@ -1,43 +1,4 @@
-{{#modal-box modalid="snapshot"}}
-  <form class="form-group" {{action 'snapit' on="submit"}}>
-    <div class="modal-header">
-      <h4>Publish 
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </h4>
-    </div>
-    <div class="modal-body">
-      <section class="inputs">
-        <div {{bind-attr class=":form-group error.fieldErrors.title:has-error"}}>
-          <label>Title</label>
-          {{input type="text" name="title" class="form-control" value=snapshot.title placeholder="Enter Title"}}
-           {{#each e in error.fieldErrors.title }}
-            <span class="help-block">{{e}}</span>
-          {{/each}}
-        </div>
-        <div {{bind-attr class=":form-group error.fieldErrors.description:has-error"}}>
-          <label>Description</label>
-          {{input type="text" name="description" class="form-control" value=snapshot.description placeholder="Enter Description"}}
-          {{#each e in error.fieldErrors.description }}
-            <span class="help-block">{{e}}</span>
-          {{/each}}
-        </div>
-        <div {{bind-attr class=":form-group error.fieldErrors.publicId:has-error"}}>
-          <label>Public ID</label>
-          {{input type="text" name="publicId" class="form-control" value=snapshot.publicId placeholder="Enter Public ID"}}
-          {{#each e in error.fieldErrors.publicId }}
-            <span class="help-block">{{e}}</span>
-          {{/each}}
-        </div>
-      </section>
-    </div>
-    <div class="modal-footer">
-      <div class="form-group">
-        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div> 
-    </div>  
-  </form>
-{{/modal-box}}
+{{view "takeSnapshot"}}
 
 <section class="concepts clearfix">
   <h4 class="clearfix"><span class="title">Concepts</span>

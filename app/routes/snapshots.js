@@ -9,5 +9,15 @@ export default Ember.Route.extend({
       snapshots = Snapshot.getSnapshots(this.modelFor('refset'), this);
     }
     return snapshots;
+  },
+  setupController: function(controller, model) {
+    Ember.Logger.log('In Snapshots setupController');
+
+    Ember.Logger.log('Setting up Import Snapshot template');
+    var created = Snapshot.create();
+    created.set('fileType', 'USE_EXTENSION');
+    
+    controller.set('snapshot', created);
+    controller.set('model', model);
   } 
 });

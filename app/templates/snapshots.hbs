@@ -3,6 +3,9 @@
   <li>{{#link-to 'snapshots'}}{{refset.title}}{{/link-to}}</li>
   <li class="active">Versions</li>
 </ol>
+
+{{view "importSnapshot"}}
+
 <section id="snapshots" class="clearfix">
   <h2 class="clearfix"><span class="title">{{refset.title}}</span>
     <div class="refset-actions clearfix">
@@ -47,5 +50,5 @@
       {{/each}}
     </tbody>
   </table>
-  <button type="button" data-toggle="modal" href="#import-snapshot" class="import btn btn-sm btn-success">Import</button>    
+  <button type="button" data-toggle="modal" href="#import-snapshot" {{action 'resetImport'}} class="import btn btn-sm btn-success">Import</button>    
 </section>
