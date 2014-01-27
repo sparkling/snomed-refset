@@ -24,13 +24,13 @@
         <th class="effectiveOn">Effective on</th>
       <thead>
       <tbody>
-        {{#each concept in conceptDtos}}
+        {{#each member in memberDtos}}
         <tr>
           <td class="title">
-            {{concept-link concept}}
+            {{concept-link member.component}}
           </td>
-          <td class="id">{{concept.id}}</td>
-          <td class="effectiveOn">{{date-format concept.effectiveTime}}</td>
+          <td class="id">{{member.component.id}}</td>
+          <td class="effectiveOn">{{date-format member.effective}}</td>
         </tr>
         {{/each}}
       </tbody>

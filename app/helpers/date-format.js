@@ -1,4 +1,6 @@
+
+
 export default Ember.Handlebars.makeBoundHelper(function(date) {
-  //return window.moment(date).fromNow();
-  return date;
+  var created = window.moment(date);
+  return created;
 });
