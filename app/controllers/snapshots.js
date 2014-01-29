@@ -10,7 +10,7 @@ export default Ember.ArrayController.extend({
     {label:"Auto Detect", id:"USE_EXTENSION"},
     {label:"JSON", id:"JSON"},
     {label:"XML",  id:"XML"},
-    {label:"List", id:"LIST"},
+    //{label:"List", id:"LIST"},
     {label:"RF2",  id:"RF2"},
   ],  
   actions:{
