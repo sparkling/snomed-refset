@@ -111,6 +111,7 @@ export default Ember.ObjectController.extend({
     addrule: function(){
       Ember.Logger.log('Handling event [addRule]');
       var counter = this.get('counter');
+      Ember.Logger.log('counter is ' + counter);
       var rule = Ember.Object.extend({
         id: counter,
         type: 'NOT_SET',
@@ -118,6 +119,10 @@ export default Ember.ObjectController.extend({
         right: '',
         concepts: Ember.A()
       }).create();
+      rule.set("id", counter);
+      rule.set("type", "NOT_SET");
+      rule.set("concepts", Ember.A());
+      Ember.Logger.log('Created rule ' + JSON.stringify(rule));
       this.set('counter', --counter);
       this.get('model.rules').pushObject(rule);
       this.dirty();

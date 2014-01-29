@@ -128,12 +128,12 @@ Snapshot.reopenClass({
         data: '',
         dataType: "json"
       }).then((function(success) {
-        Ember.Logger.log('success: ' + JSON.stringify(success));
         Ember.Logger.log('snapshot: ' + JSON.stringify(success));
         var jsParsed = success;
-        Ember.Logger.log('JSON parsed: ' + JSON.stringify(jsParsed));
+        //Ember.Logger.log('JSON parsed: ' + JSON.stringify(jsParsed));
         var snapshot = toEmberObject(jsParsed);
-        Ember.Logger.log('after toEmber: ' + JSON.stringify(snapshot));
+        //Ember.Logger.log('after toEmber: ' + JSON.stringify(snapshot));
+        
         //return result.setProperties(parsed);
         //This should be passed in as a success function instead
         //Does not belong here
