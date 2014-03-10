@@ -1,0 +1,30 @@
+<section id="listing">
+
+
+  {{confirm-box action="confirmDelete" candidate=deleteCandidate modalid=deleteModalId 
+  title="Confirm delete" message=deleteMessage}}
+
+
+  <table id="forums" class="table table-striped">
+    <thead>
+      <th>Title</th>
+      <th>Created</th>
+      <th></th>
+    <thead>
+    <tbody>
+
+      {{#each refset in controller}}
+      <tr>
+        <td>{{#link-to 'snapshots' refset}}{{refset.title}}{{/link-to}}</td>
+        <td>{{date-format refset.created}}</td>
+
+        <td><button type="button" {{action "deleteRefset" refset}} class="close">&times;</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{#link-to 'create'}}<button class="btn btn-sm btn-default">Create Refset</button>{{/link-to}}
+
+</section>
+

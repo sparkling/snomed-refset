@@ -1,44 +1,118 @@
-<ol class="breadcrumb">
-  <li>{{#link-to 'refsets'}}Refsets{{/link-to}}</li>
-  <li class="active">{{title}}</li>
-</ol>
-
-{{search-box action="selected" modalid=findConceptModalId}}
-
-<section class="inputs">
+<section id="new-refset"> 
+  <div class="row">
+    <div class="large-12 columns">
+      <h2 class="subheader">Create a new refset</h2>
+    </div>
+  </div>
   <form class="form-group" {{action 'save' on="submit"}}>
-    <!--div {{bind-attr class=":form-group :concept error.fieldErrors.concept:has-error"}}>
-      <label>Concept</label>
-      <button data-toggle="modal" {{bind-attr href=hashedFindConceptModalId}} {{bind-attr class=":btn :btn-default :btn-sm concept:has-concept"}}>Find Concept</button>
-      <div class="title">{{conceptDisplayName}}</div>
-      {{#each e in error.fieldErrors.concept }}
-        <span class="help-block">{{e}}</span>
-      {{/each}}
-    </div-->  
-    <div {{bind-attr class=":form-group error.fieldErrors.title:has-error"}}>
-      <label>Title</label>
-      {{input type="text" name="title" class="form-control" value=title placeholder="Enter Title"}}
-       {{#each e in error.fieldErrors.title }}
-        <span class="help-block">{{e}}</span>
-      {{/each}}
+
+    <div class="row">
+      <div class="field source small-4 medium-3 columns">
+        <label {{bind-attr class="error.fieldErrors.source:error"}}>Source</label>
+        {{view Ember.Select contentBinding="selectSource"
+                            optionLabelPath="content.label"
+                            optionValuePath="content.key"
+                            valueBinding="source"
+                            classNames="dropdown"}}
+        {{#each e in error.fieldErrors.source}}
+          <span class="error">{{e}}</span>
+        {{/each}}
+      </div>
+      <div class="field type small-4 medium-3 small-pull-4 medium-pull-6 columns">
+        <label {{bind-attr class="error.fieldErrors.type:error"}}>Type</label>
+        {{view Ember.Select contentBinding="selectType"
+                            optionLabelPath="content.label"
+                            optionValuePath="content.key"
+                            valueBinding="content.type"
+                            classNames="dropdown"}}
+        {{#each e in error.fieldErrors.type}}
+          <span class="error">{{e}}</span>
+        {{/each}}                            
+      </div>
     </div>
-    <div {{bind-attr class=":form-group error.fieldErrors.description:has-error"}}>
-      <label>Description</label>
-      {{input type="text" name="description" class="form-control" value=description placeholder="Enter Description"}}
-      {{#each e in error.fieldErrors.description }}
-        <span class="help-block">{{e}}</span>
-      {{/each}}
+    <div class="row field title">
+      <div class="small-12 medium-10 large-8 columns">
+        <label {{bind-attr class="error.fieldErrors.title:error"}}>Title</label>
+        {{input type="text" name="title" value=title placeholder="Please give a title"}}
+        {{#each e in error.fieldErrors.title }}
+          <span class="error">{{e}}</span>
+        {{/each}}
+      </div>
     </div>
-    <div {{bind-attr class=":form-group error.fieldErrors.publicId:has-error"}}>
-      <label>Public ID</label>
-      {{input type="text" name="publicId" class="form-control" value=publicId placeholder="Enter Public ID"}}
-      {{#each e in error.fieldErrors.publicId }}
-        <span class="help-block">{{e}}</span>
-      {{/each}}
-    </div>    
-    <div class="form-group">
-      <button type="submit" class="btn btn-default">Create Refset</button>
-      {{#link-to 'refsets'}}<button class="btn btn-default">Cancel</button>{{/link-to}}
-    </div>    
+
+    <div class="row field description">
+      <div class="small-12 medium-10 large-8 columns">
+        <label {{bind-attr class="error.fieldErrors.description:error"}}>Description</label>
+        {{textarea name="description" value=description placeholder="Please give a description"}}
+        {{#each e in error.fieldErrors.description }}
+          <span class="error">{{e}}</span>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="row field publicid">
+      <div class="small-12 medium-10 large-8 columns">
+        <label {{bind-attr class="error.fieldErrors.publicId:error"}}>Internet address</label>
+        {{input type="text" name="publicId" value=publicId placeholder="Please give an internet address"}}
+        <label class="preview">http://refset.snomedtool.com/refsets/{{publicId}}</label>
+        {{#each e in error.fieldErrors.publicId }}
+          <span class="error">{{e}}</span>
+        {{/each}}        
+      </div>
+    </div>
+
+
+
+
+    <div class="row field release">
+      <div class="small-6 medium-4 large-3 columns">
+        <label>Default Snomed CT Release</label>
+        <select id="snomed-release-select">
+          <option value="1">January 17, 2012</option>
+          <option value="2">June 16, 2013</option>
+          <option value="3">December 01, 2013</option>
+          <option value="4">May 31, 2014</option>
+        </select>
+      </div>
+    </div>
+    <div class="row field module">
+      <div class="small-12 medium-10 large-8 columns">
+        <label {{bind-attr class="error.fieldErrors.moduleConcept:error"}}>Default Module</label>
+        {{select-two action="changeModuleConcept"}}
+        {{#each e in error.fieldErrors.moduleConcept}}
+          <span class="error">{{e}}</span>
+        {{/each}}        
+      </div>
+    </div>
+    <div class="row field refset-concept">
+      <div class="small-12 medium-10 large-8 columns">
+        <label {{bind-attr class="error.fieldErrors.refsetConcept:error"}}>Snomed Refset Concept</label>
+        <dl class="tabs" data-tab>
+          <dd class="active">
+            <a href="#panel-choose">Choose existing</a>
+          </dd>
+          <dd>
+            <a href="#panel-new">Create new</a>
+          </dd>
+        </dl>
+        <div class="tabs-content">
+          <div class="content active" id="panel-choose">
+            {{select-two action="changeRefsetConcept"}}
+          </div>
+          <div class="content" id="panel-new">
+            <p>Create new...</p>
+          </div>
+          {{#each e in error.fieldErrors.refsetConcept}}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="row action main">
+      <div class="small-12 columns">
+        <button type="submit" class="button radius small">Create Refset</button>
+        {{#link-to 'refsets' class="button radius small secondary"}}Cancel{{/link-to}}
+      </div>
+    </div>
   </form>
 </section>

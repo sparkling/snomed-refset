@@ -1,0 +1,155 @@
+.tooltip2 .circle {
+    border-radius: 50% 50% 50% 50%;
+    display: inline-block;
+}
+
+.tooltip2 .small{
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+}
+
+.tooltip2 .large{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    margin-top: 6px;
+    float: left;
+}
+
+.tooltip2 .circle.inactive {
+    background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, #FF6666 0%, red 100%, yellow 5%);
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, #FF6666, red);
+    background-image: radial-gradient(45px 45px 45deg, circle cover, #FF6666 0%, red 100%, yellow 5%);
+    border: 1px solid red;
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+}
+
+.tooltip2 .circle.active {
+    background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, lightgreen 0%, green 100%, blue 5%);
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, lightgreen, green);
+    background-image: radial-gradient(45px 45px 45deg, circle cover, lightgreen 0%, green 100%, blue 5%);
+    border: 1px solid green;
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+}
+
+.tooltip2 .circle{
+    bottom: 5px;
+    float: right;
+    left: 10px;
+    position: relative;
+}
+
+.tooltip2 span.popup .value{
+    float: left;
+}
+
+*.tooltip2 {
+    outline:none; 
+}
+.tooltip2 a{
+    float: left;
+}
+
+*.tooltip2 strong {
+    line-height:30px;
+}
+*.tooltip2:hover {
+    text-decoration:none;
+} 
+*.tooltip2 span {
+    z-index:10;
+    display:none; 
+    padding:12px 18px;
+    margin-top:-13px; 
+    margin-left:20px;
+    width:auto; 
+    line-height:16px;
+    font-family: "futura-pt-1","futura-pt-2",sans-serif;
+    font-size: 0.9em;
+}
+
+.descriptions *.tooltip2 span{
+    margin-top: -36px;
+}
+
+.isactive .tooltip2 span{
+    padding:4px 10px 5px;
+    font-family: "futura-pt-1","futura-pt-2",sans-serif;
+    margin-left: 18px;
+    margin-top: -32px;
+}
+
+.statement .tooltip2 span{
+    margin-top: -50px;
+    margin-left: 17px;    
+}
+
+#heading .isactive .tooltip2 span{
+    right: 175px;
+}
+
+*.tooltip2:hover span{
+    display:inline; 
+    position:absolute; 
+    color:#111;
+    border:1px solid #DCA; 
+    background:#fffAF0;
+    border-radius: 10px 10px 10px 10px;
+}
+
+
+
+*.tooltip2.left span{
+    margin-top:-54px;
+}
+
+*.tooltip2.left:hover span{
+    margin-left: -5.5em;
+    padding-top: -20em;
+}
+
+*.inactive.tooltip2.left:hover span{
+    margin-left: -6em;
+}
+
+.tooltip2 .callout {
+    z-index:20;
+    top:30px;
+    border:0;
+    left:-12px;
+}
+*.tooltip2 span
+{
+    -moz-box-shadow: 5px 5px 8px #CCC;
+    -webkit-box-shadow: 5px 5px 8px #CCC;
+    box-shadow: 5px 5px 8px #CCC;
+}
+
+.tooltip2.arrow span:after, .tooltip2.arrow span:before {
+    right: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.tooltip2.arrow span:after {
+    border-color: rgba(255, 250, 240, 0);
+    border-right-color: #fffAF0;
+    border-width: 10px;
+    top: 50%;
+    margin-top: -10px;
+}
+.tooltip2.arrow span:before {
+    border-color: rgba(221, 204, 170, 0);
+    border-right-color: #DCA;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
+

@@ -13,12 +13,18 @@
   };
   </script>  
 
-  <link rel="stylesheet" href="/assets/refset.css">
-  <!-- build:css(tmp/result) /assets/app.min.css -->
-  <link rel="stylesheet" href="/assets/app.css">
-  <link rel="stylesheet" href="/assets/textSearch.css">
-  <link rel="stylesheet" href="/assets/bootstrap.css">
-  <link rel="stylesheet" href="/vendor/font-awesome-4.0.3/css/font-awesome.min.css"/>
+  <link type="text/css" rel="stylesheet" href="/assets/zurb.css">
+  <link type="text/css" rel="stylesheet" href="/assets/tooltip.css">
+  <link type="text/css" rel="stylesheet" href="/assets/app.css">
+  <link type="text/css" rel="stylesheet" href="/assets/tabs.css">
+  <link type="text/css" rel="stylesheet" href="/vendor/internet/font-awesome.css"/>
+  <link type="text/css" rel="stylesheet" href="/vendor/internet/normalize.css"/>
+  <link type="text/css" rel="stylesheet" href="/vendor/internet/foundation.css"/>
+  <link type="text/css" rel="stylesheet" href="/vendor/internet/easydropdown.css"/>
+  <link type="text/css" rel="stylesheet" href="/vendor/internet/select2.min.css"/>
+
+  
+
   <!-- endbuild -->
 
   <!-- for more details visit: https://github.com/yeoman/grunt-usemin -->
@@ -42,9 +48,11 @@
 
   <!-- build:js(tmp/result) /assets/vendor.min.js -->
 
+    
     <script src="/vendor/jquery/jquery.js"></script>
-    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>  
-    <!--script src="/vendor/momentjs/moment.js"></script-->  
+    <!--script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script-->  
+    <!--script src="/vendor/momentjs/moment.js"></script-->
+
 
     <!-- @if dist=false -->
     <script src="/vendor/handlebars/handlebars.js"></script>
@@ -54,7 +62,7 @@
     <script src="/vendor/ember/ember.prod.js"></script>
     <!-- @endif -->
 
-    <script src="/vendor/ember-data/ember-data.js"></script>
+    <!--script src="/vendor/ember-data/ember-data.js"></script-->
     <script src="/vendor/loader.js"></script>
     <script src="/vendor/ember-resolver/dist/ember-resolver.js"></script>
     <script src="/vendor/ic-ajax/main.js"></script>
@@ -111,14 +119,25 @@
 
   <!-- @if tests=false -->
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <!-- LOCAL -->
+  <script type="text/javascript" src="/vendor/internet/jquery.easydropdown.js"></script>
+  <script type="text/javascript" src="/vendor/internet/modernizr.min.js"></script>
+  <script type="text/javascript" src="/vendor/internet/foundation.min.js"></script>
+  <script type="text/javascript" src="/vendor/internet/select2.min.js"></script>
+  <script type="text/javascript" src="/vendor/internet/moment.min.js"></script>
+  <script type="text/javascript" src="//use.typekit.net/yny4pvk.js"></script>
+
+  <script type="text/javascript">
+    $(document).foundation();
+  </script>  
 
   <script>
     window.App = require('appkit/app')["default"].create();
   </script>
 
-  <script type="text/javascript" src="//use.typekit.net/yny4pvk.js"></script>
+
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
   <!-- @endif -->
 
 </body>
