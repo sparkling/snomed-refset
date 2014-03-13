@@ -16,6 +16,16 @@ export default Ember.ObjectController.extend({
     { label: "List",  key: "LIST" },
     { label: "Rules", key: "RULES" }
   ],
+  selectExtension: [
+    { label: "International (Core)",  key: "INTERNATIONAL" },
+    { label: "United Kingdom", key: "UK" },
+    { label: "Denmark", key: "DK" }
+  ],
+  selectReleaseDate: [
+    { label: "July 31st, 2013",  key: "20130731" },
+    { label: "January 1st, 2013",  key: "20130101" },
+  ],
+
 
   hashedFindConceptModalId: function(){
     return '#' + this.get('findConceptModalId');

@@ -60,21 +60,35 @@
         {{/each}}        
       </div>
     </div>
+    <div class="row field">
+      <div class="small-12 medium-10 large-8 columns">
+        <div class="row field release">
+          <div class="small-6 columns">
+            <label {{bind-attr class="error.fieldErrors.snomedReleaseDate:error error.fieldErrors.snomedExtension:error"}}>Snomed Extension</label>
+            {{view Ember.Select contentBinding="selectExtension"
+                                optionLabelPath="content.label"
+                                optionValuePath="content.key"
+                                valueBinding="snomedExtension"
+                                classNames="dropdown"}}
+          </div>
+          <div class="small-6 columns">
+            <label {{bind-attr class="error.fieldErrors.snomedReleaseDate:error error.fieldErrors.snomedExtension:error"}}>Snomed Release Date</label>
+            {{view Ember.Select contentBinding="selectReleaseDate"
+                                optionLabelPath="content.label"
+                                optionValuePath="content.key"
+                                valueBinding="snomedReleaseDate"
+                                classNames="dropdown"}}
 
-
-
-
-    <div class="row field release">
-      <div class="small-6 medium-4 large-3 columns">
-        <label>Default Snomed CT Release</label>
-        <select id="snomed-release-select">
-          <option value="1">January 17, 2012</option>
-          <option value="2">June 16, 2013</option>
-          <option value="3">December 01, 2013</option>
-          <option value="4">May 31, 2014</option>
-        </select>
-      </div>
-    </div>
+          </div>      
+        </div>
+        {{#each e in error.fieldErrors.snomedReleaseDate}}
+          <span class="error">{{e}}</span>
+        {{/each}}
+        {{#each e in error.fieldErrors.snomedExtension}}
+          <span class="error">{{e}}</span>
+        {{/each}}        
+      </div> <!-- columns -->
+    </div> <!-- row -->
     <div class="row field module">
       <div class="small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.moduleConcept:error"}}>Default Module</label>

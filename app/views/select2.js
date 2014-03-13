@@ -42,7 +42,7 @@ export default Ember.View.extend({
         return doc.title;
       },
       ajax: {
-          url: "https://solr.snomedtools.com/solr/concept/select",
+          url: "https://solr.sparklingideas.co.uk/solr/concept/select",
           dataType: 'jsonp',
           params: {jsonp: 'json.wrf'},
           data: function (term, page) {

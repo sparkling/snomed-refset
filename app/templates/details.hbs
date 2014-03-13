@@ -1,0 +1,115 @@
+
+<!-- ********** -->
+<!-- * HEADER * -->
+<!-- ********** -->  
+<header>
+  <nav class="row">
+    <div class="small-12 columns">
+      <ul class="breadcrumbs">
+        <li>
+          <span><a href="index.html">Refsets</a></span>
+        </li>
+        <li class="current">
+          <a href="snapshots.html">Test subset about ears</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- ********* -->
+  <!-- * ALERT * -->
+  <!-- ********* -->
+  <div class="row" style="margin-top: -1em">
+    <!-- CHANGES PENDING -->
+    <div class="small-12 columns">
+      <div data-alert id="alert2" class="alert-box success radius">
+        <span>There are changes pending</span>
+        <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
+          <!-- PENDING CHANGES ICON -->
+          <a href="pending.changes.membership.html" class="show-changes icon" style="color:white; margin-right: 0.5em">
+            <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="See Pending Changes"></span>
+          </a>
+          <!-- CREATE VERSION ICON -->
+          <a href="#" class="icon" data-reveal-id="commit-modal" style="color: white">
+            <span data-tooltip data-options="disable_for_touch:false" class="fa fa-tags" title="Commit Changes"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- DELETE ALERT -->
+    <div class="small-12 columns">
+      <div data-alert id="alert1" class="alert-box warning radius" style="display: none">
+        Member with component "Glial Cell (cell)" has been removed 
+        <span class="actions">
+          <a href="#" onclick="$('#alert1').hide()" class="icon undo"><span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span></a>
+          <a href="#" onclick="$('#alert1').hide()" class="icon close-alert"><span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span></a>
+        </span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ******** -->
+<!-- * MAIN * -->
+<!-- ******** -->
+<section class="details">
+  <!-- HEADER -->
+  <div class="row heading">
+    <div class="small-6 medium-4 columns">
+      <h2 class="subheader">Refset Details</h2>
+    </div>
+    <!-- NAVIGATION -->
+    <div class="small-6 medium-8 columns navigation top">
+      <div class="button-bar">
+        <ul class="button-group radius">
+          <li>{{#link-to 'members'  class="secondary button tiny members"}}Members{{/link-to}}</li>
+          <li>{{#link-to 'versions' class="secondary button tiny versions"}}Versions{{/link-to}}</li>
+          <li>{{#link-to 'releases' class="secondary button tiny releases"}}Releases{{/link-to}}</li>
+          <li>{{#link-to 'details'  class="secondary button tiny details disabled"}}Details{{/link-to}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- PROPERTIES -->
+  <section class="properties">
+    <div class="row source property first">
+      <div class="small-3 columns">
+        <span>Source</span>
+      </div>
+      <div class="small-9 columns">
+        <span>List of Concepts</span>
+      </div>
+    </div>
+    <div class="row component property">
+      <div class="small-3 columns">
+        <span>Concept</span>
+      </div>
+      <div class="small-9 columns">
+        <a href="#">Language Type Reference Set</a>
+      </div>
+    </div>
+    <div class="row module property">
+      <div class="small-3 columns">
+        <span>Default Module</span>
+      </div>
+      <div class="small-9 columns">
+        <a href="#">Snomed CT Core</a>
+      </div>
+    </div>
+    <div class="row effective property">
+      <div class="small-3 columns">
+        <span>Default Snomed Release</span>
+      </div>
+      <div class="small-9 columns">
+        <span>January 17, 2012</span>
+      </div>
+    </div>
+  </section>
+  <!-- ACTION -->
+  <div class="row action main">
+    <div class="small-12 columns">
+      <a href="edit.refset.html" class="button small radius">Modify</a>
+    </div>
+  </div>
+</section>

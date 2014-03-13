@@ -4,10 +4,10 @@ import Refset from 'appkit/models/refset';
 export default Ember.Route.extend({
   model: function() {
     var r = Refset.create();
-    //var c1 = Concept.create();
     r.set('source', 'LIST');
     r.set('type', 'CONCEPT');
-    //r.set('refsetConcept', c1);
+    r.set('snomedReleaseDate', '20130731');
+    r.set('snomedExtension', 'INTERNATIONAL');
     return r;
   }
 });

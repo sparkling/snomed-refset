@@ -1,17 +1,20 @@
 import toEmberObject from 'appkit/utils/to_ember_object';
 import toType from 'appkit/utils/to_type';
 
-var baseUrl = 'https://refset-api.snomedtools.info/refsets';
-//var baseUrl = 'http://localhost:8080/refsets';
+//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
+var baseUrl = 'http://localhost:8080/refsets';
 
 var Refset = Ember.Object.extend({
-  source:        '',
-  type:          '',
-  title:         '',
-  description:   '',
-  publicId:      '',
-  refsetConcept: '',
-  moduleConcept: ''  
+  source:            '',
+  type:              '',
+  title:             '',
+  description:       '',
+  publicId:          '',
+  snomedReleaseDate: '',
+  snomedExtension:   '',
+  refsetConcept:     '',
+  moduleConcept:     '' 
+
 });
  
 Refset.reopenClass({

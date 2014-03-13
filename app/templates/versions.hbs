@@ -1,0 +1,298 @@
+
+<!-- ********** -->
+<!-- * HEADER * -->
+<!-- ********** -->  
+<header>
+  <nav class="row">
+    <div class="small-12 columns">
+      <ul class="breadcrumbs">
+        <li>
+          <span><a href="index.html">Refsets</a></span>
+        </li>
+        <li class="current">
+          <a href="snapshots.html">Test subset about ears</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- ********* -->
+  <!-- * ALERT * -->
+  <!-- ********* -->
+  <div class="row" style="margin-top: -1em">
+    <!-- CHANGES PENDING -->
+    <div class="small-12 columns">
+      <div data-alert id="alert2" class="alert-box success radius">
+        <span>There are changes pending</span>
+        <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
+          <!-- PENDING CHANGES ICON -->
+          <a href="pending.changes.membership.html" class="show-changes icon" style="color:white; margin-right: 0.5em">
+            <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="See Pending Changes"></span>
+          </a>
+          <!-- CREATE VERSION ICON -->
+          <a href="#" class="icon" data-reveal-id="commit-modal" style="color: white">
+            <span data-tooltip data-options="disable_for_touch:false" class="fa fa-tags" title="Commit Changes"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- DELETE ALERT -->
+    <div class="small-12 columns">
+      <div data-alert id="alert1" class="alert-box warning radius" style="display: none">
+        Member with component "Glial Cell (cell)" has been removed 
+        <span class="actions">
+          <a href="#" onclick="$('#alert1').hide()" class="icon undo"><span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span></a>
+          <a href="#" onclick="$('#alert1').hide()" class="icon close-alert"><span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span></a>
+        </span>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ******** -->
+<!-- * MAIN * -->
+<!-- ******** -->    
+
+<!-- HEADING -->
+<section class="versions">
+  <div class="row heading">
+    <div class="small-6 medium-4 columns">
+      <h2 class="subheader">Releases</h2>
+    </div>    
+    <!-- NAVIGATION -->
+    <!-- NAVIGATION -->
+    <div class="small-6 medium-8 columns navigation top">
+      <div class="button-bar">
+        <ul class="button-group radius">
+          <li>{{#link-to 'members'  class="secondary button tiny members"}}Members{{/link-to}}</li>
+          <li>{{#link-to 'versions' class="secondary button tiny versions disabled"}}Versions{{/link-to}}</li>
+          <li>{{#link-to 'releases' class="secondary button tiny releases"}}Releases{{/link-to}}</li>
+          <li>{{#link-to 'details'  class="secondary button tiny details"}}Details{{/link-to}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- TABLE FILTER -->
+  <div class="row table-filter">
+    <!-- FILTER -->
+    <div class="small-6 columns filter">      
+      <input type="text" placeholder="Filter"></input>
+    </div>
+    <!-- SHOW ... -->
+    <div class="small-6 columns show">
+      <!--label>show</label-->
+      <input id="show-id" type="checkbox" checked="true"><label for="show-id">Titles</label>
+      <input id="show-inactive" type="checkbox"><label for="show-inactive">Created by</label>
+      <input id="show-inactive" type="checkbox" checked="true"><label for="show-inactive">Created on</label>
+      <input id="show-effective" type="checkbox" checked="true"><label for="show-effective">Members</label>
+    </div>
+  </div>
+  
+<!-- ******* -->
+<!--  TABLE  -->
+<!-- ******* -->      
+  <div class="row">
+    <div class="large-12 columns">
+      <table width="100%" cellpadding="0" cellspacing="0" class="responsive">
+        
+        <!-- TABLE HEADER -->
+        <thead>
+          <th class="title">Title
+            <a style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
+            <a style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
+          </th>
+          <th>Created on
+            <a style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-numeric-asc"></span></a>
+            <a style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-numeric-desc"></span></a></th>                
+          </th>
+          <th class="members">Members
+            <a style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-numeric-asc"></span></a>
+            <a style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-numeric-desc"></span></a></th>
+          <th class="delete action"></th>
+          <th class="publish action"></th>
+          <th class="discuss action"></th>
+        </thead>
+        
+        <!-- TABLE BODY -->
+        <tbody>
+          <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Initial Release Candidate 1</a>
+                <span class="popup">This is a description of the snapshot</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,234</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>                
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Release Candidate 2</a>
+                <span class="popup">This is a description of the snapshot</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,200</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>                       
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Snomed Upgrade to Release Jan 2012 Test</a>
+                <span class="popup">This is a description of the refset</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,631</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>                      
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Snomed Upgrade to Release Jan 2012 Maintenance Release 1</a>
+                <span class="popup">This is a description of the refset</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,521</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>                      
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+          
+          <!-- repeat -->
+          
+       <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Initial Release Candidate 1</a>
+                <span class="popup">This is a description of the snapshot</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,234</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>                      
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Release Candidate 2</a>
+                <span class="popup">This is a description of the snapshot</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,200</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>                       
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Snomed Upgrade to Release Jan 2012 Test</a>
+                <span class="popup">This is a description of the refset</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,631</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>                      
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+              <div class="tooltip2 arrow">
+                <a href="version.details.html">Snomed Upgrade to Release Jan 2012 Maintenance Release 1</a>
+                <span class="popup">This is a description of the refset</span> 
+              </div>
+            </td>
+            <td class="created">December 21st, 2012</td>
+            <td class="members">10,521</td>
+            <td class="discuss action">
+              <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
+            </td>
+            <td class="publish action">
+              <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+            </td>       
+            <td class="delete action">
+              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- ************ -->
+  <!--  PAGINATION  -->
+  <!-- ************ -->      
+  <div class="row pagination">
+    <div class="small-12 columns">
+      <div class="pagination-centered">
+        <ul class="pagination">
+          <li class="arrow unavailable"><a href="">&laquo;</a></li>
+          <li class="current"><a href="">1</a></li>
+          <li><a href="">2</a></li>
+          <li><a href="">3</a></li>
+          <li><a href="">4</a></li>
+          <li class="unavailable"><a href="">&hellip;</a></li>
+          <li><a href="">12</a></li>
+          <li><a href="">13</a></li>
+          <li class="arrow"><a href="">&raquo;</a></li>
+        </ul>
+      </div>            
+    </div>
+  </div>   
+
+</section>
