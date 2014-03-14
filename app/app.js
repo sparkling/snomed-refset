@@ -1,4 +1,4 @@
-import Resolver from 'resolver';
+import Resolver from 'ember/resolver';
 import registerComponents from './initializers/register_components';
 
 var App = Ember.Application.extend({
