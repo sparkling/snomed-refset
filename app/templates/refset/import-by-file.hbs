@@ -1,0 +1,29 @@
+<form {{action 'save' on="submit"}}>
+  <!-- ****** -->
+  <!--  FILE  -->
+  <!-- ****** -->
+  <div class="row file">
+    <!-- FILE FORMAT -->
+    <div class="small-4 medium-3 columns file-format">
+      <label>1. Choose Format</label>
+      <select class="dropdown">
+        <option value="1" selected>Use File Extension</option>
+        <option value="RULES">RF2</option>
+        <option value="RULES">JSON</option>
+        <option value="RULES">XML</option>
+      </select>
+    </div><!-- columns file-format -->
+    <!-- UPLOAD -->
+    <div class="small-8 medium-9 columns file-selection">
+      <label>2. Choose File</label>
+      <input type="file" id="file-id" name="our-file"></input>
+    </div><!-- columns file-selection -->
+  </div><!-- row file -->
+  <!-- MAIN ACTION -->
+  <div class="row action main">
+    <div class="small-12 columns"> 
+      <a href="#" {{action "import"}} class="button small round">Import</a>
+      {{#link-to 'members' refset class="button radius small secondary"}}Cancel{{/link-to}}
+    </div>
+  </div>      
+</form>

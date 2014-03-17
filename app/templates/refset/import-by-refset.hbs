@@ -1,0 +1,65 @@
+<form {{action 'save' on="submit"}}>
+  <!-- ******** -->
+  <!--  REFSET  -->
+  <!-- ******** -->
+
+  <!-- CHOOSE SOURCE -->
+  <div class="row field source">
+    <div class="small-6 medium-4 columns">
+      <label>1. Choose Source</label>
+      <select class="dropdown">
+        <option value="LIST" selected>Private</option>
+        <option value="RULES">International Organisation for Standards</option>
+        <option value="RULES">Health Level 7</option>
+      </select>
+    </div>
+  </div>
+  
+  <!-- CHOOSE REFSET -->
+  <div class="row field refset">
+    <div class="small-12 medium-6 columns">
+      <label>2. Choose Refset</label>
+      <select id="s23">
+        <option value="1">Test subset about ears</option>
+        <option value="1">Acute Diseases Reference Set</option>
+        <option value="1">Test subset about ears</option>
+        <option value="1">Acute Diseases Reference Set</option>
+        <option value="1">Test subset about ears</option>
+        <option value="1">Acute Diseases Reference Set</option>
+      </select>
+    </div>           
+  </div>
+  
+  <!-- CHOOSE REFSET COLLECTION TYPE -->
+  <div class="row field collection-type">
+    <div class="small-6 medium-4 columns">
+      <label>3. Choose Refset Collection Type</label>
+      <select class="dropdown">
+        <option value="SNAPSHOTS">Snapshots</option>
+        <option value="RELEASES">Releases</option>
+      </select>
+    </div>                  
+  </div>
+  
+  <!-- CHOOSE TITLE -->
+  <div class="row field collection">
+    <div class="small-12 medium-6 columns">
+      <label>4. Choose Snapshot / Release</label>
+      <select id="s24">
+        <option value="1">First Release</option>
+        <option value="1">Alpha Release</option>
+        <option value="1">Beta</option> Release</option>
+        <option value="1">First Release</option>
+        <option value="1">Alpha Release</option>
+        <option value="1">Beta</option> Release</option>  
+      </select>
+    </div><!-- columns -->
+  </div><!-- row collection -->
+
+  <div class="row action main">
+    <div class="small-12 columns"> 
+      <a href="#" {{action "import"}} class="button small round">Import</a>
+      {{#link-to 'members' refset class="button radius small secondary"}}Cancel{{/link-to}}
+    </div>
+  </div>      
+</form>

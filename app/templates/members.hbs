@@ -96,82 +96,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Ear ring embedded in ear lobe (disorder)</a>
-            </td>
-            <td>August 25th, 2013</td>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Snomed ct core</a>
-            </td>
-            
-            <td class="info">
-              <a href="membership.details.html" class="icon"><span class="fa fa-info-circle"></span></a>
-            </td>                
-            <!--td class="edit">
-              <a href="edit.membership.html" class="icon"><span class="fa fa-pencil"></span></a>
-            </td-->
-            <td class="delete">
-              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Examination of ear (procedure)</a>
-            </td>
-            <td>Inactive</td>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Snomed ct core</a>
-            </td>
-            
-            <td class="info">
-              <a href="membership.details.html" class="icon"><span class="fa fa-info-circle"></span></a>
-            </td>                
-            <!--td class="edit">
-              <a href="edit.membership.html" class="icon"><span class="fa fa-pencil"></span></a>
-            </td-->
-            <td class="delete">
-              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Ear ring embedded in ear lobe (disorder)</a>
+          {{#each}}
+            <tr>
+              <td>
+                <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{component.title}}</a>
               </td>
-            <td>August 25th, 2013</td>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Snomed ct core</a>
-            </td>
-
-            <td class="info">
-              <a href="membership.details.html" class="icon"><span class="fa fa-info-circle"></span></a>
-            </td>                
-            <!--td class="edit">
-              <a href="edit.membership.html" class="icon"><span class="fa fa-pencil"></span></a>
-            </td-->
-            <td class="delete">
-              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Examination of ear (procedure)</a>
+              <td>{{effective}}</td>
+              <td>
+                <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{module.title}}</a>
               </td>
-            <td>August 25th, 2013</td>
-            <td>
-              <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Snomed ct core</a>
-            </td>
+              <td class="info">
+                <a href="membership.details.html" class="icon"><span class="fa fa-info-circle"></span></a>
+              </td>                
+              <!--td class="edit">
+                <a href="edit.membership.html" class="icon"><span class="fa fa-pencil"></span></a>
+              </td-->
+              <td class="delete">
+                <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+              </td>
+            </tr>
+          {{/each}}
 
-            <td class="info">
-              <a href="membership.details.html" class="icon"><span class="fa fa-info-circle"></span></a>
-            </td>
-            <!--td class="edit">
-              <a href="edit.membership.html" class="icon"><span class="fa fa-pencil"></span></a>
-            </td-->
-            <td class="delete">
-              <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
-            </td>
-          </tr>
         </tbody>
       </table>
     </div> <!-- columns -->

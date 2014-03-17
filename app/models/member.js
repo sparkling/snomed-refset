@@ -44,7 +44,32 @@ Member.reopenClass({
       }));
     });
     return response;
-  }
+  },
+  getMembers: function(refsetPublicId, _this) {
+    var members = Ember.A();
+    Ember.Logger.log('GETing members for refset for: ' + refsetPublicId);
+    Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        url: baseUrl + "/" + refsetPublicId + "/members",
+        type: "GET",
+        data: '',
+        dataType: "json"
+      }).then((function(success) {
+        Ember.Logger.log('success: ' + JSON.stringify(success));
+        var returned = toEmberObject(success);
+        Ember.Logger.log('members found and parsed: ' + JSON.stringify(returned));
+        members.pushObjects(returned.get('members'));
+      }), function(error) {
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        _this.set('response', toEmberObject(JSON.parse(error.responseText)));
+      }));
+    });
+    return members;
+  },   
 });
 
 export default Member;
