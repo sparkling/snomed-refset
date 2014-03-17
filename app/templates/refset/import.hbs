@@ -1,0 +1,74 @@
+<section class="add-members">
+  <!-- HEADING -->
+  <header class="row sub">
+    <div class="small-12 columns">
+      <h2 class="subheader">Add Members</h2>
+    </div>
+  </header>
+  <!-- FORM -->
+  <form {{action 'save' on="submit"}}>
+    <div class="row">
+      <div class="field add-concept small-12 columns">
+        {{select-two action="addConcept"}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+      
+        <!--  TABLE  -->
+        <table width="100%" cellpadding="0" cellspacing="0" class="responsive">
+          <!-- HEADER -->
+          <thead>
+            <th class="title">Title
+              <a style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
+              <a style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
+            </th>
+            <th class="action"></th>
+          </thead>
+          <!-- BODY -->
+          <tbody>
+            {{#each}}
+              <tr>
+                <td class="title">
+                  <a href="#">{{title}}</a>
+                </td>
+                <td class="delete">
+                  <a href="#" class="icon"><span class="fa fa-trash-o"></span></a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div><!-- columns -->
+    </div><!-- row -->
+    <!-- ************ -->
+    <!--  PAGINATION  -->
+    <!-- ************ -->      
+    <div class="row pagination">
+      <div class="small-12 columns">
+        <div class="pagination-centered">
+          <ul class="pagination">
+            <li class="arrow unavailable"><a href="">&laquo;</a></li>
+            <li class="current"><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li class="unavailable"><a href="">&hellip;</a></li>
+            <li><a href="">12</a></li>
+            <li><a href="">13</a></li>
+            <li class="arrow"><a href="">&raquo;</a></li>
+          </ul>
+        </div><!-- pagination-centered -->      
+      </div><!-- columns -->
+    </div><!-- row pagination -->
+
+
+    <div class="row action main">
+      <div class="small-12 columns"> 
+        <a href="#" {{action "import"}} class="button small round">Import</a>
+        {{#link-to 'members' refset class="button radius small secondary"}}Cancel{{/link-to}}
+      </div>
+    </div>      
+  </form>
+</section>

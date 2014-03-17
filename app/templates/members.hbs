@@ -1,82 +1,12 @@
-<!-- ***************** -->
-<!-- * COMMIT MODAL * -->
-<!-- ***************** -->
-<div id="commit-modal" class="reveal-modal row" data-reveal>
-  <h2>Commit Changes</h2>
-  <div class="row field title">
-    <div class="small-12 columns">
-      <input type="text" placeholder="Please give a title to your commit">
-    </div>
-  </div>
-  <a class="close-reveal-modal">&#215;</a>
-  <a class="button primary round tiny" href="refset.snapshots.html">Save</a>
-</div> 
-
-<!-- ********** -->
-<!-- * HEADER * -->
-<!-- ********** -->  
-<header>
-  <nav class="row">
-    <div class="small-12 columns">
-      <ul class="breadcrumbs">
-        <li>
-          <span><a href="index.html">Refsets</a></span>
-        </li>
-        <li class="current">
-          <a href="snapshots.html">Test subset about ears</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-
-  <!-- ********* -->
-  <!-- * ALERT * -->
-  <!-- ********* -->
-  <div class="row" style="margin-top: -1em">
-    <!-- CHANGES PENDING -->
-    <div class="small-12 columns">
-      <div data-alert id="alert2" class="alert-box success radius">
-        <span>There are changes pending</span>
-        <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
-          <!-- PENDING CHANGES ICON -->
-          <a href="pending.changes.membership.html" class="show-changes icon" style="color:white; margin-right: 0.5em">
-            <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="See Pending Changes"></span>
-          </a>
-          <!-- CREATE VERSION ICON -->
-          <a href="#" class="icon" data-reveal-id="commit-modal" style="color: white">
-            <span data-tooltip data-options="disable_for_touch:false" class="fa fa-tags" title="Commit Changes"></span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<div class="row">
-  <!-- DELETE ALERT -->
-  <div class="small-12 columns">
-    <div data-alert id="alert1" class="alert-box warning radius" style="display: none">
-      Member with component "Glial Cell (cell)" has been removed 
-      <span class="actions">
-        <a href="#" onclick="$('#alert1').hide()" class="icon undo"><span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span></a>
-        <a href="#" onclick="$('#alert1').hide()" class="icon close-alert"><span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span></a>
-      </span>
-    </div>
-  </div>
-</div>
-
-<!-- ******** -->
-<!-- * MAIN * -->
-<!-- ******** -->
-
-<!-- HEADING -->
 <section class="members">
-  <div class="row heading">
+  <!-- HEADING -->
+  <header class="row sub">
+    <!-- TITLE -->
     <div class="small-6 medium-4 columns">
       <h2 class="subheader">Members</h2>
-    </div>    
+    </div>
     <!-- NAVIGATION -->
-    <div class="small-6 medium-8 columns navigation top">
+    <nav class="small-6 medium-8 columns navigation top">
       <div class="button-bar">
         <ul class="button-group radius">
           <li>{{#link-to 'members'  class="secondary button tiny members disabled"}}Members{{/link-to}}</li>
@@ -85,18 +15,51 @@
           <li>{{#link-to 'details'  class="secondary button tiny details"}}Details{{/link-to}}</li>
         </ul>
       </div>
+    </nav>
+  </header>
+  <!-- ********** -->
+  <!-- * ALERTS * -->
+  <!-- ********** -->
+  <section id="alerts">
+    <div class="row alert pending">
+      <!-- CHANGES PENDING -->
+      <div class="small-12 columns">
+        <div data-alert id="alert2" class="alert-box success radius">
+          <span>There are changes pending</span>
+          <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
+            <!-- PENDING CHANGES ICON -->
+            <a href="pending.changes.membership.html" class="show-changes icon" style="color:white; margin-right: 0.5em">
+              <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="See Pending Changes"></span>
+            </a>
+            <!-- CREATE VERSION ICON -->
+            <a href="#" class="icon" data-reveal-id="commit-modal" style="color: white">
+              <span data-tooltip data-options="disable_for_touch:false" class="fa fa-tags" title="Commit Changes"></span>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  
+    <div class="row alert delete">
+      <!-- DELETE ALERT -->
+      <div class="small-12 columns">
+        <div data-alert id="alert1" class="alert-box warning radius" style="display: none">
+          Member with component "Glial Cell (cell)" has been removed 
+          <span class="actions">
+            <a href="#" onclick="$('#alert1').hide()" class="icon undo"><span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span></a>
+            <a href="#" onclick="$('#alert1').hide()" class="icon close-alert"><span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span></a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>  
   <!-- TABLE FILTER -->
-  <div class="row table-filter">
-    <!-- FILTER -->
-    <div class="small-6 columns filter">      
+  <div class="row filter">
+    <!-- TEXT -->
+    <div class="small-6 columns text">      
       <input type="text" placeholder="Filter"></input>
     </div>
-    <!-- SHOW ... -->
+    <!-- BOOLEAN -->
     <div class="small-6 columns show">
-      <!--label>show</label-->
       <input id="show-id" type="checkbox"><label for="show-id">Identifier</label>
       <input id="show-inactive" type="checkbox" checked="true"><label for="show-inactive">Inactive</label>
       <input id="show-effective" type="checkbox" checked="true"><label for="show-effective">Effective</label>
@@ -152,9 +115,6 @@
               <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
             </td>
           </tr>
-
-
-
           <tr>
             <td>
               <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">Examination of ear (procedure)</a>
@@ -217,14 +177,14 @@
     </div> <!-- columns -->
   </div><!-- row -->
   
-  <div class="main action row">
-
+  <!-- MAIN ACTION -->
+  <div class="main action pagination row bottom">
     <!-- ADD ICON -->
     <div class="columns small-1 icon add">
-      <a href="add.members.html">
+      {{#link-to 'refset.import'}}
         <span data-tooltip data-options="disable_for_touch:false" class="fa fa-plus-circle" title="Add Members"></span>
-      </a>
-    </div><!-- columns -->
+      {{/link-to}}
+    </div>
   
     <!-- PAGINATION -->
     <div class="small-10 small-pull-1 columns">
@@ -260,7 +220,7 @@
 
   <!-- NEW VERSION -->
 
-  <div class="row new-version" id="new-version-id" style="display:none">
+  <!--div class="row new-version" id="new-version-id" style="display:none">
     <div class="small-12 columns">
       <div class="row collapse">
         <div class="small-11 columns">
@@ -278,5 +238,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div-->
 </section>

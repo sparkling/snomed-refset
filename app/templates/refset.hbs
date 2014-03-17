@@ -1,3 +1,33 @@
-<section id="details">
-{{outlet}} 
-</section id="details">
+<!-- ********** -->
+<!-- * MODALS * -->
+<!-- ********** -->
+<!-- CREATE VERSION -->
+<div id="commit-modal" class="reveal-modal row" data-reveal>
+  <h2>Commit Changes</h2>
+  <div class="row field title">
+    <div class="small-12 columns">
+      <input type="text" placeholder="Please give a title to your commit">
+    </div>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+  <a class="button primary round tiny" href="refset.snapshots.html">Save</a>
+</div> 
+
+<!-- ************** -->
+<!-- * HEADER NAV * -->
+<!-- ************** -->
+<header>
+  <nav class="row">
+    <div class="small-12 columns">
+      <ul class="breadcrumbs">
+        <li>
+          {{#link-to 'refsets'}}Refsets{{/link-to}}
+        </li>
+        <li class="current">
+          <a href="#">{{title}}</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+{{outlet}}

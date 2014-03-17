@@ -1,4 +1,3 @@
-import Concept from 'appkit/models/concept';
 import Refset from 'appkit/models/refset';
 
 export default Ember.Route.extend({

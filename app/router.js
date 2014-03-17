@@ -4,6 +4,7 @@ Router.map(function() {
   this.resource('refsets', {path:'/'});
   this.resource('create',  {path:'/create'}, function(){});
   this.resource('refset',  {path:'/:publicId'}, function(){
+    this.route('import',       {path:'import'});
     this.resource('members',   {path:'members'});
     this.resource('versions',  {path:'versions'});
     this.resource('releases',  {path:'releases'});

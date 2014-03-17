@@ -1,68 +1,11 @@
-
-<!-- ********** -->
-<!-- * HEADER * -->
-<!-- ********** -->  
-<header>
-  <nav class="row">
-    <div class="small-12 columns">
-      <ul class="breadcrumbs">
-        <li>
-          <span><a href="index.html">Refsets</a></span>
-        </li>
-        <li class="current">
-          <a href="snapshots.html">Test subset about ears</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <!-- ********* -->
-  <!-- * ALERT * -->
-  <!-- ********* -->
-  <div class="row" style="margin-top: -1em">
-    <!-- CHANGES PENDING -->
-    <div class="small-12 columns">
-      <div data-alert id="alert2" class="alert-box success radius">
-        <span>There are changes pending</span>
-        <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
-          <!-- PENDING CHANGES ICON -->
-          <a href="pending.changes.membership.html" class="show-changes icon" style="color:white; margin-right: 0.5em">
-            <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="See Pending Changes"></span>
-          </a>
-          <!-- CREATE VERSION ICON -->
-          <a href="#" class="icon" data-reveal-id="commit-modal" style="color: white">
-            <span data-tooltip data-options="disable_for_touch:false" class="fa fa-tags" title="Commit Changes"></span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <!-- DELETE ALERT -->
-    <div class="small-12 columns">
-      <div data-alert id="alert1" class="alert-box warning radius" style="display: none">
-        Member with component "Glial Cell (cell)" has been removed 
-        <span class="actions">
-          <a href="#" onclick="$('#alert1').hide()" class="icon undo"><span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span></a>
-          <a href="#" onclick="$('#alert1').hide()" class="icon close-alert"><span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span></a>
-        </span>
-      </div>
-    </div>
-  </div>
-</header>
-
-    
-<!-- ******** -->
-<!-- * MAIN * -->
-<!-- ******** -->    
-
-<!-- HEADING -->
 <section class="releases">
-  <div class="row heading">
+  <!-- HEADING -->
+  <header class="row sub">
     <div class="small-6 medium-4 columns">
-      <h2 class="subheader">Versions</h2>
+      <h2 class="subheader">Releases</h2>
     </div>    
     <!-- NAVIGATION -->
-    <div class="small-6 medium-8 columns navigation top">
+    <nav class="small-6 medium-8 columns navigation top">
       <div class="button-bar">
         <ul class="button-group radius">
           <li>{{#link-to 'members'  class="secondary button tiny members"}}Members{{/link-to}}</li>
@@ -71,17 +14,16 @@
           <li>{{#link-to 'details'  class="secondary button tiny details"}}Details{{/link-to}}</li>
         </ul>
       </div>
-    </div>
-  </div>
+    </nav>
+  </header>
   <!-- TABLE FILTER -->
-  <div class="row table-filter">
-    <!-- FILTER -->
+  <div class="row filter">
+    <!-- TEXT -->
     <div class="small-6 columns filter">      
       <input type="text" placeholder="Filter"></input>
     </div>
-    <!-- SHOW ... -->
+    <!-- BOOLEAN -->
     <div class="small-6 columns show">
-      <!--label>show</label-->
       <input id="show-id" type="checkbox" checked="true"><label for="show-id">Titles</label>
       <input id="show-inactive" type="checkbox"><label for="show-inactive">Created by</label>
       <input id="show-inactive" type="checkbox" checked="true"><label for="show-inactive">Created on</label>

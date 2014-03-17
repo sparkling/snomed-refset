@@ -1,4 +1,4 @@
-<section id="new-refset"> 
+<section id="new-refset fields"> 
   <div class="row">
     <div class="large-12 columns">
       <h2 class="subheader">Create a new refset</h2>
@@ -30,8 +30,8 @@
         {{/each}}                            
       </div>
     </div>
-    <div class="row field title">
-      <div class="small-12 medium-10 large-8 columns">
+    <div class="row">
+      <div class="field title small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.title:error"}}>Title</label>
         {{input type="text" name="title" value=title placeholder="Please give a title"}}
         {{#each e in error.fieldErrors.title }}
@@ -40,8 +40,8 @@
       </div>
     </div>
 
-    <div class="row field description">
-      <div class="small-12 medium-10 large-8 columns">
+    <div class="row">
+      <div class="field description small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.description:error"}}>Description</label>
         {{textarea name="description" value=description placeholder="Please give a description"}}
         {{#each e in error.fieldErrors.description }}
@@ -50,8 +50,8 @@
       </div>
     </div>
 
-    <div class="row field publicid">
-      <div class="small-12 medium-10 large-8 columns">
+    <div class="row">
+      <div class="field publicid small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.publicId:error"}}>Internet address</label>
         {{input type="text" name="publicId" value=publicId placeholder="Please give an internet address"}}
         <label class="preview">http://refset.snomedtool.com/refsets/{{publicId}}</label>
@@ -60,10 +60,10 @@
         {{/each}}        
       </div>
     </div>
-    <div class="row field">
+    <div class="row release">
       <div class="small-12 medium-10 large-8 columns">
-        <div class="row field release">
-          <div class="small-6 columns">
+        <div class="row">
+          <div class="field extension small-6 columns">
             <label {{bind-attr class="error.fieldErrors.snomedReleaseDate:error error.fieldErrors.snomedExtension:error"}}>Snomed Extension</label>
             {{view Ember.Select contentBinding="selectExtension"
                                 optionLabelPath="content.label"
@@ -71,7 +71,7 @@
                                 valueBinding="snomedExtension"
                                 classNames="dropdown"}}
           </div>
-          <div class="small-6 columns">
+          <div class="field date small-6 columns">
             <label {{bind-attr class="error.fieldErrors.snomedReleaseDate:error error.fieldErrors.snomedExtension:error"}}>Snomed Release Date</label>
             {{view Ember.Select contentBinding="selectReleaseDate"
                                 optionLabelPath="content.label"
@@ -89,8 +89,8 @@
         {{/each}}        
       </div> <!-- columns -->
     </div> <!-- row -->
-    <div class="row field module">
-      <div class="small-12 medium-10 large-8 columns">
+    <div class="row">
+      <div class="field module small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.moduleConcept:error"}}>Default Module</label>
         {{select-two action="changeModuleConcept"}}
         {{#each e in error.fieldErrors.moduleConcept}}
@@ -98,8 +98,8 @@
         {{/each}}        
       </div>
     </div>
-    <div class="row field refset-concept">
-      <div class="small-12 medium-10 large-8 columns">
+    <div class="row">
+      <div class="field refset-concept small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.refsetConcept:error"}}>Snomed Refset Concept</label>
         <dl class="tabs" data-tab>
           <dd class="active">
@@ -122,7 +122,7 @@
         </div>
       </div>
     </div>
-    <div class="row action main">
+    <div class="row action main bottom">
       <div class="small-12 columns">
         <button type="submit" class="button radius small">Create Refset</button>
         {{#link-to 'refsets' class="button radius small secondary"}}Cancel{{/link-to}}
