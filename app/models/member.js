@@ -35,6 +35,7 @@ Member.reopenClass({
         //response.setProperties(returned);
         alert.set('status', 'SUCCESS');
         alert.set('message', "Successfully added new members");
+        _this.transitionToRoute('members');
       }), function(error) {
         Ember.Logger.log('fail: ' + JSON.stringify(error));
         var returned = toEmberObject(JSON.parse(error.responseText));

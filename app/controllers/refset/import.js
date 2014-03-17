@@ -49,7 +49,6 @@ export default Ember.ArrayController.extend({
     import: function(){
       var alert = Alert.create();
       Member.addMembers(this.get('model'), this.get('controllers.refset.model.publicId'), alert, this);
-      this.transitionToRoute('members');
     }
   }
 
