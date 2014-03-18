@@ -1,11 +1,29 @@
-<form {{action 'save' on="submit"}}>
+<!-- IMPORT TABS -->
+<div class="row field import">
+  <div class="small-12 columns">
+    <!-- TABS -->
+    <dl class="tabs" data-tab>
+      <dd>
+        {{#link-to 'import.file'}}Import from File{{/link-to}}
+      </dd>
+      <dd class="active">
+        {{#link-to 'import.refset'}}Import from Refset{{/link-to}}
+      </dd>
+      <dd>
+        {{#link-to 'import.search'}}Search Snomed{{/link-to}}
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<form {{action 'import' on="submit"}}>
   <!-- ******** -->
   <!--  REFSET  -->
   <!-- ******** -->
 
   <!-- CHOOSE SOURCE -->
   <div class="row field source">
-    <div class="small-6 medium-4 columns">
+    <div class="small-6 medium-4 columns mock">
       <label>1. Choose Source</label>
       <select class="dropdown">
         <option value="LIST" selected>Private</option>
@@ -17,7 +35,7 @@
   
   <!-- CHOOSE REFSET -->
   <div class="row field refset">
-    <div class="small-12 medium-6 columns">
+    <div class="small-12 medium-6 columns mock">
       <label>2. Choose Refset</label>
       <select id="s23">
         <option value="1">Test subset about ears</option>
@@ -32,7 +50,7 @@
   
   <!-- CHOOSE REFSET COLLECTION TYPE -->
   <div class="row field collection-type">
-    <div class="small-6 medium-4 columns">
+    <div class="small-6 medium-4 columns mock">
       <label>3. Choose Refset Collection Type</label>
       <select class="dropdown">
         <option value="SNAPSHOTS">Snapshots</option>
@@ -43,7 +61,7 @@
   
   <!-- CHOOSE TITLE -->
   <div class="row field collection">
-    <div class="small-12 medium-6 columns">
+    <div class="small-12 medium-6 columns mock">
       <label>4. Choose Snapshot / Release</label>
       <select id="s24">
         <option value="1">First Release</option>
@@ -57,7 +75,7 @@
   </div><!-- row collection -->
 
   <div class="row action main">
-    <div class="small-12 columns"> 
+    <div class="small-12 columns mock"> 
       <a href="#" {{action "import"}} class="button small round">Import</a>
       {{#link-to 'members' refset class="button radius small secondary"}}Cancel{{/link-to}}
     </div>

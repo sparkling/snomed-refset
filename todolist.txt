@@ -1,0 +1,16 @@
+TODO
++====
+- Import refset members
+    - Add forgiving or strict option for parser in interface / api
+    - Return number of concepts imported vs number of concepts attempted
+- Verify that behaviour for adding a component membership that allready exists...
+- Fix the error handling of import, make sure error messages are displayed
+- Add alert message for when refsets / members have been import
+
+QUESTIONS
++=========
+- How often do we need to specify a different Module for members from default? 
+    - How do we reconcile this with the import / add components routine?
+- Are we correct in assuming no duplicate membership components? 
+    - No! Looking at refsets in the release, I see there are duplicate Components as members
+

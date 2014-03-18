@@ -1,4 +1,22 @@
-<form {{action 'save' on="submit"}}>
+<!-- IMPORT TABS -->
+<div class="row field import">
+  <div class="small-12 columns">
+    <!-- TABS -->
+    <dl class="tabs" data-tab>
+      <dd>
+        {{#link-to 'import.file'}}Import from File{{/link-to}}
+      </dd>
+      <dd>
+        {{#link-to 'import.refset'}}Import from Refset{{/link-to}}
+      </dd>
+      <dd class="active">
+        {{#link-to 'import.search'}}Search Snomed{{/link-to}}
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<form {{action 'import' on="submit"}}>
 
   <div class="row">
     <div class="small-12 columns">

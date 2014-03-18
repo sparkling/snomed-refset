@@ -1,0 +1,53 @@
+<!-- IMPORT TABS -->
+<div class="row field import">
+  <div class="small-12 columns">
+    <!-- TABS -->
+    <dl class="tabs" data-tab>
+      <dd class="active">
+        {{#link-to 'import.file'}}Import from File{{/link-to}}
+      </dd>
+      <dd>
+        {{#link-to 'import.refset'}}Import from Refset{{/link-to}}
+      </dd>
+      <dd>
+        {{#link-to 'import.search'}}Search Snomed{{/link-to}}
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<form {{action 'import' on="submit"}} id="import-file-form">
+  <!-- ****** -->
+  <!--  FILE  -->
+  <!-- ****** -->
+  <div class="row file">
+    <!-- FILE FORMAT -->
+    <div class="small-4 medium-3 columns file-format">
+      <label {{bind-attr class=":form-group error.fieldErrors.fileType:has-error"}}>1. Choose Format</label>
+      {{view Ember.Select viewName="select"
+                  contentBinding="fileTypes"
+                  optionLabelPath="content.label"
+                  optionValuePath="content.id"
+                  value=content.fileType
+                  }}
+      {{#each e in error.fieldErrors.fileType }}
+        <span class="help-block">{{e}}</span>
+      {{/each}}                  
+    </div><!-- columns file-format -->
+    <!-- UPLOAD -->
+    <div class="small-8 medium-9 columns file-selection">
+      <label {{bind-attr class=":form-group error.fieldErrors.file:has-error"}}>2. Choose File</label>
+      <input type="file" id="import-file" name="our-file">
+      {{#each e in error.fieldErrors.file }}
+        <span class="help-block">{{e}}</span>
+      {{/each}}
+    </div><!-- columns file-selection -->
+  </div><!-- row file -->
+  <!-- MAIN ACTION -->
+  <div class="row action main">
+    <div class="small-12 columns"> 
+      {{#link-to 'members' action='import' class="button small round"}}Import{{/link-to}}
+      {{#link-to 'members' class="button radius small secondary"}}Cancel{{/link-to}}
+    </div>
+  </div>     
+</form>

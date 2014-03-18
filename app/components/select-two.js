@@ -1,5 +1,5 @@
 export default Ember.Component.extend({
-  templateName: 'select2',
+  layoutName: 'select2',
 
   change: function(event){
     Ember.Logger.log('Sending default action with event ' + event);

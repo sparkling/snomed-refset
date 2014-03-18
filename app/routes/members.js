@@ -3,9 +3,8 @@ import Member from 'appkit/models/member';
 export default Ember.Route.extend({
   needs: 'refset',
 
-  model: function(args) {
+  setupController: function (controller, model) {
     Ember.Logger.log("Loading members for refset " + this.modelFor('refset').get('publicId'));
-    return Member.getMembers(this.modelFor('refset').get('publicId'), this);
-    //return '';
+    controller.set('model', Member.getMembers(this.modelFor('refset').get('publicId'), this));
   }
 });

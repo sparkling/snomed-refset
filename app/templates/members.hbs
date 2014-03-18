@@ -101,7 +101,7 @@
               <td>
                 <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{component.title}}</a>
               </td>
-              <td>{{effective}}</td>
+              <td>{{date-format effective}}</td>
               <td>
                 <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{module.title}}</a>
               </td>
@@ -126,7 +126,7 @@
   <div class="main action pagination row bottom">
     <!-- ADD ICON -->
     <div class="columns small-1 icon add">
-      {{#link-to 'refset.import'}}
+      {{#link-to 'import.search'}}
         <span data-tooltip data-options="disable_for_touch:false" class="fa fa-plus-circle" title="Add Members"></span>
       {{/link-to}}
     </div>
