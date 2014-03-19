@@ -1,7 +1,10 @@
+import Alert from 'appkit/models/alert';
 import toEmberObject from 'appkit/utils/to_ember_object';
 import toType from 'appkit/utils/to_type';
+import baseUrl from 'appkit/utils/baseurl';
 
-var baseUrl = 'https://refset-api.snomedtools.info/refsets';
+
+//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
 //var baseUrl = 'http://localhost:8080/refsets';
 
 var Member = Ember.Object.extend({
@@ -14,7 +17,35 @@ var Member = Ember.Object.extend({
 });
 
  
-Member.reopenClass({   
+Member.reopenClass({
+  delete: function(refsetPublicId, member, alert, _this){
+    Ember.Logger.log('Calling ajax delete');
+    var response = Ember.Object.create();
+    Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+                  "Content-Type": "application/json; charset=utf-8"
+        },
+        url: baseUrl() + "/" + refsetPublicId + "/members/" + member.get('publicId'),
+        type: "DELETE",
+        data: '',
+        dataType: "json"
+      }).then((function(success) {
+        Ember.Logger.log('success: ' + JSON.stringify(success));
+        alert.set('status', 'SUCCESS');
+        alert.set('message', "Successfully deleted member");
+        //_this.transitionToRoute('members');
+      }), function(error) {
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        var returned = toEmberObject(JSON.parse(error.responseText));
+        _this.set('error', toEmberObject(JSON.parse(error.responseText)));
+        alert.set('status', 'FAIL');
+        alert.set('message', "Failed updating members");
+      }));
+    });
+    return response;
+  },
   addMembers: function(members, refsetPublicId, alert, _this) {
     var response = Ember.Object.create();
     Ember.Logger.log('Saving members to refset: ' + refsetPublicId);
@@ -25,7 +56,7 @@ Member.reopenClass({
           Accept: "application/json; charset=utf-8",
                   "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "/" + refsetPublicId + "/members?type=list",
+        url: baseUrl() + "/" + refsetPublicId + "/members?type=list",
         type: "POST",
         data: JSON.stringify(members),
         dataType: "json"
@@ -63,7 +94,7 @@ Member.reopenClass({
     result = Ember.Object.create({});
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
-        url: baseUrl + '/' + refsetPublicId + '/members?type=file',
+        url: baseUrl() + '/' + refsetPublicId + '/members?type=file',
         type: "POST",
         processData: false,
         contentType: false,
@@ -92,7 +123,7 @@ Member.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "/" + refsetPublicId + "/members",
+        url: baseUrl() + "/" + refsetPublicId + "/members",
         type: "GET",
         data: '',
         dataType: "json"

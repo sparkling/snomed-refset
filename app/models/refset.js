@@ -1,7 +1,8 @@
 import toEmberObject from 'appkit/utils/to_ember_object';
 import toType from 'appkit/utils/to_type';
+import baseUrl from 'appkit/utils/baseurl';
 
-var baseUrl = 'https://refset-api.snomedtools.info/refsets';
+//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
 //var baseUrl = 'http://localhost:8080/refsets';
 
 var Refset = Ember.Object.extend({
@@ -21,7 +22,7 @@ Refset.reopenClass({
   loadRefset: function(publicId, _this) {
     return Ember.Deferred.promise(function(p) {
       var refset;
-      return p.resolve($.getJSON(baseUrl + '/' + publicId).then(function(res) {
+      return p.resolve($.getJSON(baseUrl() + '/' + publicId).then(function(res) {
         refset = Ember.Object.create(res);
         Ember.Logger.log("res: " + res);
         _this.set('refset', refset);
@@ -38,7 +39,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "/" + refset.publicId + "/concepts.json",
+        url: baseUrl() + "/" + refset.publicId + "/concepts.json",
         type: "GET",
         data: '',
         dataType: "json"
@@ -63,7 +64,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "/" + refset.publicId + "/plan.json",
+        url: baseUrl() + "/" + refset.publicId + "/plan.json",
         type: "GET",
         data: '',
         dataType: "json"
@@ -89,7 +90,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
                   "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "/" + refsetPublicId + "/plan",
+        url: baseUrl() + "/" + refsetPublicId + "/plan",
         type: "PUT",
         data: JSON.stringify(plan),
         dataType: "json"
@@ -118,7 +119,7 @@ Refset.reopenClass({
           Accept: "application/json; charset=utf-8",
                   "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + "/validate",
+        url: baseUrl() + "/validate",
         type: "PUT",
         data: JSON.stringify(plan),
         dataType: "json"

@@ -1,7 +1,8 @@
 import toEmberObject from 'appkit/utils/to_ember_object';
+import baseUrl from 'appkit/utils/baseurl';
 import toType from 'appkit/utils/to_type';
 
-var baseUrl = 'https://refset-api.snomedtools.info/refsets';
+//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
 //var baseUrl = 'http://localhost:8080/refsets';
 
 var Snapshot = Ember.Object.extend({
@@ -41,7 +42,7 @@ Snapshot.reopenClass({
     result = Ember.Object.create({});
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
-        url: baseUrl + '/' + refset.get('publicId') + '/snapshots',
+        url: baseUrl() + '/' + refset.get('publicId') + '/snapshots',
         type: "POST",
         processData: false,
         contentType: false,
@@ -83,7 +84,7 @@ Snapshot.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + '/' + refset.get('publicId') + '/snapit',
+        url: baseUrl() + '/' + refset.get('publicId') + '/snapit',
         type: "POST",
         data: JSON.stringify(snapshot),
         dataType: "json"
@@ -123,7 +124,7 @@ Snapshot.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl + '/' + refsetId + '/snapshot/' + snapshotId + '.json',
+        url: baseUrl() + '/' + refsetId + '/snapshot/' + snapshotId + '.json',
         type: "GET",
         data: '',
         dataType: "json"
@@ -154,7 +155,7 @@ Snapshot.reopenClass({
     Ember.Logger.log('getting all snapshots');
     return Ember.Deferred.promise(function(p) {
       var snapshots;
-      return p.resolve($.getJSON(baseUrl + '/' + refset.get('publicId') + '/snapshots').then(function(res) {
+      return p.resolve($.getJSON(baseUrl() + '/' + refset.get('publicId') + '/snapshots').then(function(res) {
         Ember.Logger.log('Json request returned with ' + JSON.stringify(res));
         return res.map(function(i) {
           var x = Ember.Object.create(i);

@@ -6,6 +6,9 @@ TODO
 - Verify that behaviour for adding a component membership that allready exists...
 - Fix the error handling of import, make sure error messages are displayed
 - Add alert message for when refsets / members have been import
+- Refresh list of refsets when navigating back to the list screen
+- Instead of deleting a refset, with no posibility of undo, mark the refset as 'deleted' instead
+    - Will have to change list of refset to add parameter to query
 
 QUESTIONS
 +=========
