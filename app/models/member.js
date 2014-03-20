@@ -18,9 +18,8 @@ var Member = Ember.Object.extend({
 
  
 Member.reopenClass({
-  delete: function(refsetPublicId, member, alert, _this){
-    Ember.Logger.log('Calling ajax delete');
-    var response = Ember.Object.create();
+  delete: function(refsetPublicId, member, memberModel, alert, onSuccess, onError){
+    Ember.Logger.log('Ajax: delete member');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
@@ -32,24 +31,16 @@ Member.reopenClass({
         data: '',
         dataType: "json"
       }).then((function(success) {
-        Ember.Logger.log('success: ' + JSON.stringify(success));
-        alert.set('status', 'SUCCESS');
-        alert.set('message', "Successfully deleted member");
-        //_this.transitionToRoute('members');
+        Ember.Logger.log('Ajax: success');
+        onSuccess(member, memberModel, success, alert);
       }), function(error) {
-        Ember.Logger.log('fail: ' + JSON.stringify(error));
-        var returned = toEmberObject(JSON.parse(error.responseText));
-        _this.set('error', toEmberObject(JSON.parse(error.responseText)));
-        alert.set('status', 'FAIL');
-        alert.set('message', "Failed updating members");
+        Ember.Logger.log('Ajax: error');
+        onError(member, error, alert);
       }));
     });
-    return response;
   },
-  addMembers: function(members, refsetPublicId, alert, _this) {
-    var response = Ember.Object.create();
-    Ember.Logger.log('Saving members to refset: ' + refsetPublicId);
-    Ember.Logger.log('Payload is: ' + JSON.stringify(members));
+  addMembers: function(refsetPublicId, members, memberModel, alert, onSuccess, onError) {
+    Ember.Logger.log('Ajax: add member');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
@@ -61,19 +52,13 @@ Member.reopenClass({
         data: JSON.stringify(members),
         dataType: "json"
       }).then((function(success) {
-        Ember.Logger.log('success: ' + JSON.stringify(success));
-        alert.set('status', 'SUCCESS');
-        alert.set('message', "Successfully added new members");
-        _this.transitionToRoute('members');
+        Ember.Logger.log('Ajax: success');
+        onSuccess(members, memberModel, success, alert);
       }), function(error) {
-        Ember.Logger.log('fail: ' + JSON.stringify(error));
-        var returned = toEmberObject(JSON.parse(error.responseText));
-        _this.set('error', toEmberObject(JSON.parse(error.responseText)));
-        alert.set('status', 'FAIL');
-        alert.set('message', "Failed updating members");
+        Ember.Logger.log('Ajax: error');
+        onError(members, error, alert);
       }));
     });
-    return response;
   },
   import: function(fileType, refsetPublicId, alert, _this){
     var result;
@@ -130,7 +115,7 @@ Member.reopenClass({
       }).then((function(success) {
         Ember.Logger.log('success: ' + JSON.stringify(success));
         var returned = toEmberObject(success);
-        Ember.Logger.log('members found and parsed: ' + JSON.stringify(returned));
+        //Ember.Logger.log('members found and parsed: ' + JSON.stringify(returned));
         members.pushObjects(returned.get('members'));
       }), function(error) {
         Ember.Logger.log('fail: ' + JSON.stringify(error));

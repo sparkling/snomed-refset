@@ -6,5 +6,11 @@ export default Ember.Object.extend({
   paramName: undefined,
   paramValue: undefined,
   status: undefined,
-  showUndo: true
+
+  showUndo: true,
+  undofunction: '',
+  arguments: '', 
+  type: 'warning'
+
+
 });

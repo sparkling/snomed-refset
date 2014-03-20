@@ -4,7 +4,7 @@ import Alert from 'appkit/models/alert';
 export default Ember.ArrayController.extend({
   error: '',
   alert: '',
-  needs: 'refset',
+  needs: ['refset','members'],
 
   actions: { 
     addConcept: function(event){
@@ -17,8 +17,26 @@ export default Ember.ArrayController.extend({
       }
     },
     import: function(){
+      Ember.Logger.log('Adding more members');
       var alert = Alert.create();
-      Member.addMembers(this.get('model'), this.get('controllers.refset.model.publicId'), alert, this);
+      this.get('controllers.members').set('alert', alert);
+      alert.set('showUndo', false);
+      
+      //ON SUCCESS
+      var onSuccess = function(members, memberModel, success, alert){
+        alert.set('isError', false);
+        alert.set('message', 'Successfully added new members');
+        this.transitionToRoute('members');
+      };
+
+      //ON ERROR
+      var onError = function(members, error, alert){
+        alert.set('isError', true);
+        alert.set('message', 'Unable to add new members. Message was: ' + error.responseText);
+      };
+
+      Member.addMembers(this.get('controllers.refset.model.publicId'), 
+        this.get('model'), '', alert, onSuccess, onError);
     }  
   }
 });
