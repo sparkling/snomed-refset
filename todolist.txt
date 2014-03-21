@@ -10,6 +10,11 @@ TODO
 - Instead of deleting a refset, with no posibility of undo, mark the refset as 'deleted' instead
     - Will have to change list of refset to add parameter to query
 
+BUGS:
+======
+- Refresing members page causes error
+- Clear out list of concepts on 'add concepts / search' page on load
+
 QUESTIONS
 +=========
 - How often do we need to specify a different Module for members from default? 
@@ -17,3 +22,8 @@ QUESTIONS
 - Are we correct in assuming no duplicate membership components? 
     - No! Looking at refsets in the release, I see there are duplicate Components as members
 
+
+NOTES
+======
+- Issue with Metamorph tags and foundation css selectors. 
+    - This issue:\https://github.com/emberjs/ember.js/issues/1893

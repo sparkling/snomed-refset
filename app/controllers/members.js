@@ -1,25 +1,41 @@
 import Alert from 'appkit/models/alert';
 import Member from 'appkit/models/member';
+import baseUrl from 'appkit/utils/baseurl';
 
 
 export default Ember.ArrayController.extend({
   deleteResponse: '',
   needs: 'refset',
   alert: '',
+  refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
 
   hasAlert: function(){
     return this.get('alert') !== '';
   }.property('alert'),
 
   isError: function(){
-    Ember.Logger.log('isError: ' + (this.get('alert.isError') === true))
+    //Ember.Logger.log('isError: ' + (this.get('alert.isError') === true));
     return this.get('alert.isError') === true;
   }.property('alert.isError'),
 
   isSuccess: function(){
-    Ember.Logger.log('isSuccess: ' + (this.get('alert.isError') === false))
+    //Ember.Logger.log('isSuccess: ' + (this.get('alert.isError') === false));
     return this.get('alert.isError') === false;
   }.property('alert.isError'),  
+
+
+  //DOWNLOAD LINKS
+  downloadJsonUrl: function(){
+    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.json';
+  }.property('refsetName'),
+
+  downloadXmlUrl: function(){
+    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.xml';
+  }.property('refsetName'),
+
+  downloadRf2Url: function(){
+    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.rf2';
+  }.property('refsetName'), 
 
   showComponent: true,
   showIdentifier: false,
@@ -34,6 +50,8 @@ export default Ember.ArrayController.extend({
     undo: function(){
       this.get('alert.undofunction') (this.get('alert.arguments'), this.get('alert'));
     },
+
+
 
     delete: function(member){
       Ember.Logger.log("Delete: member " + JSON.stringify(member));

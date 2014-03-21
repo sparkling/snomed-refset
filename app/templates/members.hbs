@@ -3,7 +3,16 @@
   <header class="row sub">
     <!-- TITLE -->
     <div class="small-6 medium-4 columns">
-      <h2 class="subheader">Members</h2>
+      <h2 class="subheader"><span>Members</span>
+        <a style="margin-left: 0.5em" data-options="align:right" href="#" data-dropdown="download-dropdown" style="color: skyblue">
+          <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-cloud-download"  title="Download Members"></span>          
+        </a>
+        <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
+          <!--li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
+          <li><a target="_blank" {{bind-attr href='downloadXmlUrl'}}>XML</a></li-->
+          <li><a target="_blank" {{bind-attr href='downloadRf2Url'}}>RF2</a></li>
+        </ul>
+      </h2>
     </div>
     <!-- NAVIGATION -->
     <nav class="small-6 medium-8 columns navigation top">
