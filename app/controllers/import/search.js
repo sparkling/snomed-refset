@@ -23,20 +23,21 @@ export default Ember.ArrayController.extend({
       alert.set('showUndo', false);
       
       //ON SUCCESS
-      var onSuccess = function(members, memberModel, success, alert){
+      var onSuccess = function(members, targetModel, successResponse, alert, _this){
         alert.set('isError', false);
         alert.set('message', 'Successfully added new members');
-        this.transitionToRoute('members');
+        members.clear();
+        _this.transitionToRoute('members');
       };
 
       //ON ERROR
-      var onError = function(members, error, alert){
+      var onError = function(members, errorResponse, alert, _this){
         alert.set('isError', true);
-        alert.set('message', 'Unable to add new members. Message was: ' + error.responseText);
+        alert.set('message', 'Unable to add new members. Message was: ' + errorResponse.responseText);
       };
 
       Member.addMembers(this.get('controllers.refset.model.publicId'), 
-        this.get('model'), '', alert, onSuccess, onError);
+        this.get('model'), '', alert, onSuccess, onError, this);
     }  
   }
 });

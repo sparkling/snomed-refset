@@ -2,27 +2,17 @@ import Alert from 'appkit/models/alert';
 import Member from 'appkit/models/member';
 import baseUrl from 'appkit/utils/baseurl';
 
-
 export default Ember.ArrayController.extend({
-  deleteResponse: '',
   needs: 'refset',
   alert: '',
   refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
 
-  hasAlert: function(){
-    return this.get('alert') !== '';
-  }.property('alert'),
-
-  isError: function(){
-    //Ember.Logger.log('isError: ' + (this.get('alert.isError') === true));
-    return this.get('alert.isError') === true;
-  }.property('alert.isError'),
-
-  isSuccess: function(){
-    //Ember.Logger.log('isSuccess: ' + (this.get('alert.isError') === false));
-    return this.get('alert.isError') === false;
-  }.property('alert.isError'),  
-
+  //DISPLAY FIELD SELECTIONS
+  showComponent: true,
+  showIdentifier: false,
+  showInactive: true,
+  showEffective: true,
+  showModule: true,
 
   //DOWNLOAD LINKS
   downloadJsonUrl: function(){
@@ -37,22 +27,8 @@ export default Ember.ArrayController.extend({
     return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.rf2';
   }.property('refsetName'), 
 
-  showComponent: true,
-  showIdentifier: false,
-  showInactive: true,
-  showEffective: true,
-  showModule: true,
-
+  //ACTIONS
   actions: {
-    resetAlert: function(){
-      this.set('alert', '');
-    },
-    undo: function(){
-      this.get('alert.undofunction') (this.get('alert.arguments'), this.get('alert'));
-    },
-
-
-
     delete: function(member){
       Ember.Logger.log("Delete: member " + JSON.stringify(member));
       var alert = Alert.create();
@@ -60,17 +36,21 @@ export default Ember.ArrayController.extend({
 
       //BUILD ARGUMENTS FOR UNDO FUNCTION
       var undoArgs = Ember.A();
-      undoArgs.pushObject(this.get('controllers.refset.model.publicId'));
+      undoArgs.pushObject(this.get('refsetName'));
       undoArgs.pushObject(member);
       undoArgs.pushObject(this.get('model'));
       alert.set('arguments', undoArgs);
 
       //CREATE UNDO FUNCTION
       alert.set('undofunction', function(undoArgs, undoAlert){
-        Ember.Logger.log('UNDO: Adding back: ' + JSON.stringify(undoArgs.objectAt(1)));
-        
+        var refsetName    = undoArgs.objectAt(0);
+        var deletedMember = undoArgs.objectAt(1);
+        var targetModel   = undoArgs.objectAt(2);
+
+        Ember.Logger.log('UNDO: Adding back: ' + deletedMember);
+
         //UNDO: SUCCESS
-        var onSuccess = function(members, memberModel, success, undoAlert){
+        var onSuccess = function(members, memberModel, success, undoAlert, _this){
           Ember.Logger.log('Undo: success');
           memberModel.pushObject(members[0]);
           undoAlert.set('isError', false);
@@ -79,7 +59,7 @@ export default Ember.ArrayController.extend({
         };
         
         //UNDO: ERROR
-        var onError = function(members, error, undoAlert){
+        var onError = function(members, error, undoAlert, _this){
           Ember.Logger.log('Undo: error');
           undoAlert.set('isError', true);
           undoAlert.set('message', 'Unable to add back member ' + 
@@ -88,12 +68,11 @@ export default Ember.ArrayController.extend({
 
         //UNDO: DO IT
         Ember.Logger.log('Undo: Adding member back in');
-        Member.addMembers(
-          undoArgs.objectAt(0), [undoArgs.objectAt(1)], undoArgs.objectAt(2), undoAlert, onSuccess, onError);
+        Member.addMembers(refsetName, [deletedMember], targetModel, undoAlert, onSuccess, onError, this);
       });
 
       //ON SUCCESS
-      var onSuccess = function(member, memberModel, success, alert){
+      var onSuccess = function(member, memberModel, success, alert, _this){
         Ember.Logger.log('Delete: success');
         alert.set('isError', false);
         memberModel.removeObject(member);
@@ -101,15 +80,14 @@ export default Ember.ArrayController.extend({
       };
 
       //ON ERROR
-      var onError = function(member, error, alert){
+      var onError = function(member, error, alert, _this){
         Ember.Logger.log('Delete: error');
         alert.set('isError', true);
         alert.set('message', 'Unable to delete member ' + member.get('publicId') + '. Message was: ' + error.responseText);
       };
 
       //DO IT
-      Member.delete(this.get('controllers.refset.model.publicId'), 
-        member, this.get('model'), alert, onSuccess, onError);
+      Member.delete(this.get('refsetName'), member, this.get('model'), alert, onSuccess, onError, this);
     }
   }
 });

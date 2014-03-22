@@ -67,30 +67,34 @@ Refsets.reopenClass({
     });
     return result;
   },
-  deleteRefset: function(refset, _this){
-    Ember.Logger.log('DELETEing: ' + JSON.stringify(refset));
-    var result = Ember.Object.create({});
 
-    Ember.Deferred.promise(function(p) {
-      return p.resolve($.ajax({
-        headers: {
-          Accept: "application/json; charset=utf-8",
-          "Content-Type": "application/json; charset=utf-8"
-        },
-        url: baseUrl() + '/' + refset.get('publicId'),
-        type: "DELETE",
-        data: '',
-        dataType: "json"
-      }).then((function(success) {
-        Ember.Logger.log('success: ' + JSON.stringify(success));
-        _this.get('model').removeObject(refset);
-        result.setProperties(toEmberObject(success));
-      }), function(error) {
-        Ember.Logger.log('fail: ' + JSON.stringify(error));
-        result.setProperties(toEmberObject(JSON.parse(error.responseText)));
-      }));
-    });    
-  }
+///////////////////////////////////////////////////////////
+//Moved to Refset - This class should be really be removed
+///////////////////////////////////////////////////////////
+//  deleteRefset: function(refset, _this){
+//    Ember.Logger.log('DELETEing: ' + JSON.stringify(refset));
+//    var result = Ember.Object.create({});
+//
+//    Ember.Deferred.promise(function(p) {
+//      return p.resolve($.ajax({
+//        headers: {
+//          Accept: "application/json; charset=utf-8",
+//          "Content-Type": "application/json; charset=utf-8"
+//        },
+//        url: baseUrl() + '/' + refset.get('publicId'),
+//        type: "DELETE",
+//        data: '',
+//        dataType: "json"
+//      }).then((function(success) {
+//        Ember.Logger.log('success: ' + JSON.stringify(success));
+//        _this.get('model').removeObject(refset);
+//        result.setProperties(toEmberObject(success));
+//      }), function(error) {
+//        Ember.Logger.log('fail: ' + JSON.stringify(error));
+//        result.setProperties(toEmberObject(JSON.parse(error.responseText)));
+//      }));
+//    });
+//  }
 });
 
 Ember.Logger.log('created Refsets model');

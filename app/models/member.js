@@ -18,7 +18,8 @@ var Member = Ember.Object.extend({
 
  
 Member.reopenClass({
-  delete: function(refsetPublicId, member, memberModel, alert, onSuccess, onError){
+
+  delete: function(refsetPublicId, member, targetModel, alert, onSuccess, onError, _this){
     Ember.Logger.log('Ajax: delete member');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -32,14 +33,18 @@ Member.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(member, memberModel, success, alert);
+        onSuccess(member, targetModel, success, alert, _this);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
-        onError(member, error, alert);
+        onError(member, error, alert, _this);
       }));
     });
   },
-  addMembers: function(refsetPublicId, members, memberModel, alert, onSuccess, onError) {
+
+
+
+  
+  addMembers: function(refsetPublicId, members, targetModel, alert, onSuccess, onError, _this) {
     Ember.Logger.log('Ajax: add member');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -53,10 +58,10 @@ Member.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(members, memberModel, success, alert);
+        onSuccess(members, targetModel, success, alert, _this);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
-        onError(members, error, alert);
+        onError(members, error, alert, _this);
       }));
     });
   },

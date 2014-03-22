@@ -1,0 +1,20 @@
+{{#if hasAlert}}
+<div class="row alert delete">
+  <!-- DELETE ALERT -->
+  <div class="small-12 columns">  
+    <div data-alert {{bind-attr class=":alert-box :radius type"}}>
+      {{message}} 
+      <span class="actions">
+        {{#if showUndo}}
+          <a href="#" {{action 'undo'}} class="icon undo">
+            <span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span>
+          </a>
+        {{/if}}
+        <a href="#" {{action 'resetAlert'}} class="icon close-alert">
+          <span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span>
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+{{/if}}

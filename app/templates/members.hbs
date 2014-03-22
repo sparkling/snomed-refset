@@ -4,12 +4,12 @@
     <!-- TITLE -->
     <div class="small-6 medium-4 columns">
       <h2 class="subheader"><span>Members</span>
-        <a style="margin-left: 0.5em" data-options="align:right" href="#" data-dropdown="download-dropdown" style="color: skyblue">
+        <a style="margin-left: 0.5em; color: skyblue" data-options="align:right" href="#" data-dropdown="download-dropdown">
           <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-cloud-download"  title="Download Members"></span>          
         </a>
         <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
-          <!--li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
-          <li><a target="_blank" {{bind-attr href='downloadXmlUrl'}}>XML</a></li-->
+          <li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
+          <li><a target="_blank" {{bind-attr href='downloadXmlUrl'}}>XML</a></li>
           <li><a target="_blank" {{bind-attr href='downloadRf2Url'}}>RF2</a></li>
         </ul>
       </h2>
@@ -48,28 +48,12 @@
         </div>
       </div>
     </div>
-    <div class="row alert delete">
-      <!-- DELETE ALERT -->
-      <div class="small-12 columns">
-        {{#if hasAlert}}
-          <div data-alert {{bind-attr class=":alert-box :radius alert.type"}}>
-            {{alert.message}} 
-            <span class="actions">
-              {{#if alert.showUndo}}
-                <a href="#" {{action 'undo'}} class="icon undo">
-                  <span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span>
-                </a>
-              {{/if}}
-              <a href="#" {{action 'resetAlert'}} class="icon close-alert">
-                <span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span>
-              </a>
-            </span>
-          </div>
-        {{/if}}
 
-        
-      </div>
-    </div>
+
+    {{render 'undo-alert' alert}}
+
+
+
   </section>  
   <!-- TABLE FILTER -->
   <div class="row filter">
@@ -80,7 +64,6 @@
     <!-- BOOLEAN -->
     <div class="small-6 columns show">
       {{input type="checkbox" name="showIdentifier" checked=showIdentifier id="show-id"}}<label for="show-id">Identifier</label>
-      <!--{{input type="checkbox" name="showInactive" checked=showInactive id="show-inactive"}}<label for="show-inactive">Inactive</label>-->
       {{input type="checkbox" name="showEffective" checked=showEffective id="show-effective"}}<label for="show-effective">Effective</label>
       {{input type="checkbox" name="showModule" checked=showModule id="show-module"}}<label for="show-module">Module</label>
     </div>

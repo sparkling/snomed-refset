@@ -7,22 +7,7 @@
     </div>
   </div>
       
-  <!-- ********* -->
-  <!-- * ALERT * -->
-  <!-- ********* -->
-  <div class="row">
-  
-    <!-- DELETE ALERT -->
-    <div class="small-12 columns">
-      <div data-alert id="alert1" class="alert-box warning radius" style="display: none">
-        Member with component "Glial Cell (cell)" has been removed 
-        <span class="actions">
-          <a href="#" onclick="$('#alert1').hide()" class="icon undo"><span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span></a>
-          <a href="#" onclick="$('#alert1').hide()" class="icon close-alert"><span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span></a>
-        </span>
-      </div>
-    </div>
-  </div>
+  {{render 'undo-alert' alert}}
 
   <!-- ************ -->
   <!--  NAVIGATION  -->
@@ -81,8 +66,7 @@
               </td>
               <td>{{date-format refset.created}}</td>
               <td class="delete">
-                <!-- {{action "deleteRefset" refset}} -->
-                <a href="#"  onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>
+                <a href="#" {{action "delete" refset}} class="icon"><span class="fa fa-trash-o"></span></a>
               </td>
             </tr>
           {{/each}}
