@@ -59,8 +59,7 @@ export default Ember.ObjectController.extend({
       }    
     },    
     save: function() {
-      Ember.Logger.log('handling save');
-      Ember.Logger.log('model: ' + this.get('model'));
+      Ember.Logger.log('Creating refset');
       return this.set('error', Refsets.createRefset(this.get('model'), this));
     }
     //selected: function(concept){

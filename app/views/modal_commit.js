@@ -1,8 +1,5 @@
 export default Ember.View.extend({
-  showMembership: function(membership){
-    //return membership.get('active') || this.get('controller.showInactive');
-    return true;
-  }.property('controller.showInactive'),
+  templateName: 'modal/commit',
 
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this, 'processChildElements');
@@ -11,5 +8,6 @@ export default Ember.View.extend({
   processChildElements: function() {
     Em.$(document).foundation();
   }
+  
 
 });

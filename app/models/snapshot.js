@@ -1,9 +1,6 @@
 import toEmberObject from 'appkit/utils/to_ember_object';
 import baseUrl from 'appkit/utils/baseurl';
-import toType from 'appkit/utils/to_type';
 
-//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
-//var baseUrl = 'http://localhost:8080/refsets';
 
 var Snapshot = Ember.Object.extend({
   title: '',

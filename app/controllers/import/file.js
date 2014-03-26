@@ -4,7 +4,7 @@ import Alert from 'appkit/models/alert';
 export default Ember.Controller.extend({
   error: '',
   alert: '',
-  needs: 'refset',
+  needs: ['refset','members'],
 
   fileTypes: [
     {label:"Auto Detect", id:"USE_EXTENSION"},
@@ -23,10 +23,34 @@ export default Ember.Controller.extend({
         this.get('model').pushObject(m);
       }
     },
+
     import: function(){
-      Ember.Logger.log("Attempting to import file");
+      Ember.Logger.log('Importing file');
       var alert = Alert.create();
-      Member.import(this.get('model.fileType'), this.get('controllers.refset.model.publicId'), alert, this);
-    }  
+      
+      alert.set('showUndo', false);
+      
+      //ON SUCCESS
+      var onSuccess = function(successResponse, alert, _this){
+        alert.set('isError', false);
+        alert.set('message', "Successfully imported members from file");
+        _this.set('controllers.refset.model.pendingChanges', true);
+        _this.get('controllers.members').set('alert', alert);
+        _this.transitionToRoute('members');
+      };
+
+      //ON ERROR
+      var onError = function(errorResponse, alert, _this){
+        alert.set('isError', true);
+        alert.set('message', 'Unable to import members from file. Message was: ' + errorResponse.responseText);
+        _this.get('controllers.import.file').set('alert', alert);
+      };
+
+      Member.import(
+        this.get('controllers.refset.model.publicId'), 
+        document.getElementById('import-file-form'),
+        this.get('model.fileType'),
+        alert, onSuccess, onError, this);
+    } 
   }
 });

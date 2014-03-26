@@ -27,6 +27,7 @@ export default Ember.ArrayController.extend({
         alert.set('isError', false);
         alert.set('message', 'Successfully added new members');
         members.clear();
+        _this.set('controllers.refset.model.pendingChanges', true);
         _this.transitionToRoute('members');
       };
 
@@ -36,8 +37,9 @@ export default Ember.ArrayController.extend({
         alert.set('message', 'Unable to add new members. Message was: ' + errorResponse.responseText);
       };
 
-      Member.addMembers(this.get('controllers.refset.model.publicId'), 
-        this.get('model'), '', alert, onSuccess, onError, this);
+      Member.addMembers(this.get(
+        'controllers.refset.model.publicId'), 
+        this.get('model'), undefined, alert, onSuccess, onError, this);
     }  
   }
 });

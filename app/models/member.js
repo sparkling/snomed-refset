@@ -1,11 +1,7 @@
 import Alert from 'appkit/models/alert';
 import toEmberObject from 'appkit/utils/to_ember_object';
-import toType from 'appkit/utils/to_type';
 import baseUrl from 'appkit/utils/baseurl';
 
-
-//var baseUrl = 'https://refset-api.snomedtools.info/refsets';
-//var baseUrl = 'http://localhost:8080/refsets';
 
 var Member = Ember.Object.extend({
   publicId:  '',
@@ -40,9 +36,6 @@ Member.reopenClass({
       }));
     });
   },
-
-
-
   
   addMembers: function(refsetPublicId, members, targetModel, alert, onSuccess, onError, _this) {
     Ember.Logger.log('Ajax: add member');
@@ -65,45 +58,26 @@ Member.reopenClass({
       }));
     });
   },
-  import: function(fileType, refsetPublicId, alert, _this){
-    var result;
 
-    var form = document.getElementById('import-file-form');
-    var formData = new window.FormData(form);
-    var fileInput = document.getElementById('import-file');
-    var file = fileInput.files[0];
-    
-    if (file !== undefined) {
-      formData.append('file', file);
-    }
-    
-    if (fileType !== undefined) {
-      formData.append('fileType', fileType);
-    }
-    
-    result = Ember.Object.create({});
+  import: function(refsetPublicId, formElement, fileType, alert, onSuccess, onError, _this){
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         url: baseUrl() + '/' + refsetPublicId + '/members?type=file',
         type: "POST",
         processData: false,
         contentType: false,
-        data: formData
+        data: new window.FormData(formElement)
       }).then((function(success) {
-        Ember.Logger.log('success: ' + JSON.stringify(success));
-        alert.set('status', 'SUCCESS');
-        alert.set('message', "Successfully imported file");
-        _this.transitionToRoute('members');
+        Ember.Logger.log('Ajax: success');
+        onSuccess(success, alert, _this);
       }), function(error) {
-        var parsed;
-        Ember.Logger.log('fail: ' + JSON.stringify(error));
-        parsed = toEmberObject(JSON.parse(error.responseText));
-        Ember.Logger.log('after toEmber: ' + JSON.stringify(parsed));
-        return result.setProperties(parsed);
+        Ember.Logger.log('Ajax: error');
+        onError(error, alert, _this);
       }));
     });
-    return result;    
-  },  
+  },
+
+
   getMembers: function(refsetPublicId, _this) {
     var members = Ember.A();
     Ember.Logger.log('GETing members for refset for: ' + refsetPublicId);
@@ -118,7 +92,7 @@ Member.reopenClass({
         data: '',
         dataType: "json"
       }).then((function(success) {
-        Ember.Logger.log('success: ' + JSON.stringify(success));
+        //Ember.Logger.log('success: ' + JSON.stringify(success));
         var returned = toEmberObject(success);
         //Ember.Logger.log('members found and parsed: ' + JSON.stringify(returned));
         members.pushObjects(returned.get('members'));

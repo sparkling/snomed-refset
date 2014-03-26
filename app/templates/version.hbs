@@ -1,0 +1,62 @@
+<!-- ************** -->
+<!-- * HEADER NAV * -->
+<!-- ************** -->
+<header>
+  <nav class="row">
+    <div class="small-12 columns">
+      <ul class="breadcrumbs">
+        <li>
+          {{#link-to 'refsets'}}Refsets{{/link-to}}
+        </li>
+        <li>
+          {{#link-to 'members' refset}}{{refsetName}}{{/link-to}}
+        </li>
+        <li class="current">
+          <a href="#">{{title}}</a>
+        </li>        
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- HEADING -->
+<header class="row sub">
+  <!-- TITLE -->
+  <div class="small-8 medium-6 columns">
+    <h2 class="subheader"><span>Version Members</span>
+    </h2>
+  </div>
+  <!-- NAVIGATION -->
+  <nav class="small-6 medium-6 columns navigation top">
+    {{#link-to 'versions' refset class="button secondary round tiny"}}Return to Versions{{/link-to}}
+  </nav>
+</header>
+
+<!-- ********** -->
+<!-- * ALERTS * -->
+<!-- ********** -->
+<section id="alerts">
+  {{#if hasPendingChanges}}
+    <div class="row alert pending">
+      <!-- CHANGES PENDING -->
+      <div class="small-12 columns">
+        <div data-alert id="alert2" class="alert-box success radius">
+          <span>There are changes pending</span>
+          <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
+            <!-- PENDING CHANGES ICON -->
+            <a href="pending.changes.membership.html" class="show-changes icon" style="color:white; margin-right: 0.5em">
+              <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="See Pending Changes"></span>
+            </a>
+            <!-- CREATE VERSION ICON -->
+            <a href="#" class="icon" style="color: white" data-reveal-id="createVersion" data-reveal>
+              <span data-tooltip data-options="disable_for_touch:false" class="fa fa-tags" title="Commit Changes"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+  {{render 'undo-alert' alert}}
+</section>  
+
+{{members-list members=members}}

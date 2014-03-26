@@ -9,11 +9,20 @@ TODO
 - Refresh list of refsets when navigating back to the list screen
 - Instead of deleting a refset, with no posibility of undo, mark the refset as 'deleted' instead
     - Will have to change list of refset to add parameter to query
+- Once a publicId for a refset has been used, it can never ever be reused again. Will need a few more features / sreens to make this manageble. For now, you just can't. Unless I do some sql magic. So there.
+
+
+IMPORTANT:
+==========
+- Add unique constraint for refset public id + member public id
+- Add unique constraint for refset public id + snapshot public id
+- Need to add option to RESET main picklist to latest created version only. Will wipe out any pending changes. Important.
 
 BUGS:
 ======
 - Refresing members page causes error
 - Clear out list of concepts on 'add concepts / search' page on load
+
 
 QUESTIONS
 +=========
@@ -21,7 +30,7 @@ QUESTIONS
     - How do we reconcile this with the import / add components routine?
 - Are we correct in assuming no duplicate membership components? 
     - No! Looking at refsets in the release, I see there are duplicate Components as members
-
+- Do you want to be able to delete members from a version? I'ld say no.... A version == a tag, NOT modifiable. Hm, yes, that makes sense. If you want to be able to make changes to a version, that is sort of like creating a branch. We are definitely avoiding branching / merging concepts for now, it requires a lot of knowledge by the end user. But maybe modifing a version, i.e. creating a branch (NOT giving ability to merge), is essential? Not sure. Hm. Maybe you could replace the current main picklist with any version? If this version is not the latest version, you get a pending changes icon....
 
 NOTES
 ======
