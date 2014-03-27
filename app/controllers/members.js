@@ -39,6 +39,11 @@ export default Ember.ArrayController.extend({
 
   //ACTIONS
   actions: {
+    clearTooltipAndTransitionToImport: function(){
+      $('.tooltip').hide();
+      this.transitionToRoute('import.file');
+    },
+
     cancelCommitModal: function(){
       this.set('version', Version.create());
       $('#createVersion').foundation('reveal', 'close'); 

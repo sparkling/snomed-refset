@@ -73,8 +73,8 @@
   <!-- TITLE -->
   <div class="small-6 medium-4 columns">
     <h2 class="subheader"><span>Members</span>
-      <a style="margin-left: 0.5em; color: skyblue" data-options="align:right" href="#" data-dropdown="download-dropdown">
-        <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-cloud-download"  title="Download Members"></span>          
+      <a style="margin-left: 0.5em; color: skyblue" data-options="align:bottom" href="javascript:void(0)" data-dropdown="download-dropdown">
+        <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download"  title="Export as..."></span>          
       </a>
       <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
         <li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
@@ -117,11 +117,11 @@
           <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
             <!-- PENDING CHANGES ICON -->
             <a href="javascript:void(0)" class="show-changes icon" style="color:lightgrey; margin-right: 0.5em">
-              <span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="See Pending Changes"></span>
+              <span data-tooltip data-selector="pending" data-options="disable_for_touch:false" class="radius fa fa-puzzle-piece" title="See Pending Changes"></span>
             </a>
             <!-- CREATE VERSION ICON -->
-            <a href="#" class="icon" style="color: white" data-reveal-id="createVersion" data-reveal>
-              <span data-tooltip data-options="disable_for_touch:false" class="fa fa-tags" title="Commit Changes"></span>
+            <a href="#" class="icon commit" style="color: white" data-reveal-id="createVersion" data-reveal>
+              <span data-tooltip data-selector="commit" data-options="disable_for_touch:false" class="radius tip-bottom fa fa-tags" title="Commit Changes"></span>
             </a>
           </div>
         </div>
@@ -137,8 +137,8 @@
 <div class="main action pagination row bottom">
   <!-- ADD ICON -->
   <div class="columns small-1 icon add">
-    {{#link-to 'import.file'}}
-      <span data-tooltip data-options="disable_for_touch:false" class="fa fa-plus-circle" title="Add Members"></span>
+    {{#link-to 'import.file' action='clearTooltipAndTransitionToImport'}}
+      <span data-tooltip data-selector="import" data-options="disable_for_touch:false" class="radius tip-right fa fa-plus-circle" title="Add Members"></span>
     {{/link-to}}
   </div>
 </div> 

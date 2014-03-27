@@ -9,7 +9,9 @@ export default Ember.View.extend({
   },
 
   processChildElements: function() {
-    Em.$(document).foundation();
+    setTimeout(function(){
+        Em.$(document).foundation();
+    }, 250);
   }
 
 });
