@@ -44,6 +44,13 @@ export default Ember.ArrayController.extend({
       $('#createVersion').foundation('reveal', 'close'); 
     },
 
+    sortMembers: function(sortBy, sortOrder){
+      Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
+
+    this.set('members', 
+      Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this));
+    },    
+
     createVersion: function(){
       Ember.Logger.log('Creating version');
       var alert = Alert.create();
