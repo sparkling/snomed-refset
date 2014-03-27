@@ -89,8 +89,16 @@
       <ul class="button-group radius">
         <li>{{#link-to 'members'  class="secondary button tiny members disabled"}}Members{{/link-to}}</li>
         <li>{{#link-to 'versions' class="secondary button tiny versions"}}Versions{{/link-to}}</li>
-        <li>{{#link-to 'releases' class="secondary button tiny releases"}}Releases{{/link-to}}</li>
-        <li>{{#link-to 'details'  class="secondary button tiny details"}}Details{{/link-to}}</li>
+        <li>
+        <a href="javascript:void(0)" class="secondary button tiny releases disabled">Releases (coming)</a>
+        <!--
+        {{#link-to 'releases' class="secondary button tiny releases disabled"}}Releases (coming){{/link-to}}
+        -->
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="secondary button tiny releases disabled">Details (coming)</a>
+          <!--{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}-->
+        </li>
       </ul>
     </div>
   </nav>
@@ -129,7 +137,7 @@
 <div class="main action pagination row bottom">
   <!-- ADD ICON -->
   <div class="columns small-1 icon add">
-    {{#link-to 'import.search'}}
+    {{#link-to 'import.file'}}
       <span data-tooltip data-options="disable_for_touch:false" class="fa fa-plus-circle" title="Add Members"></span>
     {{/link-to}}
   </div>

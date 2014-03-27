@@ -7,10 +7,10 @@ export default Ember.Controller.extend({
   needs: ['refset','members'],
 
   fileTypes: [
-    {label:"Auto Detect", id:"USE_EXTENSION"},
-    {label:"JSON",        id:"JSON"},
-    {label:"XML",         id:"XML"},
-    {label:"RF2",         id:"RF2"},
+    {label:"Use File Extension", id:"USE_EXTENSION"},
+    {label:".rf2",         id:"RF2"},
+    {label:".json",        id:"JSON"},
+    {label:".xml",         id:"XML"},
   ],    
 
   actions: { 

@@ -6,7 +6,17 @@ export default Ember.ArrayController.extend({
   alert: '',
   needs: ['refset','members'],
 
+  hasContent: function(){
+    //Ember.Logger.log('model is size ' + this.get('model').length);
+    return this.get('model').length !== 0;
+  }.property('model.@each'),
+
+
   actions: { 
+    delete: function(component){
+      this.get('model').removeObject(component);
+    },
+
     addConcept: function(event){
       if (event.added){
         var m = Member.create();

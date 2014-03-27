@@ -66,16 +66,18 @@ header .login .icon
 
 .add-members 
   & .file-format .dropdown
-    width 11em !important
+      width 11em !important
   & .file-selection input
-    margin-top 0.3em
-  & .field.import
-    margin-top 2em !important
+    margin-top 0.5em
+  & .field.header
+    margin-bottom 2em !important
   & .field.source .dropdown
     /*width 5em*/
   & .search-component
     margin-bottom 0.5em
   & .action.import .button
+    margin-top 1em
+  & .row.selected
     margin-top 1em
 
 
@@ -208,7 +210,8 @@ header .login .icon
 .component-list table
 .members table
 .refsets table 
-.snapshots table 
+.versions table 
+.add-members .selected table
   border none !important
   & .downloadse
   & .delete
@@ -237,7 +240,8 @@ header .login .icon
     //color skyblue
     color lightgrey
   & .publish .icon span
-    color seagreen
+    //color seagreen
+    color lightgrey
     opacity 0.75
   & .discuss .icon span
     color skyblue

@@ -6,11 +6,11 @@
       {{message}} 
       <span class="actions">
         {{#if showUndo}}
-          <a href="#" {{action 'undo'}} class="icon undo" style="padding-right: 0.25em">
+          <a href="javascript:void(0)" {{action 'undo'}} class="icon undo" style="padding-right: 0.25em">
             <span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span>
           </a>
         {{/if}}
-        <a href="#" {{action 'resetAlert'}} class="icon close-alert">
+        <a href="javascript:void(0)" {{action 'resetAlert'}} class="icon close-alert">
           <span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span>
         </a>
       </span>

@@ -32,8 +32,8 @@
         <ul class="button-group radius">
           <li>{{#link-to 'members'  class="secondary button tiny members"}}Members{{/link-to}}</li>
           <li>{{#link-to 'versions' class="secondary button tiny versions disabled"}}Versions{{/link-to}}</li>
-          <li>{{#link-to 'releases' class="secondary button tiny releases"}}Releases{{/link-to}}</li>
-          <li>{{#link-to 'details'  class="secondary button tiny details"}}Details{{/link-to}}</li>
+          <li>{{#link-to 'releases' class="secondary button tiny releases disabled"}}Releases (coming){{/link-to}}</li>
+          <li>{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}</li>
         </ul>
       </div>
     </nav>
@@ -44,7 +44,7 @@
   <div class="row filter">
     <!-- TEXT -->
     <div class="small-8 medium-6 columns filter">      
-      <input type="text" placeholder="Filter"></input>
+      <input type="text" placeholder="Filter (coming soon)"></input>
     </div>
 
   </div>
@@ -90,7 +90,8 @@
                 <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
               </td-->
               <td class="publish action">
-                <a href="#" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+                <a href="javascript:void(0)" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a>
+                <!--a href="javascript:void(0)" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a-->
               </td>           
               <!--td class="delete action">
                 <a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a>

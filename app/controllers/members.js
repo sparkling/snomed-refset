@@ -106,7 +106,7 @@ export default Ember.ArrayController.extend({
           undoAlert.set('isError', false);
           undoAlert.set('showUndo', false);
           undoAlert.set('message', 'Added back member ' + members[0].get('publicId'));
-          _this.set('members', Member.getMembers(_this.get('refsetName')));
+          _this.set('members', Member.getMembers(_this.get('refsetName'), "component.fullySpecifiedName", "ASC"));
         };
         
         //UNDO: ERROR
