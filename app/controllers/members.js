@@ -105,7 +105,7 @@ export default Ember.ArrayController.extend({
           //memberModel.pushObject(members[0]);
           undoAlert.set('isError', false);
           undoAlert.set('showUndo', false);
-          undoAlert.set('message', 'Added back member ' + members[0].get('publicId'));
+          undoAlert.set('message', "Added back member with component '" + members[0].get('component.title') + "'");
           _this.set('members', Member.getMembers(_this.get('refsetName'), "component.fullySpecifiedName", "ASC"));
         };
         
@@ -128,7 +128,7 @@ export default Ember.ArrayController.extend({
         alert.set('isError', false);
         memberModel.removeObject(member);
         _this.set('controllers.refset.model.pendingChanges', true);
-        alert.set('message', 'Removed member ' + member.get('publicId'));
+        alert.set('message', "Removed member with component '" + member.get('component.title') + "'");
       };
 
       //ON ERROR
