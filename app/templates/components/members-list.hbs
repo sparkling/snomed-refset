@@ -3,12 +3,12 @@
   <div class="row filter">
     <!-- TEXT -->
     <div class="small-6 columns text">      
-      <input type="text" placeholder="Filter"></input>
+      <input type="text" placeholder="Filter (coming soon)"></input>
     </div>
     <!-- BOOLEAN -->
     <div class="small-6 columns show">
       {{input type="checkbox" name="showComponent" checked=showComponent id="show-component"}}<label for="show-component">Component</label>    
-      {{input type="checkbox" name="showIdentifier" checked=showIdentifier id="show-id"}}<label for="show-id">Identifier</label>
+      {{input type="checkbox" name="showSctid" checked=showSctid id="show-sctid"}}<label for="show-sctid">SCTID</label>
       {{input type="checkbox" name="showEffective" checked=showEffective id="show-effective"}}<label for="show-effective">Effective</label>
       {{input type="checkbox" name="showModule" checked=showModule id="show-module"}}<label for="show-module">Module</label>
     </div>
@@ -20,36 +20,38 @@
       <table width="100%" cellpadding="0" cellspacing="0" class="responsive">
         <thead>
           <tr>
-            {{#if controller.showIdentifier}}
-            <th>Identifier
-              <a style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
-              <a style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
+            {{#if controller.showSctid}}
+            <th>SCTID
+              <a {{action 'sort' 'component.serialisedId' 'ASC'}} style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
+              <a {{action 'sort' 'component.serialisedId' 'DESC'}} style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
             </th>
             {{/if}}          
             {{#if controller.showComponent}}
             <th>Component
-              <a style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
-              <a style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
+              <a {{action 'sort' 'component.fullySpecifiedName' 'ASC'}} style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
+              <a {{action 'sort' 'component.fullySpecifiedName' 'DESC'}} style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
             </th>
             {{/if}}
             {{#if controller.showEffective}}
             <th>Effective
-              <a style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-numeric-asc"></span></a>
-              <a style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-numeric-desc"></span></a>
+              <a {{action 'sort' 'effective' 'ASC'}} style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-numeric-asc"></span></a>
+              <a {{action 'sort' 'effective' 'DESC'}} style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-numeric-desc"></span></a>
             </th>
             {{/if}}
             {{#if controller.showModule}}
             <th>Module
-              <a style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
-              <a style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
+              <a {{action 'sort' 'module.fullySpecifiedName' 'ASC'}} style="margin-left: 0.75em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
+              <a {{action 'sort' 'module.fullySpecifiedName' 'DESC'}} style="margin-left: 0.5em; font-size: 0.8em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
             </th>
             {{/if}}
             <!--th class="show-changes icon">
               <a href="show-changes.html"><span data-tooltip data-options="disable_for_touch:false" class="round fa fa-puzzle-piece" title="Pending Changes"></span></a>                  
             </th-->
             
-            <th></th>
-            <th></th>
+            <th class="info"></th>
+            {{#if showDeleteMember}}
+            <th class="delete"></th>
+            {{/if}}
             <!--th></th-->
             <!--th class="take-snapshot icon"><a href="new.snapshot.html"><span data-tooltip data-options="disable_for_touch:false" class="round fa fa-leaf" title="Create Version"></span></a></th-->
           </tr>
@@ -58,14 +60,15 @@
           {{#each member in members}}
             
               <tr>
-                {{#if controller.showIdentifier}}
+                {{#if controller.showSctid}}
                 <td>
-                    {{member.publicId}}
+                  {{member.component.id}}
                 </td>
                 {{/if}}
                 {{#if controller.showComponent}}
                 <td>
-                  <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{member.component.title}}</a>
+                  <!--a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{member.component.title}}</a-->
+                  <a href="javascript:void(0)">{{member.component.title}}</a>
                 </td>
                 {{/if}}
                 {{#if controller.showEffective}}
@@ -73,19 +76,18 @@
                 {{/if}}
                 {{#if controller.showModule}}
                 <td>
-                  <a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{member.module.title}}</a>
+                  <!--a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{member.module.title}}</a-->
+                  <a href="javascript:void(0)">{{member.module.title}}</a>
                 </td>
                 {{/if}}
                 <td class="info">
-                  <a href="membership.details.html" class="icon"><span class="fa fa-info-circle"></span></a>
-                </td>                
-                <!--td class="edit">
-                  <a href="edit.membership.html" class="icon"><span class="fa fa-pencil"></span></a>
-                </td-->
+                  <a href="javascript:void(0)" class="icon"><span class="fa fa-info-circle"></span></a>
+                </td>
+                {{#if showDeleteMember}}
                 <td class="delete">
                   <a href="#" class="icon" {{action 'delete' member}}><span class="fa fa-trash-o"></span></a>
-                  <!--a href="#" onclick="$('#alert1').show()" class="icon"><span class="fa fa-trash-o"></span></a-->
                 </td>
+                {{/if}}
               </tr>
             
           {{/each}}
@@ -97,8 +99,9 @@
   <div class="row">
     <!-- PAGINATION -->
     <div class="small-12 columns">
-      <div class="pagination-centered">
-        <ul class="pagination">
+      <div class="pagination-centered" style="color: lightgrey">
+        <span>Coming Soon: Multiple pages, and navigation</span>
+        <!--ul class="pagination">
           <li class="arrow unavailable"><a href="">&laquo;</a></li>
           <li class="current"><a href="">1</a></li>
           <li><a href="">2</a></li>
@@ -111,7 +114,7 @@
           <li><a href="">14</a></li>
           <li><a href="">15</a></li>
           <li class="arrow"><a href="">&raquo;</a></li>
-        </ul>
+        </ul-->
       </div>            
     </div>
   </div>

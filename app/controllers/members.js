@@ -15,6 +15,8 @@ export default Ember.ArrayController.extend({
     return this.get('controllers.refset.model.pendingChanges');
   }.property('controllers.refset.model.pendingChanges'),
 
+  showDeleteMember: true,
+
   //DISPLAY FIELD SELECTIONS
   showComponent: true,
   showIdentifier: false,
@@ -77,7 +79,7 @@ export default Ember.ArrayController.extend({
       var undoArgs = Ember.A();
       undoArgs.pushObject(this.get('refsetName'));
       undoArgs.pushObject(member);
-      undoArgs.pushObject(this.get('model'));
+      undoArgs.pushObject(this.get('members'));
       undoArgs.pushObject(this);
       alert.set('arguments', undoArgs);
 
@@ -97,7 +99,7 @@ export default Ember.ArrayController.extend({
           undoAlert.set('isError', false);
           undoAlert.set('showUndo', false);
           undoAlert.set('message', 'Added back member ' + members[0].get('publicId'));
-          _this.set('model', Member.getMembers(_this.get('refsetName')));
+          _this.set('members', Member.getMembers(_this.get('refsetName')));
         };
         
         //UNDO: ERROR
@@ -130,7 +132,7 @@ export default Ember.ArrayController.extend({
       };
 
       //DO IT
-      Member.delete(this.get('refsetName'), member, this.get('model'), alert, onSuccess, onError, this);
+      Member.delete(this.get('refsetName'), member, this.get('members'), alert, onSuccess, onError, this);
     }
   }
     //showModal: function(){

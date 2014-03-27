@@ -1,3 +1,4 @@
+import Version from 'appkit/models/version';
 import Alert from 'appkit/models/alert';
 import Member from 'appkit/models/member';
 import baseUrl from 'appkit/utils/baseurl';
@@ -32,6 +33,13 @@ export default Ember.ObjectController.extend({
 
   //ACTIONS
   actions: {
+    sortMembers: function(sortBy, sortOrder){
+      Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
+
+      this.set('members', 
+        Version.getMembers(this.get('refsetName'), this.get('model.publicId'), sortBy, sortOrder, this));
+    },
+
     delete: function(member){
       Ember.Logger.log("Delete: member " + JSON.stringify(member));
       var alert = Alert.create();

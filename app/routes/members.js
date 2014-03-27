@@ -6,7 +6,10 @@ export default Ember.Route.extend({
 
   setupController: function (controller, model) {
     Ember.Logger.log("Loading members for refset " + this.modelFor('refset').get('publicId'));
-    controller.set('members', Member.getMembers(this.modelFor('refset').get('publicId'), this));
+    
+    controller.set('members', 
+      Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", this));
+    
     controller.set('version', Version.create());
   }
 });

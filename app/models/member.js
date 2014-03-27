@@ -78,7 +78,7 @@ Member.reopenClass({
   },
 
 
-  getMembers: function(refsetPublicId, _this) {
+  getMembers: function(refsetPublicId, sortBy, sortOrder, _this) {
     var members = Ember.A();
     Ember.Logger.log('GETing members for refset for: ' + refsetPublicId);
     Ember.Deferred.promise(function(p) {
@@ -87,7 +87,7 @@ Member.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/members",
+        url: baseUrl() + "/" + refsetPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder,
         type: "GET",
         data: '',
         dataType: "json"

@@ -65,7 +65,7 @@ Version.reopenClass({
   },  
 
 
-  getMembers: function(refsetPublicId, versionPublicId, _this) {
+  getMembers: function(refsetPublicId, versionPublicId, sortBy, sortOrder, _this) {
     Ember.Logger.log('Ajax: get members');
     var members = Ember.A();
     Ember.Deferred.promise(function(p) {
@@ -74,7 +74,7 @@ Version.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/version/" + versionPublicId + "/members",
+        url: baseUrl() + "/" + refsetPublicId + "/version/" + versionPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder,
         type: "GET",
         data: '',
         dataType: "json"
