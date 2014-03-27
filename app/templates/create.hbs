@@ -9,22 +9,24 @@
     <div class="row">
       <div class="field source small-4 medium-3 columns">
         <label {{bind-attr class="error.fieldErrors.source:error"}}>Source</label>
-        {{view Ember.Select contentBinding="selectSource"
-                            optionLabelPath="content.label"
-                            optionValuePath="content.key"
-                            valueBinding="source"
-                            classNames="dropdown"}}
+        {{view 'form-select' contentBinding="selectSource"
+                             optionLabelPath="content.label"
+                             optionValuePath="content.key"
+                             valueBinding="source"
+                             classNames="dropdown"
+                             disabled="disabled"}}
         {{#each e in error.fieldErrors.source}}
           <span class="error">{{e}}</span>
         {{/each}}
       </div>
       <div class="field type small-4 medium-3 small-pull-4 medium-pull-6 columns">
         <label {{bind-attr class="error.fieldErrors.type:error"}}>Type</label>
-        {{view Ember.Select contentBinding="selectType"
+        {{view 'form-select' contentBinding="selectType"
                             optionLabelPath="content.label"
                             optionValuePath="content.key"
                             valueBinding="content.type"
-                            classNames="dropdown"}}
+                            classNames="dropdown"
+                            disabled="disabled"}}
         {{#each e in error.fieldErrors.type}}
           <span class="error">{{e}}</span>
         {{/each}}                            
@@ -56,7 +58,9 @@
         {{input type="text" name="publicId" value=publicId placeholder="Please give an internet address"}}
         <label class="preview">http://refset.snomedtool.com/refsets/{{publicId}}</label>
         {{#each e in error.fieldErrors.publicId }}
-          <span class="error">{{e}}</span>
+          <div style="padding-top: 1.25em">
+            <span class="error">{{e}}</span>
+          </div>
         {{/each}}        
       </div>
     </div>
@@ -82,10 +86,14 @@
           </div>      
         </div>
         {{#each e in error.fieldErrors.snomedReleaseDate}}
+        <div class="field">
           <span class="error">{{e}}</span>
+        </div>
         {{/each}}
         {{#each e in error.fieldErrors.snomedExtension}}
+        <div class="field">
           <span class="error">{{e}}</span>
+        </div>
         {{/each}}        
       </div> <!-- columns -->
     </div> <!-- row -->
@@ -114,7 +122,7 @@
             {{select-two action="changeRefsetConcept"}}
           </div>
           <div class="content" id="panel-new">
-            <p>Create new...</p>
+            <p style="color: grey">Coming soon...</p>
           </div>
           {{#each e in error.fieldErrors.refsetConcept}}
             <span class="error">{{e}}</span>

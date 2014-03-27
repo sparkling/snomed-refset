@@ -8,22 +8,22 @@ export default Ember.ObjectController.extend({
   findConceptModalId: 'find-concept-modal',
 
   selectType: [
-    { label: "Concept",     key: "CONCEPT" },
+    { label: "Concept (more coming)",     key: "CONCEPT" },
     { label: "Description", key: "DESCRIPTION" },
     { label: "Statement",   key: "STATEMENT" }
   ],
   selectSource: [
-    { label: "List",  key: "LIST" },
+    { label: "List (coming: rules)",  key: "LIST" },
     { label: "Rules", key: "RULES" }
   ],
   selectExtension: [
     { label: "International (Core)",  key: "INTERNATIONAL" },
-    { label: "United Kingdom", key: "UK" },
-    { label: "Denmark", key: "DK" }
+    { label: "United Kingdom (coming)", key: "UK" },
+    { label: "Denmark (coming)", key: "DK" }
   ],
   selectReleaseDate: [
     { label: "July 31st, 2013",  key: "20130731" },
-    { label: "January 1st, 2013",  key: "20130101" },
+    { label: "January 1st, 2013 (coming)",  key: "20130101" },
   ],
 
 
