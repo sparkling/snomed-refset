@@ -11,5 +11,7 @@ export default Ember.Route.extend({
       Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", this));
     
     controller.set('version', Version.create());
+
+    controller.set('alert', '');
   }
 });
