@@ -17,16 +17,16 @@
     
     <!-- ORGANISATION -->
     <div class="organisation small-6 medium-4 columns">
-      <select class="dropdown">
-        <option value="0" selected>Private</option>
-        <option value="1">International Organisation for Standards</option>
-        <option value="2">Health Level 7</option>
+      <select class="dropdown" disabled>
+        <option value="0" selected>Organisation (coming soon)</option>
+        <!--option value="1">International Organisation for Standards</option>
+        <option value="2">Health Level 7</option-->
       </select>
     </div>
     
     <!-- FILTER -->
     <div class="filter small-6 medium-4 columns">
-      <input type="text" placeholder="Filter"></input>
+      <input type="text" placeholder="Filter (coming soon)"></input>
     </div>
   </div>
 
@@ -41,12 +41,12 @@
         <!-- HEADER -->
         <thead>
           <th class="title">Title
-            <a style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
-            <a style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
+            <a {{action 'sort' 'title' 'ASC'}} style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
+            <a {{action 'sort' 'title' 'DESC'}} style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
           </th>
           <th class="created">Created
-            <a style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-numeric-asc"></span></a>
-            <a style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-numeric-desc"></span></a></
+            <a {{action 'sort' 'creationTime' 'ASC'}} style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-numeric-asc"></span></a>
+            <a {{action 'sort' 'creationTime' 'DESC'}} style="margin-left: 0.5em" href="#" class="icon"><span class="fa fa-sort-numeric-desc"></span></a></
           </th>
           <!--th class="members">Members
             <a style="margin-left: 0.75em" href="#" class="icon"><span class="fa fa-sort-numeric-asc"></span></a>
@@ -80,18 +80,19 @@
   <!-- ************ -->      
   <div class="row pagination">
     <div class="small-12 columns">
-      <div class="pagination-centered">
-        <ul class="pagination">
+      <div class="pagination-centered" style="color: lightgrey">
+        <span>Coming Soon: Multiple pages, and navigation</span>
+        <!--ul class="pagination">
           <li class="arrow unavailable"><a href="">&laquo;</a></li>
-          <li class="current"><a href="">1</a></li>
-          <li><a href="">2</a></li>
-          <li><a href="">3</a></li>
-          <li><a href="">4</a></li>
-          <li class="unavailable"><a href="">&hellip;</a></li>
-          <li><a href="">12</a></li>
-          <li><a href="">13</a></li>
-          <li class="arrow"><a href="">&raquo;</a></li>
-        </ul>
+          <li class="current"><a href="javascript;">1</a></li>
+          <li><a href="javascript:void(0)" style="pointer-events: none">2</a></li>
+          <li><a href="javascript:void(0)">3</a></li>
+          <li><a href="javascript;">4</a></li>
+          <li class="unavailable"><a href="javascript;">&hellip;</a></li>
+          <li><a href="javascript;">12</a></li>
+          <li><a href="javascript;">13</a></li>
+          <li class="arrow"><a href="javascript;">&raquo;</a></li>
+        </ul-->
       </div>            
     </div>
   </div>

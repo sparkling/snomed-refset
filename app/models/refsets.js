@@ -10,25 +10,52 @@ var Refsets = Ember.Object.extend({
 });
 
 Refsets.reopenClass({
-  loadRefsets: function(_this) {
-    Ember.Logger.log('Do request for refsets');
-    return Ember.Deferred.promise(function(p) {
-      var refsets;
-      refsets = _this.get('controller.model');
-      if (refsets != null) {
-        Ember.Logger.log('Found refsets in cache');
-        return p.resolve(refsets);
-      }
-      return p.resolve($.getJSON(baseUrl()).then(function(res) {
-        Ember.Logger.log('Json request returned');
-        return res.map(function(i) {
-          var x = Ember.Object.create(i);
-          Ember.Logger.log('Created object');
-          return x;
-        });
+
+  loadRefsets: function(_this, sortBy, sortOrder) {
+    var refsets = Ember.A();
+    Ember.Logger.log('Getting all refsets');
+    Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        url: baseUrl() + "?sortBy=" + sortBy + "&sortOrder=" + sortOrder,
+        type: "GET",
+        data: '',
+        dataType: "json"
+      }).then((function(success) {
+        var returned = toEmberObject(success);
+        refsets.pushObjects(returned.get('refsets'));
+      }), function(error) {
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        _this.set('response', toEmberObject(JSON.parse(error.responseText)));
       }));
     });
+    return refsets;
   },
+
+
+//  loadRefsets: function(_this, sortBy, sortOrder) {
+//    Ember.Logger.log('Do request for refsets');
+//    return Ember.Deferred.promise(function(p) {
+//      var refsets;
+//      //refsets = _this.get('controller.model');
+//      //if (refsets != null) {
+//      //  Ember.Logger.log('Found refsets in cache');
+//      //  return p.resolve(refsets);
+//      //}
+//      return p.resolve($.getJSON(baseUrl() + "?sortBy=" + sortBy + "&sortOrder=" + sortOrder).then(function(res) {
+//        Ember.Logger.log('Json request returned');
+//        return res.map(function(i) {
+//          var x = Ember.Object.create(i);
+//          Ember.Logger.log('Created object');
+//          return x;
+//        });
+//      }));
+//    });
+//  },
+
   createRefset: function(refset, _this) { 
     var result;
     Ember.Logger.log('POSTing: ' + JSON.stringify(refset));

@@ -6,7 +6,7 @@
       {{message}} 
       <span class="actions">
         {{#if showUndo}}
-          <a href="#" {{action 'undo'}} class="icon undo">
+          <a href="#" {{action 'undo'}} class="icon undo" style="padding-right: 0.25em">
             <span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span>
           </a>
         {{/if}}
@@ -17,4 +17,5 @@
     </div>
   </div>
 </div>
+{{view 'footer'}}
 {{/if}}

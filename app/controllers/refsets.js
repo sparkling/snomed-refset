@@ -1,3 +1,4 @@
+import Refsets from 'appkit/models/refsets';
 import Refset from 'appkit/models/refset';
 import Alert from 'appkit/models/alert';
 
@@ -5,6 +6,12 @@ export default Ember.ArrayController.extend({
   alert: '',
 
   actions: {
+    sort: function(sortBy, sortOrder){
+      Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
+      var refsets = Refsets.loadRefsets(this, sortBy, sortOrder);
+      this.set('model', refsets);
+    },
+
     delete: function(refset){
       Ember.Logger.log("Delete: refset " + JSON.stringify(refset));
       var alert = Alert.create();

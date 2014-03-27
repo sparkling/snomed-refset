@@ -5,5 +5,8 @@ export default Ember.View.extend({
 
   processChildElements: function() {
     this.$('select.dropdown').easyDropDown({});
+    setTimeout(function(){
+        Em.$(document).foundation();
+    }, 250);    
   }
 });
