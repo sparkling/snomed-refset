@@ -7,6 +7,9 @@ export default Ember.ObjectController.extend({
 
   findConceptModalId: 'find-concept-modal',
 
+  moduleSelectId: 'moduleSelectId',
+  refsetConceptSelectId: 'refsetSelectId',
+
   selectType: [
     { label: "Concept (more coming)",     key: "CONCEPT" },
     { label: "Description", key: "DESCRIPTION" },

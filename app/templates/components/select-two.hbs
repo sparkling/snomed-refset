@@ -1,1 +1,44 @@
-<input type="hidden" class="concept-select2">
+<div class="my-select2">
+  <div class="dropdown-with-options">
+    <div class="input-cell">
+      <input type="hidden" class="concept-select2">
+    </div>
+    <div class="options-cell">
+      <a class="icon" data-options="align:right" href="javascript:void(0)" {{bind-attr data-dropdown="identifier"}}>
+        <span class="radius fa fa-bars" title="Options"></span>
+      </a>
+      <ul {{bind-attr id="identifier"}} class="f-dropdown tiny" data-dropdown-content>
+        <li {{bind-attr class="isFullSearch:selected"}}>
+          <a {{action 'setFullSearch'}}>
+            <span class="title">Full Title Search</span>
+            <span class="icon radius fa fa-hand-o-left"></span>
+          </a>
+        </li>
+        <li {{bind-attr class="isSmartSearch:selected"}}>
+          <a {{action 'setSmartSearch'}}>
+            <span class="title">Smart Search</span>
+            <span class="icon radius fa fa-hand-o-left"></span>
+          </a>
+        </li>
+        <li><a href="javascript:void(0)" {{action 'displayHelp'}}>Help</a></li>
+      </ul>    
+    </div> 
+  </div>
+  {{#if displayHelp}}
+  <div class="help panel radius" style="font-size:0.75em;margin-top:0.5em; background-color:ivory">
+    <div class="close"><a href="javascript:void(0)" {{action 'closeHelp'}}><span class="icon fa fa-times"></span></a></div>
+    <h5>Full Title Search</h5>
+    <p>Searches the whole title string as a single line of text, and gives you results that are more accurately matched to the text you are looking for, and prioritises results that are the closest literal match. Words seperated by spaces are treated as single string, so that a search for 'reference set' only returns matches that matches exactly this string (as opposed to matching on 'reference' OR 'set').</p> 
+
+    <p>If you have a good idea of the exact term you are looking for, Full Title Search is most likely what you would want</p>
+
+    <h5 style="padding-top: 0">Smart Search</h5>
+    <p>Breaks the title you are searching for into chunks, and broadens the search results to include language based synonyms and stemming, where words such as 'connect' also returns results for 'connecting', 'connections', 'connective', etc. A query containing multiple words will be taken to mean 'one of these words in the title', e.g. a search for "reference set" will return all title containing the words 'reference' OR 'set'. This is a bit closer to what search engines do, but will return vastly more search results, and will not priorities the search results in the same way as a Full Title Search. 
+
+    <p>If you are not quite sure about the exact phrasing of the term you are searching for, Smart Search will return you more intelligent search results.</p>
+
+    <p style="font-size: 1em;font-style:italic">For the more technically inclined: The Full Title Search searches a solr string field, where as the Smart Search searches a tokenized text field (<a href="http://stackoverflow.com/questions/7175619/apache-solr-string-or-text">more information</a>). Solr regular expressions are also supported for Full Title Searches (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html">more information</a>). In a Full Title Search, we append a regular expression '*' to the end of the search term, and escape all spaces with '\ ' automatically.</p>
+  </div>
+  {{/if}}  
+</div>
+

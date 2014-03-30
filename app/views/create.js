@@ -10,5 +10,10 @@ export default Ember.View.extend({
     this.$('#snomed-release-select').select2({
       width: '100%'
     });
+
+    setTimeout(function(){
+        Em.$(document).foundation();
+    }, 250);
+    
   }
 });

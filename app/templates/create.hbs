@@ -100,7 +100,7 @@
     <div class="row">
       <div class="field module small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.moduleConcept:error"}}>Default Module</label>
-        {{select-two action="changeModuleConcept"}}
+        {{select-two action="changeModuleConcept" identifier=moduleSelectId}}
         {{#each e in error.fieldErrors.moduleConcept}}
           <span class="error">{{e}}</span>
         {{/each}}        
@@ -109,25 +109,25 @@
     <div class="row">
       <div class="field refset-concept small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.refsetConcept:error"}}>Snomed Refset Concept</label>
-        <dl class="tabs" data-tab>
+        <!--dl class="tabs" data-tab>
           <dd class="active">
             <a href="#panel-choose">Choose existing</a>
           </dd>
           <dd>
             <a href="#panel-new">Create new</a>
           </dd>
-        </dl>
-        <div class="tabs-content">
-          <div class="content active" id="panel-choose">
-            {{select-two action="changeRefsetConcept"}}
-          </div>
+        </dl-->
+        <!--div class="tabs-content">
+          <div class="content active" id="panel-choose"-->
+          {{select-two action="changeRefsetConcept" identifier=refsetConceptSelectId}}
+          <!--/div>
           <div class="content" id="panel-new">
             <p style="color: grey">Coming soon...</p>
-          </div>
+          </div-->
           {{#each e in error.fieldErrors.refsetConcept}}
             <span class="error">{{e}}</span>
           {{/each}}
-        </div>
+        <!--/div-->
       </div>
     </div>
     <div class="row action main bottom">
