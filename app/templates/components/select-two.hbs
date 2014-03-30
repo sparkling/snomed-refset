@@ -35,7 +35,7 @@
     <h5 style="padding-top: 0">Smart Search</h5>
     <p>Breaks the title you are searching for into chunks, and broadens the search results to include language based synonyms and stemming, where words such as 'connect' also returns results for 'connecting', 'connections', 'connective', etc. A query containing multiple words will be taken to mean 'one of these words in the title', e.g. a search for "reference set" will return all title containing the words 'reference' OR 'set'. This is a bit closer to what search engines do, but will return vastly more search results, and will not priorities the search results in the same way as a Full Title Search. 
 
-    <p>If you are not quite sure about the exact phrasing of the term you are searching for, Smart Search will return you more intelligent search results.</p>
+    <p>If you are not quite sure about the exact phrasing of the term you are searching for, Smart Search will return you more intelligent and extensive search results.</p>
 
     <p style="font-size: 1em;font-style:italic">For the more technically inclined: The Full Title Search searches a solr string field, where as the Smart Search searches a tokenized text field (<a href="http://stackoverflow.com/questions/7175619/apache-solr-string-or-text">more information</a>). Solr regular expressions are also supported for Full Title Searches (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html">more information</a>). In a Full Title Search, we append a regular expression '*' to the end of the search term, and escape all spaces with '\ ' automatically.</p>
   </div>
