@@ -1,34 +1,57 @@
+
+
+<!-- ************** -->
+<!-- * HEADER NAV * -->
+<!-- ************** -->
+<header>
+  <nav class="row">
+    <div class="small-12 columns">
+      <ul class="breadcrumbs">
+        <li>
+          {{#link-to 'refsets'}}Refsets{{/link-to}}
+        </li>
+        <li>
+          {{#link-to 'members'}}{{refsetName}}{{/link-to}}
+        </li>        
+        <li class="current">
+          <a href="javascript:void(0)">Releases</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
 <section class="releases">
   <!-- HEADING -->
   <header class="row sub">
+    <!-- TITLE -->
     <div class="small-6 medium-4 columns">
       <h2 class="subheader">Releases</h2>
     </div>    
     <!-- NAVIGATION -->
     <nav class="small-6 medium-8 columns navigation top">
       <div class="button-bar">
-        <ul class="button-group radius">
+        <ul class="button-group round">
           <li>{{#link-to 'members'  class="secondary button tiny members"}}Members{{/link-to}}</li>
           <li>{{#link-to 'versions' class="secondary button tiny versions"}}Versions{{/link-to}}</li>
-          <li>{{#link-to 'releases' class="secondary button tiny releases disabled"}}Releases{{/link-to}}</li>
-          <li>{{#link-to 'details'  class="secondary button tiny details"}}Details{{/link-to}}</li>
+          <li>{{#link-to 'releases' class="secondary button tiny versions disabled"}}Releases{{/link-to}}</li>
+        <li>
+          <a href="javascript:void(0)" class="secondary button tiny releases disabled">Details (coming)</a>
+          <!--{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}-->
+        </li>
         </ul>
       </div>
     </nav>
   </header>
+
+
   <!-- TABLE FILTER -->
   <div class="row filter">
     <!-- TEXT -->
-    <div class="small-6 columns filter">      
-      <input type="text" placeholder="Filter"></input>
+    <div class="small-8 medium-6 columns filter">      
+      <input type="text" placeholder="Filter (coming soon)"></input>
     </div>
-    <!-- BOOLEAN -->
-    <div class="small-6 columns show">
-      <input id="show-id" type="checkbox" checked="true"><label for="show-id">Titles</label>
-      <input id="show-inactive" type="checkbox"><label for="show-inactive">Created by</label>
-      <input id="show-inactive" type="checkbox" checked="true"><label for="show-inactive">Created on</label>
-      <input id="show-effective" type="checkbox" checked="true"><label for="show-effective">Members</label>
-    </div>
+
   </div>
   
 <!-- ******* -->
@@ -55,89 +78,18 @@
         
         <!-- TABLE BODY -->
         <tbody>
-          <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release 1.0</a>
-                <span class="popup">This is a description of the snapshot</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,234</td>
-          </tr>
-          <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release 1.1</a>
-                <span class="popup">This is a description of the snapshot</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,200</td>
-          </tr>
-          <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release Maintenance Update 1.1.1</a>
-                <span class="popup">This is a description of the refset</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,631</td>
-          </tr>
-          <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release 1.2</a>
-                <span class="popup">This is a description of the refset</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,521</td>
-          </tr>
-          
-          <!-- repeat -->
-          
-       <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release 1.2.1</a>
-                <span class="popup">This is a description of the snapshot</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,234</td>
-          </tr>
-          <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release 2</a>
-                <span class="popup">This is a description of the release</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,200</td>
-          </tr>
-          <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release 2.1</a>
-                <span class="popup">This is a description of the release</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,631</td>
-          </tr>
-          <tr>
-            <td class="title">
-              <div class="tooltip2 arrow">
-                <a href="version.details.html">Release 2.1.1</a>
-                <span class="popup">This is a description of the release</span> 
-              </div>
-            </td>
-            <td class="created">December 21st, 2012</td>
-            <td class="members">10,521</td>
-          </tr>
+          {{#each release in model}}
+            <tr>
+              <td class="title">
+                <div class="tooltip2 arrow">
+                  {{#link-to 'release' controllers.refset.model release}}{{release.title}}{{/link-to}}
+                  <span class="popup">{{release.description}}</span> 
+                </div>
+              </td>
+              <td class="created">{{date-format release.createdOn}}</td>
+              <td class="members">{{release.size}}</td>
+            </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>
@@ -147,9 +99,9 @@
   <!-- ************ -->      
   <div class="row pagination">
     <div class="small-12 columns">
-      <div class="pagination-centered">
-        <ul class="pagination">
-          <li class="arrow unavailable"><a href="">&laquo;</a></li>
+      <div class="pagination-centered" style="color: lightgrey">
+        <span>Coming Soon: Multiple pages, and navigation</span>
+          <!--li class="arrow unavailable"><a href="">&laquo;</a></li>
           <li class="current"><a href="">1</a></li>
           <li><a href="">2</a></li>
           <li><a href="">3</a></li>
@@ -158,9 +110,8 @@
           <li><a href="">12</a></li>
           <li><a href="">13</a></li>
           <li class="arrow"><a href="">&raquo;</a></li>
-        </ul>
+        </ul-->
       </div>            
     </div>
-  </div>   
-
+  </div>
 </section>

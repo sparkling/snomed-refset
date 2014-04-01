@@ -12,11 +12,11 @@
           {{#link-to 'members' refset}}{{refsetName}}{{/link-to}}
         </li>
         <li>
-          {{#link-to 'versions' refset}}versions{{/link-to}}
-        </li>        
+          {{#link-to 'releases' refset}}Releases{{/link-to}}
+        </li>
         <li class="current">
           <a href="javascript:void(0)">{{title}}</a>
-        </li>
+        </li>        
       </ul>
     </div>
   </nav>
@@ -28,11 +28,16 @@
     <div class="row">
       <!-- TITLE -->
       <div class="small-8 medium-6 columns">
-        <h2 class="subheader"><span>{{title}} <small>({{size}} members)</small></span></h2>
+        <h2 class="subheader"><span>{{title}} <small>({{snapshot.size}} members)</small></span></h2>
       </div>
       <!-- NAVIGATION -->
-      <nav class="small-6 medium-6 columns navigation top">
-        {{#link-to 'versions' refset class="single button secondary round tiny"}}Return to Versions{{/link-to}}
+      <nav class="small-4 medium-6 columns navigation top">
+        <div class="button-bar">
+          <ul class="button-group round">
+            <li>{{#link-to 'version' refset snapshot class="button secondary tiny"}}Associated Version{{/link-to}}</li>
+            <li>{{#link-to 'releases' refset class="button secondary tiny"}}Back to Releases{{/link-to}}</li>
+          </ul>
+        </div>
       </nav>
     </div>
     <div class="row">
@@ -42,13 +47,12 @@
     </div>
   </header>
 
-<!-- ********** -->
-<!-- * ALERTS * -->
-<!-- ********** -->
-<section id="alerts">
-  {{render 'undo-alert' alert}}
-</section>  
+  <!-- ********** -->
+  <!-- * ALERTS * -->
+  <!-- ********** -->
+  <section id="alerts">
+    {{render 'undo-alert' alert}}
+  </section>  
 
-{{members-list sortMembers="sortMembers" showDeleteMember=showDeleteMember members=members}}
-
+  {{members-list sortMembers="sortMembers" showDeleteMember=showDeleteMember members=members}}
 </section>

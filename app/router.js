@@ -11,8 +11,9 @@ Router.map(function() {
     });
     this.resource('members',   {path:'members'});
     this.resource('versions',  {path:'versions'});
-    this.resource('version',   {path:'versions/:versionPublicId'});
+    this.resource('version',   {path:'version/:versionPublicId'});
     this.resource('releases',  {path:'releases'});
+    this.resource('release',   {path:'release/:releasePublicId'}); 
     this.resource('details',   {path:'details'});
     this.resource('member',    {path:'member'}, function(){
       this.route('index',        {path:':memberId'});

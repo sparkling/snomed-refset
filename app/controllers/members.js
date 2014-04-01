@@ -11,10 +11,6 @@ export default Ember.ArrayController.extend({
   error: '',
   members: '',
   refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
-  hasPendingChanges: function(){
-    return this.get('controllers.refset.model.pendingChanges');
-  }.property('controllers.refset.model.pendingChanges'),
-
   showDeleteMember: true,
 
   //DISPLAY FIELD SELECTIONS
@@ -23,6 +19,10 @@ export default Ember.ArrayController.extend({
   showInactive: true,
   showEffective: true,
   showModule: true,
+
+  hasPendingChanges: function(){
+    return this.get('controllers.refset.model.pendingChanges');
+  }.property('controllers.refset.model.pendingChanges'),
 
   //DOWNLOAD LINKS
   downloadJsonUrl: function(){
@@ -51,9 +51,7 @@ export default Ember.ArrayController.extend({
 
     sortMembers: function(sortBy, sortOrder){
       Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
-
-    this.set('members', 
-      Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this));
+      this.set('members', Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this));
     },    
 
     createVersion: function(){

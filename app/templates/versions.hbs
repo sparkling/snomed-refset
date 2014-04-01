@@ -1,3 +1,54 @@
+<!-- CREATE RELEASE MODAL -->
+<div id="createRelease" class="reveal-modal" data-reveal>
+  <section id="new-release fields"> 
+    <div class="row">
+      <div class="large-12 columns">
+        <h2 class="subheader">Create a new release</h2>
+      </div>
+    </div>
+    <form class="form-group" {{action 'createRelease' on="submit"}}>
+
+      <div class="row">
+        <div class="field title small-12 medium-10 large-8 columns">
+          <label {{bind-attr class="error.fieldErrors.title:error"}}>Title</label>
+          {{input type="text" name="title" value=release.title placeholder="Please give a title"}}
+          {{#each e in error.fieldErrors.title }}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field description small-12 medium-10 large-8 columns">
+          <label {{bind-attr class="error.fieldErrors.description:error"}}>Description</label>
+          {{textarea name="description" value=release.description placeholder="Please give a description"}}
+          {{#each e in error.fieldErrors.description }}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field publicid small-12 medium-10 large-8 columns">
+          <label {{bind-attr class="error.fieldErrors.publicId:error"}}>Internet address</label>
+          {{input type="text" name="publicId" value=release.publicId placeholder="Please give an internet address"}}
+          <label class="preview">http://refset.snomedtool.com/refsets/{{refsetName}}/{{release.publicId}}</label>
+          {{#each e in error.fieldErrors.publicId }}
+            <span class="error">{{e}}</span>
+          {{/each}}        
+        </div>
+      </div>
+
+      <div class="row action main bottom">
+        <div class="small-12 columns">
+          <button type="submit" class="button radius small">Create</button>
+          <button {{action 'cancelReleaseModal'}} type="submit" class="button radius small secondary">Cancel</button>
+        </div>
+      </div>    
+    </form>
+  </section>
+</div>
+
 <!-- ************** -->
 <!-- * HEADER NAV * -->
 <!-- ************** -->
@@ -8,12 +59,10 @@
         <li>
           {{#link-to 'refsets'}}Refsets{{/link-to}}
         </li>
-        <li class="current">
+        <li>
           {{#link-to 'members'}}{{refsetName}}{{/link-to}}
         </li>
-        <!--li class="current">
-          <a href="#">{{title}}</a>
-        </li-->
+        <li class="current">Versions</li>
       </ul>
     </div>
   </nav>
@@ -29,19 +78,14 @@
     <!-- NAVIGATION -->
     <nav class="small-6 medium-8 columns navigation top">
       <div class="button-bar">
-        <ul class="button-group radius">
+        <ul class="button-group round">
           <li>{{#link-to 'members'  class="secondary button tiny members"}}Members{{/link-to}}</li>
           <li>{{#link-to 'versions' class="secondary button tiny versions disabled"}}Versions{{/link-to}}</li>
-        <li>
-        <a href="javascript:void(0)" class="secondary button tiny releases disabled">Releases (coming)</a>
-        <!--
-        {{#link-to 'releases' class="secondary button tiny releases disabled"}}Releases (coming){{/link-to}}
-        -->
-        </li>
-        <li>
-          <a href="javascript:void(0)" class="secondary button tiny releases disabled">Details (coming)</a>
-          <!--{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}-->
-        </li>
+          <li>{{#link-to 'releases' class="secondary button tiny versions"}}Releases{{/link-to}}</li>
+          <li>
+            <a href="javascript:void(0)" class="secondary button tiny releases disabled">Details (coming)</a>
+            <!--{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}-->
+          </li>
         </ul>
       </div>
     </nav>
@@ -98,7 +142,7 @@
                 <a href="http://disqus.com/websites/" target="_blank" class="icon"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-comment-o" title="Discuss"></span></a>
               </td-->
               <td class="publish action">
-                <a href="javascript:void(0)" class="icon"><span data-tooltip data-selector="publish" data-options="disable_for_touch:false" class="radius tip-right fa fa-rocket" title="Publish"></span></a>
+                <a href="javascript:void(0)" {{action 'createReleaseSetVersionPublicId' version}} data-reveal-id="createRelease" data-reveal class="icon"><span data-tooltip data-selector="publish" data-options="disable_for_touch:false" class="radius tip-right fa fa-rocket" title="Publish"></span></a>
                 <!--a href="javascript:void(0)" class="icon" data-reveal-id="publish-modal"><span data-tooltip data-options="disable_for_touch:false" class="fa fa-rocket" title="Publish"></span></a-->
               </td>           
               <!--td class="delete action">
