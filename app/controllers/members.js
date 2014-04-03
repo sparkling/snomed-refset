@@ -4,7 +4,7 @@ import Member from 'appkit/models/member';
 import Version from 'appkit/models/version';
 import baseUrl from 'appkit/utils/baseurl';
 
-export default Ember.ArrayController.extend({
+export default Ember.ObjectController.extend({
   needs: 'refset',
   version: '',
   alert: '',
@@ -25,6 +25,10 @@ export default Ember.ArrayController.extend({
   }.property('controllers.refset.model.pendingChanges'),
 
   //DOWNLOAD LINKS
+  downloadPopupText: function(){
+    return 'Download ' + this.get('memberSize') + ' members as ...';
+  }.property('members.size'),
+
   downloadJsonUrl: function(){
     return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.json';
   }.property('refsetName'),

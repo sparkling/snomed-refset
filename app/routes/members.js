@@ -13,5 +13,7 @@ export default Ember.Route.extend({
     controller.set('version', Version.create());
 
     controller.set('alert', '');
+
+    controller.set('model', model);
   }
 });

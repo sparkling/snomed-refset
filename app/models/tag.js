@@ -70,7 +70,7 @@ Tag.reopenClass({
     return tag;
   },    
 
-  createTag: function(refsetPublicId, tag, targetModel, alert, onSuccess, onError, _this) {
+  createTag: function(refsetPublicId, tag, alert, onSuccess, onError, _this) {
     Ember.Logger.log('Ajax: create tag');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -92,7 +92,7 @@ Tag.reopenClass({
     });
   },
 
-  deleteTag: function(refsetPublicId, tag, targetModel, alert, onSuccess, onError, _this){
+  deleteTag: function(refsetPublicId, tag, alert, onSuccess, onError, _this){
     Ember.Logger.log('Ajax: delete tag');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -106,7 +106,7 @@ Tag.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(tag, targetModel, success, alert, _this);
+        onSuccess(tag, success, alert, _this);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         onError(tag, error, alert, _this);

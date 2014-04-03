@@ -74,7 +74,7 @@
   <div class="small-6 medium-4 columns">
     <h2 class="subheader"><span>Members</span>
       <a style="margin-left: 0.5em; color: skyblue" data-options="align:bottom" href="javascript:void(0)" data-dropdown="download-dropdown">
-        <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download"  title="Export as..."></span>          
+        <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download"  {{bind-attr title="downloadPopupText"}}></span>          
       </a>
       <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
         <li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>

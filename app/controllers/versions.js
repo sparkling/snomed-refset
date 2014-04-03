@@ -44,7 +44,7 @@ export default Ember.ArrayController.extend({
         //alert.set('message', 'Unable to create new version. Message was: ' + errorResponse.responseText);
       };
 
-      Tag.createTag(this.get('refsetName'), this.get('release'), undefined, alert, onSuccess, onError, this);
+      Tag.createTag(this.get('refsetName'), this.get('release'), alert, onSuccess, onError, this);
       
     },    
   }

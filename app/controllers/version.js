@@ -12,17 +12,21 @@ export default Ember.ObjectController.extend({
   showDeleteMember: false,
 
   //DOWNLOAD LINKS
+  downloadPopupText: function(){
+    return 'Download ' + this.get('size') + ' members as ...';
+  }.property('size'),
+
   downloadJsonUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.json';
-  }.property('refsetName'),
+    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.json';
+  }.property('refsetName', 'publicId'),
 
   downloadXmlUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.xml';
-  }.property('refsetName'),
+    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.xml';
+  }.property('refsetName', 'publicId'),
 
   downloadRf2Url: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.rf2';
-  }.property('refsetName'), 
+    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.rf2';
+  }.property('refsetName', 'publicId'), 
 
   //ACTIONS
   actions: {
