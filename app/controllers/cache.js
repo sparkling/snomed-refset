@@ -1,4 +1,3 @@
-import Cache from 'appkit/models/cache';
 
 export default Ember.ObjectController.extend({
   members: '',
