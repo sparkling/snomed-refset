@@ -1,7 +1,6 @@
 import toEmberObject from 'appkit/utils/to_ember_object';
 import toType from 'appkit/utils/to_type';
 import baseUrl from 'appkit/utils/baseurl';
-import Cache from 'appkit/models/cache';
 
 //var baseUrl = 'https://refset-api.snomedtools.info/refsets';
 //var baseUrl = 'http://localhost:8080/refsets';

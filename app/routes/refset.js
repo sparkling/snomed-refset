@@ -1,5 +1,4 @@
 import Refset from 'appkit/models/refset';
-import Cache from 'appkit/models/cache';
 
 export default Ember.Route.extend({
   model: function(args) {
