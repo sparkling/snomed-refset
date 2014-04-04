@@ -15,7 +15,7 @@ var Member = Ember.Object.extend({
  
 Member.reopenClass({
 
-  delete: function(refsetPublicId, member, targetModel, alert, onSuccess, onError, _this){
+  delete: function(refsetPublicId, member, alert, onSuccess, onError, _this){
     Ember.Logger.log('Ajax: delete member');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -29,7 +29,7 @@ Member.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(member, targetModel, success, alert, _this);
+        onSuccess(member, success, alert, _this);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         onError(member, error, alert, _this);
@@ -37,7 +37,7 @@ Member.reopenClass({
     });
   },
   
-  addMembers: function(refsetPublicId, members, targetModel, alert, onSuccess, onError, _this) {
+  addMembers: function(refsetPublicId, members, alert, onSuccess, onError, _this) {
     Ember.Logger.log('Ajax: add member');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -51,7 +51,7 @@ Member.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(members, targetModel, success, alert, _this);
+        onSuccess(members, success, alert, _this);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         onError(members, error, alert, _this);
@@ -60,6 +60,7 @@ Member.reopenClass({
   },
 
   import: function(refsetPublicId, formElement, fileType, alert, onSuccess, onError, _this){
+    Ember.Logger.log('Ajax: Import');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         url: baseUrl() + '/' + refsetPublicId + '/members?type=file',
@@ -80,7 +81,7 @@ Member.reopenClass({
 
   getMembers: function(refsetPublicId, sortBy, sortOrder, _this) {
     var members = Ember.A();
-    Ember.Logger.log('GETing members for refset for: ' + refsetPublicId);
+    Ember.Logger.log('Ajax: Get members for refset ' + refsetPublicId);
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
@@ -92,9 +93,7 @@ Member.reopenClass({
         data: '',
         dataType: "json"
       }).then((function(success) {
-        //Ember.Logger.log('success: ' + JSON.stringify(success));
         var returned = toEmberObject(success);
-        //Ember.Logger.log('members found and parsed: ' + JSON.stringify(returned));
         members.pushObjects(returned.get('members'));
       }), function(error) {
         Ember.Logger.log('fail: ' + JSON.stringify(error));

@@ -24,32 +24,36 @@ export default Ember.ArrayController.extend({
         m.set('title', event.added.title);
         m.set('effective', window.moment().format("YYYYMMDD"));
         this.get('model').pushObject(m);
+        $('.concept-select2').select2('data', null);
       }
     },
     import: function(){
       Ember.Logger.log('Adding more members');
       var alert = Alert.create();
-      this.get('controllers.members').set('alert', alert);
+      this.set('controllers.members.alert', alert);
       alert.set('showUndo', false);
+      alert.set('onceSticky', true);
       
       //ON SUCCESS
-      var onSuccess = function(members, targetModel, successResponse, alert, _this){
+      var onSuccess = function(members, successResponse, alert, _this){
+        Ember.Logger.log('Import success');
         alert.set('isError', false);
         alert.set('message', 'Successfully added new members');
-        members.clear();
         _this.set('controllers.refset.model.pendingChanges', true);
+        _this.set('controllers.members.alert', alert);
         _this.transitionToRoute('members');
       };
 
       //ON ERROR
       var onError = function(members, errorResponse, alert, _this){
+        Ember.Logger.log('Import error');
         alert.set('isError', true);
         alert.set('message', 'Unable to add new members. Message was: ' + errorResponse.responseText);
+        _this.set('alert', alert);
       };
 
-      Member.addMembers(this.get(
-        'controllers.refset.model.publicId'), 
-        this.get('model'), undefined, alert, onSuccess, onError, this);
+      Member.addMembers(
+        this.get('controllers.refset.model.publicId'), this.get('model'), alert, onSuccess, onError, this);
     }  
   }
 });

@@ -58,9 +58,7 @@
         {{input type="text" name="publicId" value=publicId placeholder="Please give an internet address"}}
         <label class="preview">http://refset.snomedtool.com/refsets/{{publicId}}</label>
         {{#each e in error.fieldErrors.publicId }}
-          <div style="padding-top: 1.25em">
-            <span class="error">{{e}}</span>
-          </div>
+          <span class="error">{{e}}</span>
         {{/each}}        
       </div>
     </div>

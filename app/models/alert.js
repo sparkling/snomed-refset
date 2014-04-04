@@ -10,7 +10,6 @@ export default Ember.Object.extend({
   showUndo: true,
   undofunction: '',
   arguments: '', 
-  type: 'warning'
-
-
+  type: 'warning',
+  onceSticky: false
 });

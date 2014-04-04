@@ -4,30 +4,35 @@ import Member from 'appkit/models/member';
 import Version from 'appkit/models/version';
 import baseUrl from 'appkit/utils/baseurl';
 
-export default Ember.ObjectController.extend({
+export default Ember.ArrayController.extend({
   needs: 'refset',
-  version: '',
-  alert: '',
-  error: '',
-  members: '',
-  refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
+  
+  version:          undefined,
+  alert:            undefined,
+  error:            undefined,
+  memberSortyBy:    undefined, 
+  memberSortOrder:  undefined,
   showDeleteMember: true,
 
+  //ALIAS
+  refset:     Ember.computed.alias('controllers.refset.model'),
+  refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
+
   //DISPLAY FIELD SELECTIONS
-  showComponent: true,
+  showComponent:  true,
   showIdentifier: false,
-  showInactive: true,
-  showEffective: true,
-  showModule: true,
+  showInactive:   true,
+  showEffective:  true,
+  showModule:     true,
 
   hasPendingChanges: function(){
-    return this.get('controllers.refset.model.pendingChanges');
-  }.property('controllers.refset.model.pendingChanges'),
+    return this.get('refset.pendingChanges');
+  }.property('refset.pendingChanges'),
 
   //DOWNLOAD LINKS
   downloadPopupText: function(){
     return 'Download ' + this.get('memberSize') + ' members as ...';
-  }.property('members.size'),
+  }.property('memberSize'),
 
   downloadJsonUrl: function(){
     return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.json';
@@ -49,13 +54,20 @@ export default Ember.ObjectController.extend({
     },
 
     cancelCommitModal: function(){
+      $('#createVersionModal').foundation('reveal', 'close'); 
+    },
+
+    showCommitModal: function(){
       this.set('version', Version.create());
-      $('#createVersion').foundation('reveal', 'close'); 
+      this.set('error', undefined);
+      $('#createVersionModal').foundation('reveal', 'open'); 
     },
 
     sortMembers: function(sortBy, sortOrder){
       Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
-      this.set('members', Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this));
+      this.set('sortBy', sortBy);
+      this.set('sortOrder', sortOrder);
+      this.set('model', Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this));
     },    
 
     createVersion: function(){
@@ -64,28 +76,26 @@ export default Ember.ObjectController.extend({
 
       //ON SUCCESS
       var onSuccess = function(version, successResponse, alert, _this){
-        _this.set('alert', alert);
+        Ember.Logger.log('Create version success');
         alert.set('showUndo', false);
         alert.set('isError', false);
         alert.set('message', 'Successfully created new version');
-        _this.set('controllers.refset.model.pendingChanges', false);
-        _this.set('version', Version.create());
-        $('#createVersion').foundation('reveal', 'close');
+        _this.set('refset.pendingChanges', false);
+        _this.set('alert', alert);
+        $('#createVersionModal').foundation('reveal', 'close');
       };
 
       //ON ERROR
       var onError = function(version, errorResponse, alert, _this){
+        Ember.Logger.log('Create version fail');
         _this.set('error', toEmberObject(JSON.parse(errorResponse.responseText)));
-        //alert.set('isError', true);
-        //alert.set('message', 'Unable to create new version. Message was: ' + errorResponse.responseText);
       };
 
-      Version.createVersion(this.get('refsetName'), this.get('version'), undefined, alert, onSuccess, onError, this);
-      
+      Version.createVersion(this.get('refsetName'), this.get('version'), alert, onSuccess, onError, this);
     },
 
     delete: function(member){
-      Ember.Logger.log("Delete: member " + JSON.stringify(member));
+      Ember.Logger.log("Delete member");
       var alert = Alert.create();
       this.set('alert', alert);
 
@@ -93,7 +103,6 @@ export default Ember.ObjectController.extend({
       var undoArgs = Ember.A();
       undoArgs.pushObject(this.get('refsetName'));
       undoArgs.pushObject(member);
-      undoArgs.pushObject(this.get('members'));
       undoArgs.pushObject(this);
       alert.set('arguments', undoArgs);
 
@@ -101,19 +110,19 @@ export default Ember.ObjectController.extend({
       alert.set('undofunction', function(undoArgs, undoAlert){
         var refsetName    = undoArgs.objectAt(0);
         var deletedMember = undoArgs.objectAt(1);
-        var targetModel   = undoArgs.objectAt(2);
-        var _thisArg      = undoArgs.objectAt(3);
+        var _thisArg      = undoArgs.objectAt(2);
 
-        Ember.Logger.log('UNDO: Adding back: ' + deletedMember);
+        Ember.Logger.log('UNDO: Adding back: ' + deletedMember.get('publicId'));
 
         //UNDO: SUCCESS
-        var onSuccess = function(members, memberModel, success, undoAlert, _this){
+        var onSuccess = function(members, success, undoAlert, _this){
           Ember.Logger.log('Undo: success');
-          //memberModel.pushObject(members[0]);
           undoAlert.set('isError', false);
           undoAlert.set('showUndo', false);
           undoAlert.set('message', "Added back member with component '" + members[0].get('component.title') + "'");
-          _this.set('members', Member.getMembers(_this.get('refsetName'), "component.fullySpecifiedName", "ASC"));
+          //'target' points to the route; refresh refires beforeModel, model, and afterModel
+          //this.get('target').refresh();
+          _this.set('model', Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder')));
         };
         
         //UNDO: ERROR
@@ -126,16 +135,16 @@ export default Ember.ObjectController.extend({
 
         //UNDO: DO IT
         Ember.Logger.log('Undo: Adding member back in');
-        Member.addMembers(refsetName, [deletedMember], targetModel, undoAlert, onSuccess, onError, _thisArg);
+        Member.addMembers(refsetName, [deletedMember], undoAlert, onSuccess, onError, _thisArg);
       });
 
       //ON SUCCESS
-      var onSuccess = function(member, memberModel, success, alert, _this){
+      var onSuccess = function(member, success, alert, _this){
         Ember.Logger.log('Delete: success');
         alert.set('isError', false);
-        memberModel.removeObject(member);
-        _this.set('controllers.refset.model.pendingChanges', true);
+        _this.set('refset.pendingChanges', true);
         alert.set('message', "Removed member with component '" + member.get('component.title') + "'");
+        _this.set('model', Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder')));
       };
 
       //ON ERROR
@@ -146,7 +155,7 @@ export default Ember.ObjectController.extend({
       };
 
       //DO IT
-      Member.delete(this.get('refsetName'), member, this.get('members'), alert, onSuccess, onError, this);
+      Member.delete(this.get('refsetName'), member, alert, onSuccess, onError, this);
     }
   }
     //showModal: function(){

@@ -4,10 +4,12 @@ import Tag from 'appkit/models/tag';
 export default Ember.Route.extend({
   needs: 'refset',
 
+  model: function(){
+    return Version.getVersions(this.modelFor('refset').get('publicId'), this);
+  },
+
   setupController: function (controller, model) {
-    Ember.Logger.log("Loading versions for refset " + this.modelFor('refset').get('publicId'));
-    controller.set('model', Version.getVersions(this.modelFor('refset').get('publicId'), this));
-    controller.set('release', Tag.create());
-    controller.set('alert', '');
+    this._super(controller, model);  
+    controller.set('alert', undefined);
   }
 });

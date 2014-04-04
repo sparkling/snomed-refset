@@ -91,7 +91,7 @@ Version.reopenClass({
     return members;
   },    
 
-  createVersion: function(refsetPublicId, version, targetModel, alert, onSuccess, onError, _this) {
+  createVersion: function(refsetPublicId, version, alert, onSuccess, onError, _this) {
     Ember.Logger.log('Ajax: create version');
     Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({

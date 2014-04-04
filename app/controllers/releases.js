@@ -6,11 +6,13 @@ import toEmberObject from 'appkit/utils/to_ember_object';
 export default Ember.ArrayController.extend({
   needs: 'refset',
   alert: '',
+  sortBy: '',
+  sortOrder: '',
   refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
 
   actions:{
     delete: function(release){
-      Ember.Logger.log("Deleting release id " + release.publicId);
+      Ember.Logger.log("Deleting release");
       var alert = Alert.create();
       this.set('alert', alert);
 
@@ -27,7 +29,7 @@ export default Ember.ArrayController.extend({
         var deletedRelease = undoArgs.objectAt(1);
         var _this          = undoArgs.objectAt(2);
 
-        Ember.Logger.log('UNDO: Adding back: ' + deletedRelease.get('publicId'));
+        Ember.Logger.log('UNDO: Adding back release ' + deletedRelease.get('publicId'));
 
         //UNDO: SUCCESS
         var onSuccess = function(release, success, undoAlert, _this){
@@ -35,14 +37,15 @@ export default Ember.ArrayController.extend({
           undoAlert.set('isError', false);
           undoAlert.set('showUndo', false);
           undoAlert.set('message', "Added back release with id '" + release.get('publicId') + "'");
-          _this.set('model', Tag.getTags(_this.get('refsetName'), "title", "ASC", _this));
+          _this.set('model', Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this));
         };
         
         //UNDO: ERROR
         var onError = function(release, error, undoAlert, _this){
           Ember.Logger.log('Undo: error');
           undoAlert.set('isError', true);
-          undoAlert.set('message', 'Unable to add back release ' + release.get('publicId') + '. Message was: ' + error.responseText);
+          undoAlert.set('message', 'Unable to add back release ' + release.get('publicId') + 
+            '. Message was: ' + error.responseText);
         };
 
         //UNDO: DO IT
@@ -54,21 +57,20 @@ export default Ember.ArrayController.extend({
       var onSuccess = function(release, success, alert, _this){
         Ember.Logger.log('Delete: success');
         alert.set('isError', false);
-        _this.set('model', Tag.getTags(_this.get('refsetName'), "title", "ASC", _this));
         alert.set('message', "Removed release with name '" + release.get('title') + "'");
+        _this.set('model', Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this));
       };
 
       //ON ERROR
       var onError = function(release, error, alert, _this){
         Ember.Logger.log('Delete: error');
         alert.set('isError', true);
-        alert.set('message', "Unable to delete release with name '" + release.get('title') + "'. Message was: " + error.responseText);
+        alert.set('message', "Unable to delete release with name '" + release.get('title') + 
+          "'. Message was: " + error.responseText);
       };
 
       //DO IT
       Tag.deleteTag(this.get('refsetName'), release, alert, onSuccess, onError, this);
-    },
-
-
+    }
   }
 });

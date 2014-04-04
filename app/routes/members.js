@@ -1,19 +1,24 @@
 import Member from 'appkit/models/member';
 import Version from 'appkit/models/version';
+import Refset from 'appkit/models/refset';
 
 export default Ember.Route.extend({
-  needs: 'refset',
+  model: function() {
+    return Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", this);
+  },
 
   setupController: function (controller, model) {
-    Ember.Logger.log("Loading members for refset " + this.modelFor('refset').get('publicId'));
-    
-    controller.set('members', 
-      Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", this));
-    
-    controller.set('version', Version.create());
+    this._super(controller, model);
+    controller.set('sortBy', "component.fullySpecifiedName");
+    controller.set('sortOrder', 'ASC');
 
-    controller.set('alert', '');
-
-    controller.set('model', model);
+    //Display the Import alert, but only one time
+    if (typeof controller.get('alert') !== 'undefined') {
+      if (!controller.get('alert.onceSticky')){
+        controller.set('alert', undefined);
+      }else{
+        controller.set('alert.onceSticky', false);        
+      }
+    }
   }
 });

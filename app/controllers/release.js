@@ -4,11 +4,11 @@ import Member  from 'appkit/models/member';
 import baseUrl from 'appkit/utils/baseurl';
 
 export default Ember.ObjectController.extend({
-  needs: 'refset',
-  alert: '',
-  members: '',
-  refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
-  refset: Ember.computed.alias('controllers.refset.model'),
+  needs:            'refset',
+  alert:            undefined,
+  members:          '',
+  refsetName:       Ember.computed.alias('controllers.refset.model.publicId'),
+  refset:           Ember.computed.alias('controllers.refset.model'),
   showDeleteMember: false,
 
   downloadPopupText: function(){

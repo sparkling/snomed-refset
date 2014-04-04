@@ -23,8 +23,8 @@
   <!-- ****** -->
   <div class="row file">
     <!-- FILE FORMAT -->
-    <div class="small-4 medium-3 columns file-format">
-      <label {{bind-attr class=":form-group error.fieldErrors.fileType:has-error"}}>1. Choose Format</label>
+    <div class="small-4 medium-3 columns file-format field">
+      <label {{bind-attr class=":form-group error.fieldErrors.fileType:error"}}>1. Choose Format</label>
       {{view 'form-select'
                   name="fileType"
                   viewName="select"
@@ -35,15 +35,15 @@
                   classNames="dropdown"
                   }}
       {{#each e in error.fieldErrors.fileType }}
-        <span class="help-block">{{e}}</span>
+        <span class="error">{{e}}</span>
       {{/each}}                  
     </div><!-- columns file-format -->
     <!-- UPLOAD -->
-    <div class="small-8 medium-9 columns file-selection">
-      <label {{bind-attr class=":form-group error.fieldErrors.file:has-error"}}>2. Select File</label>
+    <div class="small-8 medium-9 columns file-selection field">
+      <label {{bind-attr class=":form-group error.fieldErrors.file:error"}}>2. Select File</label>
       <input type="file" id="import-file" name="file">
       {{#each e in error.fieldErrors.file }}
-        <span class="help-block">{{e}}</span>
+        <span class="error">{{e}}</span>
       {{/each}}
     </div><!-- columns file-selection -->
   </div><!-- row file -->
