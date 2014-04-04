@@ -14,8 +14,7 @@ var Refset = Ember.Object.extend({
   snomedReleaseDate: '',
   snomedExtension:   '',
   refsetConcept:     '',
-  moduleConcept:     '',
-  cache:             Cache.create()
+  moduleConcept:     ''
 
 });
  
