@@ -2,6 +2,8 @@ import Resolver from 'ember/resolver';
 import registerComponents from './initializers/register_components';
 
 var App = Ember.Application.extend({
+  needs: 'cache',
+
   LOG_ACTIVE_GENERATION: true,
   LOG_MODULE_RESOLVER: true,
   LOG_TRANSITIONS: true,

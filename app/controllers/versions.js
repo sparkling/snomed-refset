@@ -5,7 +5,7 @@ import toEmberObject from 'appkit/utils/to_ember_object';
 
 
 export default Ember.ArrayController.extend({
-  needs: 'refset',
+  needs: ['refset', 'cache'],
   
   release:    undefined,
   alert:      undefined,

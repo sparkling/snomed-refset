@@ -4,7 +4,11 @@ import Refset from 'appkit/models/refset';
 
 export default Ember.Route.extend({
   model: function() {
-    return Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", this);
+    var cache = this.controllerFor('cache');
+    if (cache.get('members').length === 0){
+      cache.set('members', Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", this));
+    }
+    return cache.get('members');
   },
 
   setupController: function (controller, model) {

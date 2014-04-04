@@ -4,7 +4,7 @@ import Alert from 'appkit/models/alert';
 export default Ember.ArrayController.extend({
   error: '',
   alert: '',
-  needs: ['refset','members'],
+  needs: ['refset','members', 'cache'],
 
   hasContent: function(){
     //Ember.Logger.log('model is size ' + this.get('model').length);
@@ -41,6 +41,7 @@ export default Ember.ArrayController.extend({
         alert.set('message', 'Successfully added new members');
         _this.set('controllers.refset.model.pendingChanges', true);
         _this.set('controllers.members.alert', alert);
+        _this.set('controllers.cache.members', Ember.A());
         _this.transitionToRoute('members');
       };
 

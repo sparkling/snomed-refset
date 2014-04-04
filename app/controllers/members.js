@@ -5,7 +5,7 @@ import Version from 'appkit/models/version';
 import baseUrl from 'appkit/utils/baseurl';
 
 export default Ember.ArrayController.extend({
-  needs: 'refset',
+  needs: ['refset', 'cache'],
   
   version:          undefined,
   alert:            undefined,
@@ -67,7 +67,9 @@ export default Ember.ArrayController.extend({
       Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
       this.set('sortBy', sortBy);
       this.set('sortOrder', sortOrder);
-      this.set('model', Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this));
+      var sorted = Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this);
+      this.set('controllers.cache.members', sorted);
+      this.set('model', sorted);
     },    
 
     createVersion: function(){
@@ -122,7 +124,9 @@ export default Ember.ArrayController.extend({
           undoAlert.set('message', "Added back member with component '" + members[0].get('component.title') + "'");
           //'target' points to the route; refresh refires beforeModel, model, and afterModel
           //this.get('target').refresh();
-          _this.set('model', Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder')));
+          var refreshed = Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'));
+          _this.set('controllers.cache.members', refreshed);
+          _this.set('model', refreshed);
         };
         
         //UNDO: ERROR
@@ -144,7 +148,9 @@ export default Ember.ArrayController.extend({
         alert.set('isError', false);
         _this.set('refset.pendingChanges', true);
         alert.set('message', "Removed member with component '" + member.get('component.title') + "'");
-        _this.set('model', Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder')));
+        var members = Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'));
+        _this.set('controllers.cache.members', members);
+        _this.set('model', members);
       };
 
       //ON ERROR

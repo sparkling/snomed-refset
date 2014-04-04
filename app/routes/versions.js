@@ -2,10 +2,12 @@ import Version from 'appkit/models/version';
 import Tag from 'appkit/models/tag';
 
 export default Ember.Route.extend({
-  needs: 'refset',
-
   model: function(){
-    return Version.getVersions(this.modelFor('refset').get('publicId'), this);
+    var cache = this.controllerFor('cache');
+    if (cache.get('versions').length === 0){
+      cache.set('versions', Version.getVersions(this.modelFor('refset').get('publicId'), this));
+    }
+    return cache.get('versions');
   },
 
   setupController: function (controller, model) {

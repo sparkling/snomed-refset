@@ -4,7 +4,11 @@ export default Ember.Route.extend({
   needs: 'refset',
 
   model: function(){
-    return Tag.getTags(this.modelFor('refset').get('publicId'), "title", "ASC", this);
+    var cache = this.controllerFor('cache');
+    if (cache.get('releases').length === 0){
+      cache.set('releases', Tag.getTags(this.modelFor('refset').get('publicId'), "title", "ASC", this));
+    }
+    return cache.get('releases');
   },
 
   setupController: function(controller, model){

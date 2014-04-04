@@ -3,7 +3,7 @@ import Member from 'appkit/models/member';
 import Alert from 'appkit/models/alert';
 
 export default Ember.Controller.extend({
-  needs: ['refset','members'],
+  needs: ['refset','members', 'cache'],
 
   error: undefined,
   alert: undefined,
@@ -29,6 +29,7 @@ export default Ember.Controller.extend({
         alert.set('message', "Successfully imported members from file");
         _this.set('controllers.refset.model.pendingChanges', true);
         _this.set('controllers.members.alert', alert);
+        _this.set('controllers.cache.members', Ember.A());
         _this.transitionToRoute('members');
       };
 

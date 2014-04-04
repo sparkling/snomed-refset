@@ -4,7 +4,7 @@ import toEmberObject from 'appkit/utils/to_ember_object';
 
 
 export default Ember.ArrayController.extend({
-  needs: 'refset',
+  needs: ['refset', 'cache'],
   alert: '',
   sortBy: '',
   sortOrder: '',
@@ -37,7 +37,9 @@ export default Ember.ArrayController.extend({
           undoAlert.set('isError', false);
           undoAlert.set('showUndo', false);
           undoAlert.set('message', "Added back release with id '" + release.get('publicId') + "'");
-          _this.set('model', Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this));
+          var tags = Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this);
+          _this.set('controllers.cache.releases', tags);
+          _this.set('model', tags);
         };
         
         //UNDO: ERROR
@@ -58,7 +60,9 @@ export default Ember.ArrayController.extend({
         Ember.Logger.log('Delete: success');
         alert.set('isError', false);
         alert.set('message', "Removed release with name '" + release.get('title') + "'");
-        _this.set('model', Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this));
+        var tags = Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this);
+        _this.set('controllers.cache.releases', tags);
+        _this.set('model', tags);
       };
 
       //ON ERROR
