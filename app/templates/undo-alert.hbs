@@ -5,13 +5,18 @@
     <div data-alert {{bind-attr class=":alert-box :radius type"}}>
       {{message}} 
       <span class="actions">
+        {{#if showGoto}}
+          <a href="javascript:void(0)" {{action 'goto'}} class="icon goto" style="padding-right: 0.35em">
+            <span data-tooltip data-selector="goto" data-options="disable_for_touch:false" {{bind-attr title=gotoTitle}} class="radius fa fa-hand-o-right"></span>
+          </a>
+        {{/if}}      
         {{#if showUndo}}
           <a href="javascript:void(0)" {{action 'undo'}} class="icon undo" style="padding-right: 0.25em">
-            <span data-tooltip data-options="disable_for_touch:false" title="Undo" class="fa fa-undo"></span>
+            <span data-tooltip data-selector="undo" data-options="disable_for_touch:false" title="Undo" class="radius fa fa-undo"></span>
           </a>
         {{/if}}
         <a href="javascript:void(0)" {{action 'resetAlert'}} class="icon close-alert">
-          <span data-tooltip data-options="disable_for_touch:false" title="Accept" class="fa fa-check"></span>
+          <span data-tooltip data-selector="accept" data-options="disable_for_touch:false" title="Accept" class="radius fa fa-check"></span>
         </a>
       </span>
     </div>

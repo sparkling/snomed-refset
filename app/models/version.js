@@ -13,9 +13,8 @@ var Version = Ember.Object.extend({
 Version.reopenClass({
 
   getVersions: function(refsetPublicId, _this) {
-    var versions = Ember.A();
     Ember.Logger.log('Ajax: get versions');
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -27,21 +26,19 @@ Version.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        var returned = toEmberObject(success);
-        versions.pushObjects(returned.get('versions'));
+        return Ember.A(toEmberObject(success).get('versions'));
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
         _this.set('response', toEmberObject(JSON.parse(error.responseText)));
       }));
     });
-    return versions;
+
   },
 
   getVersion: function(refsetPublicId, versionPublicId, _this) {
     Ember.Logger.log('Ajax: get version');
-    var version = Version.create();
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -53,22 +50,18 @@ Version.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        var returned = toEmberObject(success);
-        version.setProperties(returned);
+        return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
         _this.set('error', toEmberObject(JSON.parse(error.responseText)));
       }));
     });
-    return version;
   },  
-
 
   getMembers: function(refsetPublicId, versionPublicId, sortBy, sortOrder, _this) {
     Ember.Logger.log('Ajax: get members');
-    var members = Ember.A();
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -80,15 +73,13 @@ Version.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        var returned = toEmberObject(success);
-        members.pushObjects(returned.get('members'));
+        return Ember.A(toEmberObject(success).get('members'));
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
         _this.set('error', toEmberObject(JSON.parse(error.responseText)));
       }));
     });
-    return members;
   },    
 
   createVersion: function(refsetPublicId, version, alert, onSuccess, onError, _this) {
@@ -105,14 +96,13 @@ Version.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(version, success, alert, _this);
+        onSuccess(toEmberObject(success), success, alert, _this);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         onError(version, error, alert, _this);
       }));
     });
-  },
-   
+  }
 });
 
 export default Version;

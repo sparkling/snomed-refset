@@ -31,7 +31,7 @@ export default Ember.ArrayController.extend({
 
   //DOWNLOAD LINKS
   downloadPopupText: function(){
-    return 'Download ' + this.get('memberSize') + ' members as ...';
+    return 'Download ' + this.get('refset.memberSize') + ' members as ...';
   }.property('memberSize'),
 
   downloadJsonUrl: function(){
@@ -78,12 +78,21 @@ export default Ember.ArrayController.extend({
 
       //ON SUCCESS
       var onSuccess = function(version, successResponse, alert, _this){
-        Ember.Logger.log('Create version success');
+        Ember.Logger.log('Create version success: ' + JSON.stringify(version));
         alert.set('showUndo', false);
         alert.set('isError', false);
-        alert.set('message', 'Successfully created new version');
+        alert.set('message', "Successfully created new version '" + version.get('publicId') + "'");
+
+        //Goto
+        alert.set('showGoto', true);
+        alert.set('gotoTitle', "Go to '" + version.get('publicId') + "'");
+        alert.set('isDynamicGotoRoute', true);
+        alert.set('gotoDynamicParam', version.get('publicId'));
+        alert.set('gotoTransition', 'version');
+
         _this.set('refset.pendingChanges', false);
         _this.set('alert', alert);
+        _this.set('controllers.cache.versions', Ember.A());
         $('#createVersionModal').foundation('reveal', 'close');
       };
 
@@ -94,6 +103,10 @@ export default Ember.ArrayController.extend({
       };
 
       Version.createVersion(this.get('refsetName'), this.get('version'), alert, onSuccess, onError, this);
+
+      setTimeout(function(){
+          Em.$(document).foundation();
+      }, 250);      
     },
 
     delete: function(member){
@@ -162,6 +175,10 @@ export default Ember.ArrayController.extend({
 
       //DO IT
       Member.delete(this.get('refsetName'), member, alert, onSuccess, onError, this);
+
+      setTimeout(function(){
+          Em.$(document).foundation();
+      }, 250);
     }
   }
     //showModal: function(){

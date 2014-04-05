@@ -46,17 +46,6 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="field publicid small-12 medium-10 large-8 columns">
-          <label {{bind-attr class="error.fieldErrors.publicId:error"}}>Internet address</label>
-          {{input type="text" name="publicId" value=version.publicId placeholder="Please give an internet address"}}
-          <label class="preview">http://refset.snomedtool.com/refsets/{{refsetName}}/{{version.publicId}}</label>
-          {{#each e in error.fieldErrors.publicId }}
-            <span class="error">{{e}}</span>
-          {{/each}}        
-        </div>
-      </div>
-
       <div class="row action main bottom">
         <div class="small-12 columns">
           <button type="submit" class="button radius small">Create Version</button>

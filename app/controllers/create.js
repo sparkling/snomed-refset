@@ -3,7 +3,7 @@ import Concept from 'appkit/models/concept';
 
 export default Ember.ObjectController.extend({
   error: 'none',
-  needs: 'refsets',
+  needs: ['refsets', 'cache'],
 
   findConceptModalId: 'find-concept-modal',
 
@@ -64,6 +64,9 @@ export default Ember.ObjectController.extend({
     },    
     save: function() {
       Ember.Logger.log('Creating refset');
+      this.set('controllers.cache.members', Ember.A());
+      this.set('controllers.cache.versions', Ember.A());
+      this.set('controllers.cache.releases', Ember.A());
       return this.set('error', Refsets.createRefset(this.get('model'), this));
     }
     //selected: function(concept){

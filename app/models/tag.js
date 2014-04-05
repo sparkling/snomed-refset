@@ -16,9 +16,8 @@ var Tag = Ember.Object.extend({
 Tag.reopenClass({
 
   getTags: function(refsetPublicId, sortBy, sortOrder, _this) {
-    var tags = Ember.A();
     Ember.Logger.log('Ajax: get tags');
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -30,21 +29,18 @@ Tag.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        var returned = toEmberObject(success);
-        tags.pushObjects(returned.get('tags'));
+        return Ember.A(toEmberObject(success).get('tags'));
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
         _this.set('response', toEmberObject(JSON.parse(error.responseText)));
       }));
     });
-    return tags;
   },    
 
-  getRelease: function(refsetPublicId, releasePublicId, onSuccess, _this) {
+  getRelease: function(refsetPublicId, releasePublicId, _this) {
     Ember.Logger.log('Ajax: get release');
-    var tag = Tag.create();
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -56,61 +52,52 @@ Tag.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        var returned = toEmberObject(success);
-        tag.setProperties(returned);
-        if(typeof onSuccess !== 'undefined'){
-          onSuccess(tag, _this);
-        }
+        return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
         _this.set('error', toEmberObject(JSON.parse(error.responseText)));
       }));
     });
-    return tag;
   },    
 
   createTag: function(refsetPublicId, tag, alert, onSuccess, onError, _this) {
     Ember.Logger.log('Ajax: create tag');
-    Ember.Deferred.promise(function(p) {
-      return p.resolve($.ajax({
-        headers: {
-          Accept: "application/json; charset=utf-8",
-                  "Content-Type": "application/json; charset=utf-8"
-        },
-        url: baseUrl() + "/" + refsetPublicId + "/tags",
-        type: "POST",
-        data: JSON.stringify(tag),
-        dataType: "json"
-      }).then((function(success) {
-        Ember.Logger.log('Ajax: success');
-        onSuccess(tag, success, alert, _this);
-      }), function(error) {
-        Ember.Logger.log('Ajax: error');
-        onError(tag, error, alert, _this);
-      }));
+    $.ajax({
+      headers: {
+        Accept: "application/json; charset=utf-8",
+                "Content-Type": "application/json; charset=utf-8"
+      },
+      url: baseUrl() + "/" + refsetPublicId + "/tags",
+      type: "POST",
+      data: JSON.stringify(tag),
+      dataType: "json"
+    }).then((function(success) {
+      Ember.Logger.log('Ajax: success');
+      onSuccess(tag, success, alert, _this);
+    }), function(error) {
+      Ember.Logger.log('Ajax: error');
+      onError(tag, error, alert, _this);
     });
   },
 
   deleteTag: function(refsetPublicId, tag, alert, onSuccess, onError, _this){
     Ember.Logger.log('Ajax: delete tag');
-    Ember.Deferred.promise(function(p) {
-      return p.resolve($.ajax({
-        headers: {
-          Accept: "application/json; charset=utf-8",
-                  "Content-Type": "application/json; charset=utf-8"
-        },
-        url: baseUrl() + "/" + refsetPublicId + "/tag/" + tag.get('publicId'),
-        type: "DELETE",
-        data: '',
-        dataType: "json"
-      }).then((function(success) {
-        Ember.Logger.log('Ajax: success');
-        onSuccess(tag, success, alert, _this);
-      }), function(error) {
-        Ember.Logger.log('Ajax: error');
-        onError(tag, error, alert, _this);
-      }));
+    $.ajax({
+      headers: {
+        Accept: "application/json; charset=utf-8",
+                "Content-Type": "application/json; charset=utf-8"
+      },
+      url: baseUrl() + "/" + refsetPublicId + "/tag/" + tag.get('publicId'),
+      type: "DELETE",
+      data: '',
+      dataType: "json"
+    }).then((function(success) {
+      Ember.Logger.log('Ajax: success');
+      onSuccess(tag, success, alert, _this);
+    }), function(error) {
+      Ember.Logger.log('Ajax: error');
+      onError(tag, error, alert, _this);
     });
   },  
    

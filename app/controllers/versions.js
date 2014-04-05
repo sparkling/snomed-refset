@@ -37,6 +37,14 @@ export default Ember.ArrayController.extend({
         _this.set('alert', alert);
         alert.set('showUndo', false);
         alert.set('isError', false);
+
+        //Goto
+        alert.set('showGoto', true);
+        alert.set('gotoTitle', "Go to '" + tag.get('publicId') + "'");
+        alert.set('isDynamicGotoRoute', true);
+        alert.set('gotoDynamicParam', tag.get('publicId'));
+        alert.set('gotoTransition', 'release');
+
         alert.set('message', "Successfully created new release for version '" + _this.get('release.snapshot.title') + "'");
         $('#createRelease').foundation('reveal', 'close');
       };
@@ -45,6 +53,10 @@ export default Ember.ArrayController.extend({
         _this.set('error', toEmberObject(JSON.parse(errorResponse.responseText)));
       };
       Tag.createTag(this.get('refsetName'), this.get('release'), alert, onSuccess, onError, this);
+
+      setTimeout(function(){
+          Em.$(document).foundation();
+      }, 250);
     }
   }
 });
