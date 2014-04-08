@@ -22,7 +22,7 @@
   </nav>
 </header>
 
-<section class="version">
+<section class="release">
   <!-- HEADING -->
   <header class="sub">
     <div class="row">
@@ -62,7 +62,6 @@
   <!-- ********** -->
   <section id="alerts">
     {{render 'undo-alert' alert}}
-  </section>  
-
-  {{members-list sortMembers="sortMembers" showDeleteMember=showDeleteMember members=members}}
+  </section> 
+{{members-list showDeleteMember=showDeleteMember members=members pageSize=pageSize totalItems=snapshot.size sortMembers="sortMembers" page="page"}}
 </section>

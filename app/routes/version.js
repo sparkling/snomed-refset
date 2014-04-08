@@ -11,7 +11,10 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     this._super(controller, model);
-    Version.getMembers(this.modelFor('refset').get('publicId'), model.get('publicId'), "component.fullySpecifiedName", "ASC", this).
+    controller.set('sortBy', "component.fullySpecifiedName");
+    controller.set('sortOrder', 'ASC');
+        
+    Version.getMembers(this.modelFor('refset').get('publicId'), model.get('publicId'), "component.fullySpecifiedName", "ASC", 0, 10, this).
       then(function(members){
         controller.set('members', members);
       });

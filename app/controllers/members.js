@@ -10,13 +10,15 @@ export default Ember.ArrayController.extend({
   version:          undefined,
   alert:            undefined,
   error:            undefined,
-  memberSortyBy:    undefined, 
-  memberSortOrder:  undefined,
+  sortyBy:          undefined, 
+  sortOrder:        undefined,
   showDeleteMember: true,
+  pageSize:         10, //how many items are displayed on one page?s
 
   //ALIAS
   refset:     Ember.computed.alias('controllers.refset.model'),
   refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
+  memberSize: Ember.computed.alias('controllers.refset.model.memberSize'),
 
   //DISPLAY FIELD SELECTIONS
   showComponent:  true,
@@ -63,11 +65,18 @@ export default Ember.ArrayController.extend({
       $('#createVersionModal').foundation('reveal', 'open'); 
     },
 
+    page: function(page){
+      Ember.Logger.log('Displaying page ' + page);
+      var pageResult = Member.getMembers(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), page - 1, this.get('pageSize'), this);
+      this.set('controllers.cache.members', pageResult);
+      this.set('model', pageResult);      
+    },
+
     sortMembers: function(sortBy, sortOrder){
       Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
       this.set('sortBy', sortBy);
       this.set('sortOrder', sortOrder);
-      var sorted = Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this);
+      var sorted = Member.getMembers(this.get('refsetName'), sortBy, sortOrder, 0, this.get('pageSize'), this);
       this.set('controllers.cache.members', sorted);
       this.set('model', sorted);
     },    
@@ -137,7 +146,7 @@ export default Ember.ArrayController.extend({
           undoAlert.set('message', "Added back member with component '" + members[0].get('component.title') + "'");
           //'target' points to the route; refresh refires beforeModel, model, and afterModel
           //this.get('target').refresh();
-          var refreshed = Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'));
+          var refreshed = Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), 0, this.get('pageSize'), this);
           _this.set('controllers.cache.members', refreshed);
           _this.set('model', refreshed);
         };
@@ -161,7 +170,7 @@ export default Ember.ArrayController.extend({
         alert.set('isError', false);
         _this.set('refset.pendingChanges', true);
         alert.set('message', "Removed member with component '" + member.get('component.title') + "'");
-        var members = Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'));
+        var members = Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), 0, this.get('pageSize'), this);
         _this.set('controllers.cache.members', members);
         _this.set('model', members);
       };

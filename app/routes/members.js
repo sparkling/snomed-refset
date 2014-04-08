@@ -10,7 +10,8 @@ export default Ember.Route.extend({
 
     var cache = this.controllerFor('cache');
     if (cache.get('members').length === 0){
-      cache.set('members', Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", this));
+      cache.set('members', Member.getMembers(this.modelFor('refset').get('publicId'), 
+        "component.fullySpecifiedName", "ASC", 0, 10, this));
     }
     return cache.get('members');
   },

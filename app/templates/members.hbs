@@ -77,10 +77,6 @@
     <div class="button-bar">
       <ul class="button-group round">
         <li>
-          <a href="javascript:void(0)" class="secondary button tiny releases disabled">Refset (coming)</a>
-          <!--{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}-->
-        </li>
-        <li>
           <a href="javascript:void(0)" class="secondary button tiny releases disabled">Rules (coming)</a>
           <!--{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}-->
         </li>        
@@ -118,8 +114,7 @@
   {{/if}}
   {{render 'undo-alert' alert}}
 </section>  
-
-{{members-list showDeleteMember=showDeleteMember members=model sortMembers="sortMembers" deleteMember="delete"}}
+{{members-list showDeleteMember=showDeleteMember members=model pageSize=pageSize totalItems=memberSize page="page" sortMembers="sortMembers" deleteMember="delete"}}
   
 <!-- MAIN ACTION -->
 <div class="main action pagination row bottom">

@@ -38,6 +38,8 @@ export default Ember.ArrayController.extend({
         alert.set('showUndo', false);
         alert.set('isError', false);
 
+        _this.set('controllers.cache.releases', Ember.A());
+
         //Goto
         alert.set('showGoto', true);
         alert.set('gotoTitle', "Go to '" + tag.get('publicId') + "'");

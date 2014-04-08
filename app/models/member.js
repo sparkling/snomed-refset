@@ -74,7 +74,7 @@ Member.reopenClass({
 
 
   //FIXME: Need to return a promise here, but that will break the cache handling in the route...
-  getMembers: function(refsetPublicId, sortBy, sortOrder, _this) {
+  getMembers: function(refsetPublicId, sortBy, sortOrder, pageIndex, pageSize, _this) {
     var members = Ember.A();
     Ember.Logger.log('Ajax: Get members for refset ' + refsetPublicId);
     Ember.Deferred.promise(function(p) {
@@ -83,7 +83,7 @@ Member.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder,
+        url: baseUrl() + "/" + refsetPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize,
         type: "GET",
         data: '',
         dataType: "json"

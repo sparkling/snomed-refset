@@ -56,7 +56,7 @@
             {{#each component in model}}
               <tr>
                 <td class="title">
-                  <a href="javascript:void(0)">{{component.title}}</a>
+                  {{component-link component.component}}
                 </td>
                 <td class="delete">
                   <a href="javascript:void(0)" {{action "delete" component}} class="icon"><span class="fa fa-trash-o"></span></a>
