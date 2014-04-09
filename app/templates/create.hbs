@@ -98,7 +98,7 @@
     <div class="row">
       <div class="field module small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.moduleConcept:error"}}>Default Module</label>
-        {{select-two action="changeModuleConcept" identifier=moduleSelectId}}
+        {{select-two action="changeModuleConcept" identifier=moduleSelectId version_flavour=snomedExtension version_date=snomedReleaseDate}}
         {{#each e in error.fieldErrors.moduleConcept}}
           <span class="error">{{e}}</span>
         {{/each}}        
@@ -117,7 +117,7 @@
         </dl-->
         <!--div class="tabs-content">
           <div class="content active" id="panel-choose"-->
-          {{select-two action="changeRefsetConcept" identifier=refsetConceptSelectId}}
+          {{select-two action="changeRefsetConcept" identifier=refsetConceptSelectId version_flavour=snomedExtension version_date=snomedReleaseDate}}
           <!--/div>
           <div class="content" id="panel-new">
             <p style="color: grey">Coming soon...</p>

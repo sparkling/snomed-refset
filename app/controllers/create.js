@@ -25,9 +25,8 @@ export default Ember.ObjectController.extend({
     { label: "Denmark (coming)", key: "DK" }
   ],
   selectReleaseDate: [
-    { label: "January 31st, 2014", key: "20140131"},
-    { label: "July 31st, 2013",  key: "20130731" },
-    { label: "January 1st, 2013 (coming)",  key: "20130101" },
+    { label: "January 31st, 2014", key: "2014-01-31"},
+    { label: "July 31st, 2013",  key: "2013-07-31" }
   ],
 
 

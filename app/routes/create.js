@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     var r = Refset.create();
     r.set('source', 'LIST');
     r.set('type', 'CONCEPT');
-    r.set('snomedReleaseDate', '20130731');
+    r.set('snomedReleaseDate', '2014-01-31');
     r.set('snomedExtension', 'INTERNATIONAL');
     return r;
   }

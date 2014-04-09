@@ -2,6 +2,8 @@ export default Ember.Component.extend({
   layoutName: 'select2',
   identifier: 'identifier-must-be-set',
   searchType: 'full',
+  version_flavour: '',
+  version_date: '',
   displayHelp: false,
 
   isFullSearch: function(){
@@ -84,15 +86,19 @@ export default Ember.Component.extend({
               Ember.Logger.log('In data. Page is ' + page);
               var field = (_this.get('searchType') === 'smart') ? 'title' : 'exact_title';
               var modifiedTerm = term;
+              var sort = '';
               if (_this.get('searchType') === 'full'){
                 modifiedTerm = modifiedTerm.replace(/\ /g, "\\ ");
                 Ember.Logger.log('Original: ' + term + ", modified: " + modifiedTerm);
                 modifiedTerm = modifiedTerm + '*';
+                sort = 'title_length asc';
               }
               Ember.Logger.log('Field is ' + field + '. Query is ' + modifiedTerm);
               return {
-                  q: field + ':' + modifiedTerm + ' AND active:true',
+                  //q: field + ':' + modifiedTerm + ' AND active:true',
+                  q: field + ':' + modifiedTerm + ' AND active:true AND version_flavour:' + _this.get('version_flavour') + ' AND version_date:' + _this.get('version_date'),
                   start: (page - 1) * 10,
+                  sort: sort,
                   rows: 10,
                   wt: 'json',
                   indent: true
