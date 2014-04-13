@@ -63,9 +63,9 @@ export default Ember.ObjectController.extend({
     },    
     save: function() {
       Ember.Logger.log('Creating refset');
-      this.set('controllers.cache.members', Ember.A());
-      this.set('controllers.cache.versions', Ember.A());
-      this.set('controllers.cache.releases', Ember.A());
+      this.set('controllers.cache.membersPage', '');
+      this.set('controllers.cache.versionsPage', '');
+      this.set('controllers.cache.releasesPage', '');
       return this.set('error', Refsets.createRefset(this.get('model'), this));
     }
     //selected: function(concept){

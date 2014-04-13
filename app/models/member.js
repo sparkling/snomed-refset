@@ -74,28 +74,31 @@ Member.reopenClass({
 
 
   //FIXME: Need to return a promise here, but that will break the cache handling in the route...
-  getMembers: function(refsetPublicId, sortBy, sortOrder, pageIndex, pageSize, _this) {
-    var members = Ember.A();
+  getMembers: function(refsetPublicId, sortBy, sortOrder, filter, pageIndex, pageSize, _this) {
     Ember.Logger.log('Ajax: Get members for refset ' + refsetPublicId);
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize,
+        url: baseUrl() + "/" + refsetPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&filter=" + filter + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize,
         type: "GET",
         data: '',
         dataType: "json"
       }).then((function(success) {
-        var returned = toEmberObject(success);
-        members.pushObjects(returned.get('members'));
+        Ember.Logger.log('Ajax: success');
+        //var page = Ember.Object.create();
+        //page.set('totalSize', success.totalSize);
+        //page.set('members', Ember.A(toEmberObject(success).get('members')));
+        //return page;
+        return toEmberObject(success);
       }), function(error) {
+        Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
         _this.set('response', toEmberObject(JSON.parse(error.responseText)));
       }));
     });
-    return members;
   },   
 });
 

@@ -16,9 +16,9 @@ export default Ember.Route.extend({
     controller.set('sortBy', "component.fullySpecifiedName");
     controller.set('sortOrder', 'ASC');
 
-    Version.getMembers(this.modelFor('refset').get('publicId'), model.get('snapshot.publicId'), "component.fullySpecifiedName", "ASC", 0, 10, this).
-      then(function(members){
-        controller.set('members', members);
+    Version.getMembers(this.modelFor('refset').get('publicId'), model.get('snapshot.publicId'), "component.fullySpecifiedName", "ASC", "", 0, 10, this).
+      then(function(membersPage){
+        controller.set('membersPage', membersPage);
       });
   }
 });

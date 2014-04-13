@@ -1,3 +1,4 @@
+{{#if shouldDisplayPagination}}
 <ul class="pagination">
   <li class="arrow"><a {{action 'firstPage'}} href="javascript:void(0)">&laquo;</a></li>
   <li class="arrow"><a {{action 'previousPage'}} href="javascript:void(0)">&lsaquo;</a></li>
@@ -10,3 +11,4 @@
   <li class="arrow"><a {{action 'nextPage'}} href="javascript:void(0)">&rsaquo;</a></li>
   <li class="arrow"><a {{action 'lastPage'}} href="javascript:void(0)">&raquo;</a></li>  
 </ul>
+{{/if}}

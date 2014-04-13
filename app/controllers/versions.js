@@ -3,16 +3,34 @@ import Version from 'appkit/models/version';
 import Alert from 'appkit/models/alert';
 import toEmberObject from 'appkit/utils/to_ember_object';
 
-
-export default Ember.ArrayController.extend({
+export default Ember.ObjectController.extend({
   needs: ['refset', 'cache'],
   
-  release:    undefined,
-  alert:      undefined,
-  error:      undefined,
-  
-  refset:     Ember.computed.alias('controllers.refset.model'),
-  refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
+  release:          undefined,
+  alert:            undefined,
+  error:            undefined,
+
+  sortyBy:          undefined, 
+  sortOrder:        undefined,
+  filter:           '',
+  pageSize:         10, 
+  displaySetSize:   10,
+  resetPagesSwitch: false,
+
+  refset:       Ember.computed.alias('controllers.refset.model'),
+  refsetName:   Ember.computed.alias('controllers.refset.model.publicId'),
+  versionsPage: Ember.computed.alias('controllers.cache.versionsPage'),
+
+  filterChange: function(){
+      Ember.Logger.log('Filter by ' + this.get('filter'));
+      this.toggleProperty('resetPagesSwitch');
+      var _this = this;
+      Version.getVersions(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), 0, this.get('pageSize'), this).
+        then(function(page){
+          _this.set('controllers.cache.versionsPage', page);
+        });
+
+  }.observes('filter'),  
 
   actions: {
     
@@ -26,6 +44,26 @@ export default Ember.ArrayController.extend({
 
     cancelReleaseModal: function(){
       $('#createRelease').foundation('reveal', 'close'); 
+    },
+
+    changePage: function(index){
+      Ember.Logger.log('Displaying page ' + index);
+      var _this = this;
+      Version.getVersions(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), index - 1, this.get('pageSize'), this).
+        then(function(page){
+          _this.set('controllers.cache.versionsPage', page);
+        });
+    },
+
+    sort: function(sortBy, sortOrder){
+      Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
+      this.set('sortBy', sortBy);
+      this.set('sortOrder', sortOrder);
+      var _this = this;
+      Version.getVersions(this.get('refsetName'), sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize'), this).
+        then(function(page){
+          _this.set('controllers.cache.versionsPage', page);
+        });
     },    
 
     createRelease: function(){
@@ -38,7 +76,7 @@ export default Ember.ArrayController.extend({
         alert.set('showUndo', false);
         alert.set('isError', false);
 
-        _this.set('controllers.cache.releases', Ember.A());
+        _this.set('controllers.cache.releasesPage', '');
 
         //Goto
         alert.set('showGoto', true);

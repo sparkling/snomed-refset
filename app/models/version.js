@@ -12,7 +12,7 @@ var Version = Ember.Object.extend({
  
 Version.reopenClass({
 
-  getVersions: function(refsetPublicId, _this) {
+  getVersions: function(refsetPublicId, sortBy, sortOrder, filter, pageIndex, pageSize, _this) {
     Ember.Logger.log('Ajax: get versions');
     return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -20,13 +20,19 @@ Version.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/versions",
+        url: baseUrl() + "/" + refsetPublicId + "/versions" +
+          "?sortBy="    + sortBy + 
+          "&sortOrder=" + sortOrder +
+          "&filter="    + filter +
+          "&pageIndex=" + pageIndex +
+          "&pageSize="  + pageSize,
         type: "GET",
         data: '',
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        return Ember.A(toEmberObject(success).get('versions'));
+        //return Ember.A(toEmberObject(success).get('versions'));
+        return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
@@ -59,7 +65,7 @@ Version.reopenClass({
     });
   },  
 
-  getMembers: function(refsetPublicId, versionPublicId, sortBy, sortOrder, pageIndex, pageSize, _this) {
+  getMembers: function(refsetPublicId, versionPublicId, sortBy, sortOrder, filter, pageIndex, pageSize, _this) {
     Ember.Logger.log('Ajax: get members');
     return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -70,6 +76,7 @@ Version.reopenClass({
         url: baseUrl() + "/" + refsetPublicId + "/version/" + versionPublicId + "/members" + 
             "?sortBy=" + sortBy + 
             "&sortOrder=" + sortOrder +
+            "&filter=" + filter +
             "&pageIndex=" + pageIndex +
             "&pageSize=" + pageSize,
         type: "GET",
@@ -77,7 +84,11 @@ Version.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        return Ember.A(toEmberObject(success).get('members'));
+        //var page = Ember.Object.create();
+        //page.set('totalSize', success.totalSize);
+        //page.set('members', Ember.A(toEmberObject(success).get('members')));
+        //return page;
+        return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));

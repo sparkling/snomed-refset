@@ -2,8 +2,8 @@
   <!-- TABLE FILTER -->
   <div class="row filter">
     <!-- TEXT -->
-    <div class="small-6 columns text">      
-      <input type="text" placeholder="Filter (coming soon)"></input>
+    <div class="small-6 columns text">
+      {{input type="text" name="filter" value=filter placeholder="Filter"}}
     </div>
     <!-- BOOLEAN -->
     <div class="small-6 columns show">
@@ -100,10 +100,7 @@
     <!-- PAGINATION -->
     <div class="small-12 columns">
       <div class="pagination-centered" style="color: lightgrey">
-        <!--div>displaySetSize: {{displaySetSize}}</div>
-        <div>totalItems: {{totalItems}}</div>
-        <div>pageSize: {{pageSize}}</div-->
-        {{pagination-component resetSwitch=resetPagesSwitch selectPage="selectPage" displaySetSize=displaySetSize totalItems=totalItems pageSize=pageSize}}
+        {{pagination-component resetSwitch=resetPagesSwitch changePage="changePage" displaySetSize=displaySetSize totalMembers=totalMembers pageSize=pageSize}}
       </div>            
     </div>
   </div>

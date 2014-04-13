@@ -1,20 +1,19 @@
 import Tag from 'appkit/models/tag';
 
 export default Ember.Route.extend({
-  needs: 'refset',
-
-  model: function(){
-    var cache = this.controllerFor('cache');
-    if (cache.get('releases').length === 0){
-      cache.set('releases', Tag.getTags(this.modelFor('refset').get('publicId'), "title", "ASC", this));
-    }
-    return cache.get('releases');
-  },
-
   setupController: function(controller, model){
     this._super(controller, model);
-    controller.set('sortBy', "title");
-    controller.set('sortOrder', 'ASC');
-  }
+    controller.set('sortBy', "creationTime");
+    controller.set('sortOrder', 'DESC');
 
+    if (this.controllerFor('cache').get('releasesPage') === ''){
+      var _this = this;
+      Tag.getTags(this.modelFor('refset').get('publicId'), "creationTime", "DESC", "", 0, 10, this).
+        then(function(page){
+          _this.controllerFor('cache').set('releasesPage', page);
+        });
+    }
+
+    controller.set('alert', undefined);
+  }
 });

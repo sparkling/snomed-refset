@@ -7,8 +7,8 @@ export default Ember.Route.extend({
   },
 
   afterModel: function(){
-    this.controllerFor('cache').set('members', Ember.A());
-    this.controllerFor('cache').set('versions', Ember.A());
-    this.controllerFor('cache').set('releases', Ember.A());    
+    //this.controllerFor('cache').set('members', Ember.A());
+    //this.controllerFor('cache').set('versions', Ember.A());
+    //this.controllerFor('cache').set('releases', Ember.A());    
   }
 });

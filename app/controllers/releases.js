@@ -2,15 +2,56 @@ import Tag from 'appkit/models/tag';
 import Alert from 'appkit/models/alert';
 import toEmberObject from 'appkit/utils/to_ember_object';
 
-
-export default Ember.ArrayController.extend({
+export default Ember.ObjectController.extend({
   needs: ['refset', 'cache'],
-  alert: '',
-  sortBy: '',
-  sortOrder: '',
-  refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
+  alert:        undefined,
+  
+  sortBy:           '',
+  sortOrder:        '',
+  filter:           '',
+  pageSize:         10, 
+  currentPageIndex:  0,
+  displaySetSize:   10,
+  resetPagesSwitch: false,
+
+  refset:       Ember.computed.alias('controllers.refset.model'),
+  refsetName:   Ember.computed.alias('controllers.refset.model.publicId'),
+  releasesPage: Ember.computed.alias('controllers.cache.releasesPage'),  
+
+  filterChange: function(){
+      Ember.Logger.log('Filter by ' + this.get('filter'));
+      this.toggleProperty('resetPagesSwitch');
+      var _this = this;
+      Tag.getTags(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), 0, this.get('pageSize'), this).
+        then(function(page){
+          _this.set('controllers.cache.releasesPage', page);
+        });
+
+  }.observes('filter'),  
 
   actions:{
+
+    changePage: function(index){
+      Ember.Logger.log('Displaying page ' + index);
+      this.set('currentPageIndex', index);
+      var _this = this;
+      Tag.getTags(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), index - 1, this.get('pageSize'), this).
+        then(function(page){
+          _this.set('controllers.cache.releasesPage', page);
+        });
+    },
+
+    sort: function(sortBy, sortOrder){
+      Ember.Logger.log('Sorting by ' + sortBy + ' ' + sortOrder);
+      this.set('sortBy', sortBy);
+      this.set('sortOrder', sortOrder);
+      var _this = this;
+      Tag.getTags(this.get('refsetName'), sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize'), this).
+        then(function(page){
+          _this.set('controllers.cache.releasesPage', page);
+        });
+    },    
+
     delete: function(release){
       Ember.Logger.log("Deleting release");
       var alert = Alert.create();
@@ -37,9 +78,11 @@ export default Ember.ArrayController.extend({
           undoAlert.set('isError', false);
           undoAlert.set('showUndo', false);
           undoAlert.set('message', "Added back release with id '" + release.get('publicId') + "'");
-          var tags = Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this);
-          _this.set('controllers.cache.releases', tags);
-          _this.set('model', tags);
+
+          Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), _this.get('currentPageIndex'), _this.get('pageSize'), _this).
+            then(function(page){
+              _this.set('controllers.cache.releasesPage', page);
+            });
         };
         
         //UNDO: ERROR
@@ -60,9 +103,10 @@ export default Ember.ArrayController.extend({
         Ember.Logger.log('Delete: success');
         alert.set('isError', false);
         alert.set('message', "Removed release with name '" + release.get('title') + "'");
-        var tags = Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this);
-        _this.set('controllers.cache.releases', tags);
-        _this.set('model', tags);
+        Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), _this.get('currentPageIndex'), _this.get('pageSize'), _this).
+          then(function(page){
+            _this.set('controllers.cache.releasesPage', page);
+          });
       };
 
       //ON ERROR

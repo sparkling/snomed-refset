@@ -63,5 +63,7 @@
   <section id="alerts">
     {{render 'undo-alert' alert}}
   </section> 
-{{members-list showDeleteMember=showDeleteMember members=members pageSize=pageSize totalItems=snapshot.size sortMembers="sortMembers" page="page"}}
+
+{{members-list showDeleteMember=showDeleteMember totalMembers=membersPage.totalSize members=membersPage.members pageSize=pageSize changePage="changePage" sortMembers="sortMembers" doFilter="doFilter"}}
+
 </section>

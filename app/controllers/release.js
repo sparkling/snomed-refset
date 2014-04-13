@@ -6,9 +6,10 @@ import baseUrl from 'appkit/utils/baseurl';
 export default Ember.ObjectController.extend({
   needs:            'refset',
   alert:            '',
-  members:          '',
+  membersPage:          '',
   sortyBy:          undefined, 
   sortOrder:        undefined,  
+  filter:           '',
   showDeleteMember: false,
   pageSize:         10, //how many items are displayed on one page?s
 
@@ -40,19 +41,30 @@ export default Ember.ObjectController.extend({
       this.set('sortBy', sortBy);
       this.set('sortOrder', sortOrder);
       var _this = this;
-      Version.getMembers(this.get('refsetName'), this.get('model.snapshot.publicId'), sortBy, sortOrder, 0, this.get('pageSize'), this).
-        then(function(members){
-          _this.set('members', members);
-        });      
+      Version.getMembers(this.get('refsetName'), this.get('model.snapshot.publicId'), sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize'), this).
+        then(function(membersPage){
+          _this.set('membersPage', membersPage);
+        });
     },
 
-    page: function(page){
+    changePage: function(page){
       Ember.Logger.log('Displaying page ' + page);
       var _this = this;
-      Version.getMembers(this.get('refsetName'), this.get('model.snapshot.publicId'), this.get('sortBy'), this.get('sortOrder'), page - 1, this.get('pageSize'), this).
-        then(function(members){
-          _this.set('members', members);
+      Version.getMembers(this.get('refsetName'), this.get('model.snapshot.publicId'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), page - 1, this.get('pageSize'), this).
+        then(function(membersPage){
+          _this.set('membersPage', membersPage);
         });
     },     
+
+    doFilter: function(term){
+      Ember.Logger.log('Filter by ' + term);
+      this.set('filter', term);
+      var _this = this;
+      Version.getMembers(this.get('refsetName'), this.get('model.snapshot.publicId'), this.get('sortBy'), this.get('sortOrder'), term, 0, this.get('pageSize'), this).
+        then(function(membersPage){
+          _this.set('membersPage', membersPage);
+        });
+    },
+
   }
 });

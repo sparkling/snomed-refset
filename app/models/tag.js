@@ -15,7 +15,7 @@ var Tag = Ember.Object.extend({
 
 Tag.reopenClass({
 
-  getTags: function(refsetPublicId, sortBy, sortOrder, _this) {
+  getTags: function(refsetPublicId, sortBy, sortOrder, filter, pageIndex, pageSize, _this) {
     Ember.Logger.log('Ajax: get tags');
     return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
@@ -23,13 +23,19 @@ Tag.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/tags?sortBy=" + sortBy + "&sortOrder=" + sortOrder,
+        url: baseUrl() + "/" + refsetPublicId + "/tags" +
+          "?sortBy="    + sortBy + 
+          "&sortOrder=" + sortOrder +
+          "&filter="    + filter +
+          "&pageIndex=" + pageIndex +
+          "&pageSize="  + pageSize,        
         type: "GET",
         data: '',
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        return Ember.A(toEmberObject(success).get('tags'));
+        //return Ember.A(toEmberObject(success).get('tags'));
+        return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));

@@ -1,8 +1,12 @@
 export default Ember.Component.extend({
   showDeleteMember: false,
+  filter: '',
+  members: '',
 
   //pagination
   displaySetSize: 10,         //how many page indexes are displayed at once?
+  totalMembers: '',
+  membersPage: '',
 
   //DISPLAY FIELD SELECTIONS
   showComponent: true,
@@ -10,13 +14,18 @@ export default Ember.Component.extend({
   showInactive: true,
   showEffective: true,
   showModule: false,
-  totalItems: null,
   resetPagesSwitch: false,
 
+
+  filterChange: function(){
+      Ember.Logger.log('Detected change in filter');
+      this.toggleProperty('resetPagesSwitch');
+      this.sendAction('doFilter', this.get('filter'));
+  }.observes('filter'),
+
   actions:{
-    selectPage: function(index){
-      //Ember.Logger.log('Handling pagination in the members-list');
-      this.sendAction('page', index);
+    changePage: function(index){
+      this.sendAction('changePage', index);
     },
     delete: function(member){
       Ember.Logger.log('delete member action handled in component');
