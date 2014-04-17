@@ -10,6 +10,10 @@ export default Ember.ObjectController.extend({
   moduleSelectId: 'moduleSelectId',
   refsetConceptSelectId: 'refsetSelectId',
 
+  onTitleChange: function(){
+    this.set('model.publicId', window.getSlug(this.get('model.title'), {truncate:50}));
+  }.observes('model.title'),
+
   selectType: [
     { label: "Concept (more coming)",     key: "CONCEPT" },
     { label: "Description", key: "DESCRIPTION" },
