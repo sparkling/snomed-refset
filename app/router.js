@@ -15,9 +15,7 @@ Router.map(function() {
     this.resource('releases',  {path:'releases'});
     this.resource('release',   {path:'release/:releasePublicId'}); 
     this.resource('details',   {path:'details'});
-    this.resource('member',    {path:'member'}, function(){
-      this.route('index',        {path:':memberId'});
-    });
+    this.resource('member',    {path:'member/:memberPublicId'}); 
     this.resource('plan',  {path:'plan'}, function(){
       this.route('edit',      {path:'edit'});
       this.route('show',      {path:'show'});

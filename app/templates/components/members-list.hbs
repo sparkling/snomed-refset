@@ -7,6 +7,7 @@
     </div>
     <!-- BOOLEAN -->
     <div class="small-6 columns show">
+      {{input type="checkbox" name="showId" checked=showId id="show-id"}}<label for="show-id">Id</label>    
       {{input type="checkbox" name="showComponent" checked=showComponent id="show-component"}}<label for="show-component">Component</label>    
       {{input type="checkbox" name="showSctid" checked=showSctid id="show-sctid"}}<label for="show-sctid">SCTID</label>
       {{input type="checkbox" name="showEffective" checked=showEffective id="show-effective"}}<label for="show-effective">Effective</label>
@@ -20,6 +21,12 @@
       <table width="100%" cellpadding="0" cellspacing="0" class="responsive">
         <thead>
           <tr>
+            {{#if controller.showId}}
+            <th>Id
+              <a {{action 'sort' 'publicId' 'ASC'}} style="margin-left: 0.75em; font-size: 0.8em" href="javascript:void(0)" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
+              <a {{action 'sort' 'publicId' 'DESC'}} style="margin-left: 0.5em; font-size: 0.8em" href="javascript:void(0)" class="icon"><span class="fa fa-sort-alpha-desc"></span></a>
+            </th>
+            {{/if}}
             {{#if controller.showSctid}}
             <th style="width: 8em">SCTID
               <a {{action 'sort' 'component.serialisedId' 'ASC'}} style="margin-left: 0.75em; font-size: 0.8em" href="javascript:void(0)" class="icon"><span class="fa fa-sort-alpha-asc"></span></a>
@@ -60,6 +67,11 @@
           {{#each member in members}}
             
               <tr>
+                {{#if showId}}
+                <td>
+                  {{member.publicId}}
+                </td>
+                {{/if}}              
                 {{#if controller.showSctid}}
                 <td>
                   {{member.component.id}}
@@ -74,14 +86,15 @@
                 {{#if controller.showModule}}
                 <td>
                   <!--a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{member.module.title}}</a-->
-                  <a href="javascript:void(0)">{{member.module.title}}</a>
+                  <!--a href="javascript:void(0)">{{member.module.title}}</a-->
+                  {{component-link member.module}}
                 </td>
                 {{/if}}                
                 {{#if controller.showEffective}}
                 <td>{{date-format member.effective}}</td>
                 {{/if}}
                 <td class="info">
-                  <a href="javascript:void(0)" class="icon"><span class="fa fa-info-circle"></span></a>
+                  {{#link-to 'member' member}}<span class="fa fa-info-circle"></span>{{/link-to}}
                 </td>
                 {{#if showDeleteMember}}
                 <td class="delete">

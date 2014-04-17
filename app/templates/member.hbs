@@ -1,0 +1,93 @@
+<!-- ************** -->
+<!-- * HEADER NAV * -->
+<!-- ************** -->
+<header>
+  <nav class="row">
+    <div class="small-12 columns">
+      <ul class="breadcrumbs">
+        <li>
+          {{#link-to 'refsets'}}Refsets{{/link-to}}
+        </li>
+        <li>
+          {{#link-to 'members' refset}}Members{{/link-to}}
+        </li>
+        <li class="current">
+          <a href="javascript:void(0)">{{publicId}}</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<section class="membership-details">
+  <!-- HEADER -->
+  <div class="row heading">
+    <div class="small-6 columns">
+      <h2 class="subheader">Member Details</h2>
+    </div>
+    <!-- NAVIGATION -->
+    <!--div class="small-6 columns navigation top">
+      <a href="refset.members.html" class="secondary button round tiny member">Return</a> 
+    </div-->
+  </div>
+  <!-- PROPERTIES -->
+  <section class="properties">
+    <div class="row source property">
+      <div class="small-3 columns">
+        <span>Source</span>
+      </div>
+      <div class="small-9 columns">
+        <span>{{controllers.refset.sourceString}}</span>
+      </div>
+    </div>
+    <div class="row release property">
+      <div class="small-3 columns">
+        <span>Snomed Release</span>
+      </div>
+      <div class="small-9 columns">
+        <span>{{date-format controllers.refset.snomedReleaseDate}}</span>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2em">
+      <div class="small-8 medium-7 large-6 columns">
+        <table width="100%" cellpadding="0" cellspacing="0" class="responsive">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Identifier</td>
+              <td>{{publicId}}</td>
+            </tr>
+            <tr>
+              <td>Active</td>
+              <td>{{displayActive}}</td>
+            </tr>
+            <tr>
+              <td>Component</td>
+              <td>{{component-link component}}</td>
+            </tr>
+            <tr>
+              <td>Module</td>
+              <td>{{component-link module}}</td>
+            </tr>
+            <tr>
+              <td>Effective</td>
+              <td>{{date-format effectiveDate}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> <!-- columns -->
+    </div><!-- row -->
+  </section> <!-- properties -->
+  <!-- ACTION -->
+  <div class="row action main">
+    <div class="small-12 columns">
+      {{#link-to 'members' class="button secondary small radius"}}Return{{/link-to}}
+    </div>
+  </div>
+</section>

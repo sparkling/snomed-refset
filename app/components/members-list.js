@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   membersPage: '',
 
   //DISPLAY FIELD SELECTIONS
+  showId: false,
   showComponent: true,
   showSctid: true,
   showInactive: true,

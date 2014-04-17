@@ -72,8 +72,29 @@ Member.reopenClass({
     });
   },
 
+  getMember: function(refsetPublicId, memberId, _this){
+    Ember.Logger.log('Ajax: Get members for refset ' + refsetPublicId + " with member id " + memberId);
+    return Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        url: baseUrl() + "/" + refsetPublicId + "/members/" + memberId,
+        type: "GET",
+        data: '',
+        dataType: "json"
+      }).then((function(success) {
+        Ember.Logger.log('Ajax: success');
+        return toEmberObject(success);
+      }), function(error) {
+        Ember.Logger.log('Ajax: error');
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        _this.set('response', toEmberObject(JSON.parse(error.responseText)));
+      }));
+    });
+  },
 
-  //FIXME: Need to return a promise here, but that will break the cache handling in the route...
   getMembers: function(refsetPublicId, sortBy, sortOrder, filter, pageIndex, pageSize, _this) {
     Ember.Logger.log('Ajax: Get members for refset ' + refsetPublicId);
     return Ember.Deferred.promise(function(p) {
@@ -88,10 +109,6 @@ Member.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        //var page = Ember.Object.create();
-        //page.set('totalSize', success.totalSize);
-        //page.set('members', Ember.A(toEmberObject(success).get('members')));
-        //return page;
         return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
