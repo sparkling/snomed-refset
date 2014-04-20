@@ -55,20 +55,22 @@ Member.reopenClass({
     });
   },
 
-  import: function(refsetPublicId, formElement, fileType, alert, onSuccess, onError, _this){
+  import: function(refsetPublicId, formElement, fileType){
     Ember.Logger.log('Ajax: Import');
-    $.ajax({
-      url: baseUrl() + '/' + refsetPublicId + '/members?type=file',
-      type: "POST",
-      processData: false,
-      contentType: false,
-      data: new window.FormData(formElement)
-    }).then((function(success) {
-      Ember.Logger.log('Ajax: success');
-      onSuccess(success, alert, _this);
-    }), function(error) {
-      Ember.Logger.log('Ajax: error');
-      onError(error, alert, _this);
+    return Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        url: baseUrl() + '/' + refsetPublicId + '/members?type=file',
+        type: "POST",
+        processData: false,
+        contentType: false,
+        data: new window.FormData(formElement)
+      }).then((function(success) {
+        Ember.Logger.log('Ajax: success');
+        //return toEmberObject(success);
+      }), function(error) {
+        Ember.Logger.log('Ajax: error');
+        return toEmberObject(JSON.parse(error.responseText)); 
+      }));
     });
   },
 

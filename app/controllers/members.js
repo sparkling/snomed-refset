@@ -7,11 +7,11 @@ import baseUrl from 'appkit/utils/baseurl';
 export default Ember.ObjectController.extend({
   needs: ['refset', 'cache'],
   
-  version:          undefined,
-  alert:            undefined,
-  error:            undefined,
-  sortyBy:          undefined, 
-  sortOrder:        undefined,
+  version:          null,
+  alert:            null,
+  error:            null,
+  sortyBy:          null, 
+  sortOrder:        null,
   filter:           '',
   showDeleteMember: true,
   pageSize:         10, //how many items are displayed on one page?
