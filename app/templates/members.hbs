@@ -8,8 +8,11 @@
         <li>
           {{#link-to 'refsets'}}Refsets{{/link-to}}
         </li>
+        <li>
+          <a href="javascript:void(0)">Refset</a>
+        </li>
         <li class="current">
-          <a href="#">Members</a>
+          <a href="javascript:void(0)">Members</a>
         </li>
       </ul>
     </div>
@@ -61,7 +64,7 @@
 <header class="row sub">
   <!-- TITLE -->
   <div class="small-6 medium-4 columns">
-    <h2 class="subheader"><span>Members</span>
+    <h2 class="subheader"><span>{{title}}</span>
       <a style="margin-left: 0.5em; color: skyblue" data-options="align:bottom" href="javascript:void(0)" data-dropdown="download-dropdown">
         <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download"  {{bind-attr title="downloadPopupText"}}></span>          
       </a>
@@ -96,7 +99,7 @@
     <div class="row alert pending">
       <!-- CHANGES PENDING -->
       <div class="small-12 columns">
-        <div data-alert id="alert2" class="alert-box success radius">
+        <div data-alert id="alert2" class="alert-box success radius" >
           <span>There are changes pending</span>
           <div class="actions" style="float: right; font-size: 1.4em; margin-right: -0.75em; margin-top: -0.15em">
             <!-- PENDING CHANGES ICON -->

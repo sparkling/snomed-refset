@@ -11,7 +11,7 @@
           {{#link-to 'refsets'}}Refsets{{/link-to}}
         </li>
         <li>
-          {{#link-to 'members' refset}}Members{{/link-to}}
+          {{#link-to 'members' refset}}refset{{/link-to}}
         </li>
         <li class="current">
           <a href="javascript:void(0)">Releases</a>
@@ -26,7 +26,7 @@
   <header class="row sub">
     <!-- TITLE -->
     <div class="small-6 medium-4 columns">
-      <h2 class="subheader">Releases</h2>
+      <h2 class="subheader">{{refset.title}}</h2>
     </div>    
     <!-- NAVIGATION -->
     <nav class="small-6 medium-8 columns navigation top">
