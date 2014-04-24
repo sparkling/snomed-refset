@@ -29,7 +29,7 @@ Login.reopenClass({
         return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
-        return toEmberObject(JSON.parse(error.responseText)); 
+        return error; 
       }));
     });
   }

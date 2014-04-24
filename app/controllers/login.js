@@ -29,7 +29,6 @@ export default Ember.ObjectController.extend({
           });
 
           _this.set('token', 'token-1234');
-          //alert('setting User: ' + JSON.stringify(user));
           _this.set('controllers.application.user', user);
 
           var attemptedTransition = _this.get('attemptedTransition');
@@ -37,9 +36,12 @@ export default Ember.ObjectController.extend({
             attemptedTransition.retry();
             _this.set('attemptedTransition', null);
           } else {
-            // Redirect to 'articles' by default.
+            // Redirect to 'refsets' by default.
             _this.transitionToRoute('refsets');
           }
+        },
+        function(error){
+          _this.set('errorMessage', "Username and password not recognised");
         });//then
     }//login
   }//actions

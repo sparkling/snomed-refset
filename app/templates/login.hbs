@@ -2,19 +2,25 @@
   <p>You are already logged in!</p>
 {{else}}
   <form class="form-inline" {{action login on="submit"}}>
-    <div class="row">
+    <div class="row" style="margin-top: 1em">
       <div class="columns">
-        <h3>Log In</h3>
+        <h3>Please log in</h3>
       </div>
     </div>
-    <div class="row">
+    <div class="row" >
       <div class="small-6 medium-5 large-4 columns">
-        {{input value=username type="text" placeholder="Username"}}
-        {{input value=password type="password" placeholder="Password"}}
-        {{input class="button tiny round" type="submit" value="Log In"}}
-        {{#if errorMessage}}
-          <div class="alert alert-error">{{errorMessage}}</div>
-        {{/if}}
+        <div class="row field">
+          <div class="small-12 columns">      
+            {{input value=username type="text" placeholder="Username"}}
+            {{input value=password type="password" placeholder="Password"}}
+            <span class="error" style="height: 0.75em">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div class="row field">
+          <div class="small-12 columns">
+            {{input class="button tiny round" type="submit" value="Log In"}}
+          </div>
+        </div>
       </div>
     </div>
   </form>
