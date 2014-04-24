@@ -1,6 +1,7 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Snapshot from 'appkit/models/snapshot';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
   model: function() {
     Ember.Logger.log('Loading snapshots in router');
     var snapshots = this.get('model');

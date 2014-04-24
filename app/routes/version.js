@@ -1,6 +1,7 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Version from 'appkit/models/version';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
   model: function(params) {
     return Version.getVersion(this.modelFor('refset').get('publicId'), params.versionPublicId, this);
   },

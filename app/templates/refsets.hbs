@@ -26,7 +26,7 @@
     
     <!-- FILTER -->
     <div class="filter small-6 medium-4 columns">
-      <input type="text" placeholder="Filter (coming soon)"></input>
+      {{input type="text" name="filter" value=filter placeholder="Filter"}}
     </div>
   </div>
 
@@ -56,7 +56,7 @@
         
         <!-- BODY -->
         <tbody>
-          {{#each refset in controller}}
+          {{#each refset in refsets}}
             <tr>
               <td class="title">
                 <div class="tooltip2 arrow">
@@ -75,33 +75,21 @@
     </div>
   </div>
 
-  <!-- ************ -->
-  <!--  PAGINATION  -->
-  <!-- ************ -->      
   <div class="row pagination">
+    <!-- PAGINATION -->
     <div class="small-12 columns">
       <div class="pagination-centered" style="color: lightgrey">
-        <span>Coming Soon: Multiple pages, and navigation</span>
-        <!--ul class="pagination">
-          <li class="arrow unavailable"><a href="">&laquo;</a></li>
-          <li class="current"><a href="javascript;">1</a></li>
-          <li><a href="javascript:void(0)" style="pointer-events: none">2</a></li>
-          <li><a href="javascript:void(0)">3</a></li>
-          <li><a href="javascript;">4</a></li>
-          <li class="unavailable"><a href="javascript;">&hellip;</a></li>
-          <li><a href="javascript;">12</a></li>
-          <li><a href="javascript;">13</a></li>
-          <li class="arrow"><a href="javascript;">&raquo;</a></li>
-        </ul-->
+        {{pagination-component resetPagesSwitch=resetPagesSwitch changePage="changePage" displaySetSize=displaySetSize totalMembers=totalSize pageSize=pageSize}}
       </div>            
     </div>
   </div>
 
   <!-- ACTION -->
-  <div class="row action main">
-    <div class="small-12 columns">
-      {{#link-to 'create'}}<button class="button small radius">Create Refset</button>{{/link-to}}
+  {{#ifAllowed 'refset:create'}}
+    <div class="row action main">
+      <div class="small-12 columns">
+        {{#link-to 'create'}}<button class="button small radius">Create Refset</button>{{/link-to}}
+      </div>
     </div>
-  </div>
-  
+  {{/ifAllowed}}  
 </section>

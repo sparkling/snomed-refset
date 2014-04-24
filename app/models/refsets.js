@@ -11,28 +11,27 @@ var Refsets = Ember.Object.extend({
 
 Refsets.reopenClass({
 
-  loadRefsets: function(_this, sortBy, sortOrder) {
-    var refsets = Ember.A();
-    Ember.Logger.log('Getting all refsets');
-    Ember.Deferred.promise(function(p) {
+  loadRefsets: function(sortBy, sortOrder, filter, pageIndex, pageSize) {
+    Ember.Logger.log('Ajax: Get all refsets');
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "?sortBy=" + sortBy + "&sortOrder=" + sortOrder,
+        url: baseUrl() + "?sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&filter=" + filter + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize,
         type: "GET",
         data: '',
         dataType: "json"
       }).then((function(success) {
-        var returned = toEmberObject(success);
-        refsets.pushObjects(returned.get('refsets'));
+        Ember.Logger.log('Ajax: success');
+        return toEmberObject(success);
       }), function(error) {
+        Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
-        _this.set('response', toEmberObject(JSON.parse(error.responseText)));
+        return toEmberObject(JSON.parse(error.responseText));
       }));
     });
-    return refsets;
   },
 
 
@@ -56,12 +55,9 @@ Refsets.reopenClass({
 //    });
 //  },
 
-  createRefset: function(refset, _this) { 
-    var result;
-    Ember.Logger.log('POSTing: ' + JSON.stringify(refset));
-    result = Ember.Object.create({});
-    Ember.Deferred.promise(function(p) {
-
+  createRefset: function(refset) { 
+    Ember.Logger.log('Ajax: create refset');
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -72,27 +68,14 @@ Refsets.reopenClass({
         data: JSON.stringify(refset),
         dataType: "json"
       }).then((function(success) {
-        var parsed;
-        Ember.Logger.log('success: ' + JSON.stringify(success));
-        Ember.Logger.log('refset: ' + JSON.stringify(success.refset));
-        var jsParsed = success.refset;
-        Ember.Logger.log('JSON parsed: ' + JSON.stringify(jsParsed));
-        var refset = toEmberObject(jsParsed);
-        Ember.Logger.log('after toEmber: ' + JSON.stringify(refset));
-        //return result.setProperties(parsed);
-        //This should be passed in as a success function instead
-        //Does not belong here
-        _this.get('controllers.refsets.model').pushObject(refset);
-        _this.transitionToRoute('members', refset);
+        Ember.Logger.log('Ajax: success');
+        return toEmberObject(success);
       }), function(error) {
-        var parsed;
+        Ember.Logger.log('Ajax: error');
         Ember.Logger.log('fail: ' + JSON.stringify(error));
-        parsed = toEmberObject(JSON.parse(error.responseText));
-        Ember.Logger.log('after toEmber: ' + JSON.stringify(parsed));
-        return result.setProperties(parsed);
+        return toEmberObject(JSON.parse(error.responseText));
       }));
     });
-    return result;
   },
 
 ///////////////////////////////////////////////////////////

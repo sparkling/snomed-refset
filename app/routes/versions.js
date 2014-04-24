@@ -1,6 +1,7 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Version from 'appkit/models/version';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
   setupController: function(controller, model) {
     this._super(controller, model);  
     controller.set('sortBy', "creationTime");

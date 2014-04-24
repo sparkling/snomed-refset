@@ -1,7 +1,8 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Version from 'appkit/models/version';
 import Tag from 'appkit/models/tag';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
 
   model: function(params) {
     return Tag.getRelease(this.modelFor('refset').get('publicId'), params.releasePublicId, this);

@@ -1,14 +1,19 @@
 {{#if shouldDisplayPagination}}
 <ul class="pagination">
-  <li class="arrow"><a {{action 'firstPage'}} href="javascript:void(0)">&laquo;</a></li>
-  <li class="arrow"><a {{action 'previousPage'}} href="javascript:void(0)">&lsaquo;</a></li>
   
+  {{#if shouldDisplaySetNavs}}
+    <li class="arrow"><a {{action 'firstPage'}} href="javascript:void(0)">&laquo;</a></li>
+    <li class="arrow"><a {{action 'previousPage'}} href="javascript:void(0)">&lsaquo;</a></li>
+  {{/if}}
   
   {{#each page in pages}}
     <li {{bind-attr class="page.active:current"}}><a {{action 'selectPage' page}} href="javascript:void(0)">{{page.index}}</a></li>
   {{/each}}
 
-  <li class="arrow"><a {{action 'nextPage'}} href="javascript:void(0)">&rsaquo;</a></li>
-  <li class="arrow"><a {{action 'lastPage'}} href="javascript:void(0)">&raquo;</a></li>  
+  {{#if shouldDisplaySetNavs}}
+    <li class="arrow"><a {{action 'nextPage'}} href="javascript:void(0)">&rsaquo;</a></li>
+    <li class="arrow"><a {{action 'lastPage'}} href="javascript:void(0)">&raquo;</a></li>  
+  {{/if}}
+
 </ul>
 {{/if}}

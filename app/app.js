@@ -40,6 +40,25 @@ var App = Ember.Application.extend({
 //  }
 //});
 
+Ember.Handlebars.registerHelper("ifAllowed", function(activity, fn)
+{
+  var context = (fn.contexts && fn.contexts[0]) || this;
+ 
+  var func = function(result){
+    if (typeof result === 'boolean') {
+      return result;
+    }
+         
+    // The actual check if value is not undefined and null
+    Ember.Logger.log("Checking permissions for activity " + activity);
+    Ember.Logger.log("Defaulting to 'true'");
+    return true;
+  };
+
+  return Em.Handlebars.bind.call(context, activity, fn, true, func, func);
+
+});
+
 
 // See:
 // https://stackoverflow.com/questions/16124381/combine-linkto-and-action-helpers-in-ember-js

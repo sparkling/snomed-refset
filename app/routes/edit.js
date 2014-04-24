@@ -1,3 +1,5 @@
-export default Ember.Route.extend({
+import Authenticated from 'appkit/routes/authenticated';
+
+export default Authenticated.extend({
 
 });

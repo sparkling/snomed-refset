@@ -5,7 +5,10 @@ export default Ember.View.extend({
 
   processChildElements: function() {
     Em.$(document).foundation();
-  }
+  },
+
+
+
 });
 
 

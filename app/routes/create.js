@@ -1,6 +1,7 @@
-import Refset from 'appkit/models/refset';
+import Refset from 'appkit/models/refset';  
+import Authenticated from 'appkit/routes/authenticated';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
   model: function() {
     var r = Refset.create();
     r.set('source', 'LIST');

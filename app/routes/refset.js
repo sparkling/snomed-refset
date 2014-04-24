@@ -1,6 +1,7 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Refset from 'appkit/models/refset';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
   model: function(args) {
     Ember.Logger.log("Loading refset " + args.publicId + " from route model");
     return Refset.loadRefset(args.publicId, this);

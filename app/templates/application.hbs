@@ -25,9 +25,10 @@
       <h1>Snomed Clinical Terms</h1>
     </div>
     <div class="small-4 columns login">
-      Logged in as 
-      <a href="http://www.stormpath.com/" target="_blank">Refset User</a>
-      <a href="#" class="icon"><span class="fa fa-sign-out"></span></a>
+      {{#if loggedIn}}
+        Logged in as {{user.firstName}} {{user.lastName}}
+        <a href="javascript:void(0)" {{action 'logout'}} class="icon"><span class="fa fa-sign-out"></span></a>
+      {{/if}}
     </div>
   </div>
 </header>

@@ -1,6 +1,7 @@
 var Router = Ember.Router.extend();
 
 Router.map(function() {
+  this.resource('login', {path:'/login'});
   this.resource('refsets', {path:'/'});
   this.resource('create',  {path:'/create'}, function(){});
   this.resource('refset',  {path:'/:publicId'}, function(){

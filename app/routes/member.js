@@ -1,6 +1,7 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Member from 'appkit/models/member';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
 
   model: function(params) {
     return Member.getMember(this.modelFor('refset').get('publicId'), params.memberPublicId, this);

@@ -20,9 +20,9 @@ var Refset = Ember.Object.extend({
  
 Refset.reopenClass({
 
-  delete: function(refset, targetModel, alert, onSuccess, onError, _this){
+  delete: function(refset){
     Ember.Logger.log('Ajax: delete refset');
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -34,17 +34,17 @@ Refset.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(refset, targetModel, success, alert, _this);
+        return success;
       }), function(error) {
         Ember.Logger.log('Ajax: error');
-        onError(refset, error, alert, _this);
+        return error;
       }));
     });
   },
 
-  resurect: function(refset, targetModel, alert, onSuccess, onError, _this){
+  resurect: function(refset){
     Ember.Logger.log('Ajax: resurect refset');
-    Ember.Deferred.promise(function(p) {
+    return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
         headers: {
           Accept: "application/json; charset=utf-8",
@@ -56,10 +56,10 @@ Refset.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        onSuccess(refset, targetModel, success, alert, _this);
+        return success;
       }), function(error) {
         Ember.Logger.log('Ajax: error');
-        onError(refset, error, alert, _this);
+        return error;
       }));
     });
   },  

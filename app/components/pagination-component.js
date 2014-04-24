@@ -9,13 +9,21 @@ export default Em.Component.extend({
   resetSwitch:    false,      //Toggle this switch to reset the page to 1
   totalMembers:      '',
 
-  setupPages: function(){
+  resetPages: function(){
     this.createPages(1);
-  }.observes("totalMembers"), 
+  }.observes("totalMembers"),
+
+  initPages: function(){
+    this.createPages(1);
+  }.on("init"),
 
   shouldDisplayPagination: function(){
     return this.get('lastPage') > 1;
   }.property('lastPage'),
+
+  shouldDisplaySetNavs: function(){
+    return this.get('lastPage') > this.get('displaySetSize');
+  }.property('lastPage', 'displaySetSize'),
 
   reset: function(){
     this.createPages(1);

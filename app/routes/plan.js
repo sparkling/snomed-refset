@@ -1,6 +1,7 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Refset from 'appkit/models/refset';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
   model: function() {
     Ember.Logger.log('Loading plan in router');
     var plan = this.get('model');

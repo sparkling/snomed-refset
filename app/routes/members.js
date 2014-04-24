@@ -1,8 +1,9 @@
+import Authenticated from 'appkit/routes/authenticated';
 import Member from 'appkit/models/member';
 import Version from 'appkit/models/version';
 import Refset from 'appkit/models/refset';
 
-export default Ember.Route.extend({
+export default Authenticated.extend({
 
   setupController: function (controller, model) {
     this._super(controller, model);

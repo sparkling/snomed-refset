@@ -70,13 +70,15 @@ export default Ember.ObjectController.extend({
       this.set('controllers.cache.membersPage', '');
       this.set('controllers.cache.versionsPage', '');
       this.set('controllers.cache.releasesPage', '');
-      return this.set('error', Refsets.createRefset(this.get('model'), this));
+      //return this.set('error', Refsets.createRefset(this.get('model'), this));
+      var _this = this;
+      Refsets.createRefset(this.get('model')).
+        then(function(success){
+          _this.transitionToRoute('members', _this.get('model'));
+        }, 
+        function(error){
+          _this.set('error', error);
+        });
     }
-    //selected: function(concept){
-    //  Ember.Logger.log('Found selected: ' + concept.title);
-    //  this.set('concept', concept.id);
-    //  this.set('conceptDisplayName', concept.title);
-    //  this.set('showFindConceptButton', false);
-    //}
   }
 });
