@@ -1,6 +1,9 @@
 export default Ember.ObjectController.extend({
 
   importPendingAlert: null,
+  membersPage:  '',
+  versionsPage: '',
+  releasesPage: '',
 
   sourceString: function(){
     if (this.get('source') === 'LIST'){
@@ -8,11 +11,5 @@ export default Ember.ObjectController.extend({
     }
     return 'Concept Rules';
   }.property('model.source'),
-
-  actions:{
-    cancelImportSuccessModal: function(){
-      $('#importSuccessModal').foundation('reveal', 'close'); 
-    },
-  }
 
 });

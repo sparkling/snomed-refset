@@ -13,6 +13,12 @@ export default Ember.Controller.extend({
 
   loggedIn: function(){
     return this.get('controllers.login.token');
-  }.property('controllers.login.token')
+  }.property('controllers.login.token'),
+
+  actions:{
+    cancelImportSuccessModal: function(){
+      $('#importSuccessModal').foundation('reveal', 'close'); 
+    },
+  }  
 
 });

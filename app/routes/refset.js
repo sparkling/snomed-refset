@@ -7,9 +7,11 @@ export default Authenticated.extend({
     return Refset.loadRefset(args.publicId, this);
   },
 
-  afterModel: function(){
-    //this.controllerFor('cache').set('members', Ember.A());
-    //this.controllerFor('cache').set('versions', Ember.A());
-    //this.controllerFor('cache').set('releases', Ember.A());    
+  setupController: function (controller, model) {
+    this._super(controller, model);
+
+    controller.set('membersPage', Ember.A());
+    controller.set('versionsPage', Ember.A());
+    controller.set('releasesPage', Ember.A());
   }
 });

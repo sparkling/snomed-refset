@@ -114,7 +114,7 @@
   {{/if}}
   {{render 'undo-alert' alert}}
 </section>
-{{members-list showDeleteMember=showDeleteMember totalMembers=membersPage.totalSize members=membersPage.members pageSize=pageSize changePage="changePage" sortMembers="sortMembers" deleteMember="delete" doFilter="doFilter"}}
+{{members-list showDeleteMember=showDeleteMember totalMembers=controllers.refset.membersPage.totalSize members=controllers.refset.membersPage.members pageSize=pageSize changePage="changePage" sortMembers="sortMembers" deleteMember="delete" doFilter="doFilter"}}
   
 <!-- MAIN ACTION -->
 <div class="main action pagination row bottom">

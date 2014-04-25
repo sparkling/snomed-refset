@@ -3,7 +3,7 @@ import Alert from 'appkit/models/alert';
 import toEmberObject from 'appkit/utils/to_ember_object';
 
 export default Ember.ObjectController.extend({
-  needs: ['refset', 'cache'],
+  needs: ['refset'],
   alert:        undefined,
   
   sortBy:           '',
@@ -16,7 +16,7 @@ export default Ember.ObjectController.extend({
 
   refset:       Ember.computed.alias('controllers.refset.model'),
   refsetName:   Ember.computed.alias('controllers.refset.model.publicId'),
-  releasesPage: Ember.computed.alias('controllers.cache.releasesPage'),  
+  releasesPage: Ember.computed.alias('controllers.refset.releasesPage'),  
 
   filterChange: function(){
       Ember.Logger.log('Filter by ' + this.get('filter'));
@@ -24,7 +24,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Tag.getTags(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), 0, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.releasesPage', page);
+          _this.set('controllers.refset.releasesPage', page);
         });
 
   }.observes('filter'),  
@@ -37,7 +37,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Tag.getTags(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), index - 1, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.releasesPage', page);
+          _this.set('controllers.refset.releasesPage', page);
         });
     },
 
@@ -48,7 +48,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Tag.getTags(this.get('refsetName'), sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.releasesPage', page);
+          _this.set('controllers.refset.releasesPage', page);
         });
     },    
 
@@ -81,7 +81,7 @@ export default Ember.ObjectController.extend({
 
           Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), _this.get('currentPageIndex'), _this.get('pageSize'), _this).
             then(function(page){
-              _this.set('controllers.cache.releasesPage', page);
+              _this.set('controllers.refset.releasesPage', page);
             });
         };
         
@@ -105,7 +105,7 @@ export default Ember.ObjectController.extend({
         alert.set('message', "Removed release with name '" + release.get('title') + "'");
         Tag.getTags(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), _this.get('currentPageIndex'), _this.get('pageSize'), _this).
           then(function(page){
-            _this.set('controllers.cache.releasesPage', page);
+            _this.set('controllers.refset.releasesPage', page);
           });
       };
 

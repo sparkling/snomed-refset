@@ -7,11 +7,11 @@ export default Authenticated.extend({
     controller.set('sortBy', "creationTime");
     controller.set('sortOrder', 'DESC');
 
-    if (this.controllerFor('cache').get('versionsPage') === ''){
+    if (this.controllerFor('refset').get('versionsPage.length') === 0){
       var _this = this;
       Version.getVersions(this.modelFor('refset').get('publicId'), "creationTime", "DESC", "", 0, 10, this).
         then(function(page){
-          _this.controllerFor('cache').set('versionsPage', page);
+          _this.controllerFor('refset').set('versionsPage', page);
         });
     }
 

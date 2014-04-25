@@ -5,7 +5,7 @@ import Version from 'appkit/models/version';
 import baseUrl from 'appkit/utils/baseurl';
 
 export default Ember.ObjectController.extend({
-  needs: ['refset', 'cache'],
+  needs: ['refset'],
   
   version:          null,
   alert:            null,
@@ -20,7 +20,7 @@ export default Ember.ObjectController.extend({
   refset:     Ember.computed.alias('controllers.refset.model'),
   refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
   memberSize: Ember.computed.alias('controllers.refset.model.memberSize'),
-  membersPage: Ember.computed.alias('controllers.cache.membersPage'),
+//  membersPage: Ember.computed.alias('controllers.cache.membersPage'),
 
   hasPendingChanges: function(){
     return this.get('refset.pendingChanges');
@@ -65,7 +65,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Member.getMembers(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), index - 1, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.membersPage', page);
+          _this.set('controllers.refset.membersPage', page);
         });
     },
 
@@ -76,7 +76,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Member.getMembers(this.get('refsetName'), sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.membersPage', page);
+          _this.set('controllers.refset.membersPage', page);
         });
     },    
 
@@ -86,7 +86,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Member.getMembers(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), term, 0, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.membersPage', page);
+          _this.set('controllers.refset.membersPage', page);
         });
     },
 
@@ -110,7 +110,7 @@ export default Ember.ObjectController.extend({
 
         _this.set('refset.pendingChanges', false);
         _this.set('alert', alert);
-        _this.set('controllers.cache.versionsPage', '');
+        _this.set('controllers.refset.versionsPage', '');
         $('#createVersionModal').foundation('reveal', 'close');
       };
 
@@ -157,7 +157,7 @@ export default Ember.ObjectController.extend({
           //this.get('target').refresh();
           Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), 0, _this.get('pageSize'), _this).
             then(function(page){
-              _this.set('controllers.cache.membersPage', page);
+              _this.set('controllers.refset.membersPage', page);
             });
         };
         
@@ -182,7 +182,7 @@ export default Ember.ObjectController.extend({
         alert.set('message', "Removed member with component '" + member.get('component.title') + "'");
         Member.getMembers(_this.get('refsetName'), _this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), 0, _this.get('pageSize'), _this).
           then(function(page){
-            _this.set('controllers.cache.membersPage', page);
+            _this.set('controllers.refset.membersPage', page);
           });
       };
 

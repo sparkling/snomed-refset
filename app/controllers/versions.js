@@ -4,7 +4,7 @@ import Alert from 'appkit/models/alert';
 import toEmberObject from 'appkit/utils/to_ember_object';
 
 export default Ember.ObjectController.extend({
-  needs: ['refset', 'cache'],
+  needs: ['refset'],
   
   release:          undefined,
   alert:            undefined,
@@ -19,7 +19,7 @@ export default Ember.ObjectController.extend({
 
   refset:       Ember.computed.alias('controllers.refset.model'),
   refsetName:   Ember.computed.alias('controllers.refset.model.publicId'),
-  versionsPage: Ember.computed.alias('controllers.cache.versionsPage'),
+  //versionsPage: Ember.computed.alias('controllers.cache.versionsPage'),
 
   filterChange: function(){
       Ember.Logger.log('Filter by ' + this.get('filter'));
@@ -27,7 +27,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Version.getVersions(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), 0, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.versionsPage', page);
+          _this.set('controllers.refset.versionsPage', page);
         });
 
   }.observes('filter'),  
@@ -51,7 +51,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Version.getVersions(this.get('refsetName'), this.get('sortBy'), this.get('sortOrder'), this.get('filter'), index - 1, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.versionsPage', page);
+          _this.set('controllers.refset.versionsPage', page);
         });
     },
 
@@ -62,7 +62,7 @@ export default Ember.ObjectController.extend({
       var _this = this;
       Version.getVersions(this.get('refsetName'), sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize'), this).
         then(function(page){
-          _this.set('controllers.cache.versionsPage', page);
+          _this.set('controllers.refset.versionsPage', page);
         });
     },    
 
@@ -76,7 +76,7 @@ export default Ember.ObjectController.extend({
         alert.set('showUndo', false);
         alert.set('isError', false);
 
-        _this.set('controllers.cache.releasesPage', '');
+        _this.set('controllers.refset.releasesPage', '');
 
         //Goto
         alert.set('showGoto', true);

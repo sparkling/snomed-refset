@@ -3,7 +3,7 @@ import Member from 'appkit/models/member';
 import Alert from 'appkit/models/alert';
 
 export default Ember.Controller.extend({
-  needs: ['refset','members', 'cache'],
+  needs: ['refset','members'],
 
   error: undefined,
   alert: undefined,
@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
           _this.set('controllers.members.alert', null);
           Member.getMembers(_this.get('controllers.refset.publicId'), "component.fullySpecifiedName", "ASC", "", 0, 10, _this).
             then(function(page){
-              _this.get('controllers.cache').set('membersPage', page);
+              _this.set('controllers.refset.membersPage', page);
             });
         },
         function(error){

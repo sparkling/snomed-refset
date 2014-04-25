@@ -10,11 +10,11 @@ export default Authenticated.extend({
     controller.set('sortBy', "component.fullySpecifiedName");
     controller.set('sortOrder', 'ASC');
     
-    if (this.controllerFor('cache').get('membersPage') === ''){
+    if (this.controllerFor('refset').get('membersPage.length') === 0){
       var _this = this;
       Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", "", 0, 10, this).
         then(function(page){
-          _this.controllerFor('cache').set('membersPage', page);
+          _this.controllerFor('refset').set('membersPage', page);
           //_this.set('model', page);
         });
     }
