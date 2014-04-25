@@ -21,12 +21,16 @@
 <!-- ********** -->
 <header>
   <div class="row">
-    <div class="small-8 columns">
-      <h1>Snomed Clinical Terms</h1>
+    <div class="small-12 columns">
+      <h1>IHTSDO Refset Management Service
+        <span class="logo" style="float:right"><img src="img/ihtsdo.logo.png"/></span>
+      </h1>
     </div>
-    <div class="small-4 columns login">
+  </div>
+  <div class="row login">
+    <div class="small-12 columns">
       {{#if loggedIn}}
-        Logged in as {{user.firstName}} {{user.lastName}}
+        Logged in as <span class="name">{{user.firstName}} {{user.lastName}}</span>
         <a href="javascript:void(0)" {{action 'logout'}} class="icon"><span class="fa fa-sign-out"></span></a>
       {{/if}}
     </div>
