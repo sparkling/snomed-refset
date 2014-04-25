@@ -32,7 +32,29 @@ Login.reopenClass({
         return error; 
       }));
     });
-  }
+  },
+
+  getPermissionGroups: function(userId){
+    Ember.Logger.log('Ajax: Get permissionGroups for user ' + userId);
+    return Ember.Deferred.promise(function(p) {
+      return p.resolve($.ajax({
+        headers: {
+          Accept: "application/json; charset=utf-8",
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        url: 'http://usermanagement.ihtsdotools.org:8080/security-web/query/users/' + userId + '/apps/Refset',
+        type: "GET"
+      }).then((function(success) {
+        Ember.Logger.log('Ajax: success');
+        return success;
+      }), function(error) {
+        Ember.Logger.log('Ajax: error');
+        Ember.Logger.log('fail: ' + JSON.stringify(error));
+        return error;
+      }));
+    });
+  },
+
 });
 
 

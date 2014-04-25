@@ -1,8 +1,9 @@
 var User = Ember.Object.extend({
-  firstName: null,
-  lastName: null,
-  userId: null,
-  roles: null
+  firstName:        null,
+  lastName:         null,
+  name:             null,
+  userId:           null,
+  permissionGroups: null
 });
 
 export default User;
