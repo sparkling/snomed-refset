@@ -20,7 +20,7 @@ Login.reopenClass({
       //  resolve('success');
       //});
       return p.resolve($.ajax({
-        url: 'http://usermanagement.ihtsdotools.org:8080/security-web/query/',
+        url: 'https://usermanagement.ihtsdotools.org/security-web/query/',
         type: "POST",
         data: data
       }).then((function(success) {
@@ -42,7 +42,7 @@ Login.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: 'http://usermanagement.ihtsdotools.org:8080/security-web/query/users/' + userId + '/apps/Refset',
+        url: 'https://usermanagement.ihtsdotools.org/security-web/query/users/' + userId + '/apps/Refset',
         type: "GET"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
