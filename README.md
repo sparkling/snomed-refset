@@ -46,6 +46,6 @@ Start the Grunt web server
     nohup grunt server &
     
 ###Configure an Nginx proxy for the app
-Follow [these instructions](https://github.com/IHTSDO/snomed-publish/tree/master/config/nginx) for how to set up nginx. The Nginx configuration file for the refset app can also be found at this location.
+Follow [these instructions](https://github.com/IHTSDO/snomed-publish/tree/master/config/nginx) for how to set up nginx. The Nginx configuration file can also be found at there.
     
     
