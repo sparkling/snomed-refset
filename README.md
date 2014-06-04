@@ -39,6 +39,7 @@ Create a new user account for running the refset app, and login with this new us
     git clone git@github.com:IHTSDO/snomed-refset.git
     cd snomed-refset
     npm install
+    bower install
     
 ###Start the application
 Start the Grunt web server
