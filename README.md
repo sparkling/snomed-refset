@@ -10,6 +10,7 @@ This application was built with the Ember Framework, and is based on the [Ember 
 You can install using the apt package manager, following [these instructions]()
 
     sudo apt-get install nodejs
+    ln -s /usr/bin/node /usr/bin/nodejs
 ###Install Node Package Manager
 You can install using the apt package manager, following [these instructions]()
 
