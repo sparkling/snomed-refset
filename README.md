@@ -25,7 +25,7 @@ You can install using the apt package manager, following [these instructions]()
         
 - Less, the css pre-processor
 
-       npm install -g less
+        npm install -g less
 
 ###Create new user
 Create a new user account for running the refset app, and login with this new user before continuing
