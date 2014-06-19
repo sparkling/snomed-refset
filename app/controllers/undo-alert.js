@@ -1,6 +1,6 @@
 export default Ember.ObjectController.extend({
   hasAlert: function(){
-    return this.get('model');
+    return !!this.get('model');
   }.property('model'),
 
   gotoTitle: function(){

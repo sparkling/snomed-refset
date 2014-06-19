@@ -1,4 +1,4 @@
-import Page from 'appkit/models/page';
+import Page from '../models/page';
 
 export default Em.Component.extend({
   pageSize:       10,         //how many items are displayed on one page?
@@ -46,9 +46,8 @@ export default Em.Component.extend({
     return this.get('pages.firstObject.index');
   }.property('pages.@each'),
 
-  createPages: function(startIndex, pages){
+  createPages: function(startIndex){
     Ember.Logger.log('Creating pages from start index ' + startIndex);
-    //this.get('pages').clear();
 
     var newPages = Ember.A();
 

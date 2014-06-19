@@ -1,15 +1,14 @@
 export default Ember.Object.extend({
-  message: undefined,
-  entity: undefined,
-  action: undefined,
-  collectionIndex: undefined,
-  paramName: undefined,
-  paramValue: undefined,
-  status: undefined,
-
-  showUndo: true,
-  undofunction: '',
-  arguments: '', 
-  type: 'warning',
-  onceSticky: false
+  message:          null,
+  entity:           null,
+  action:           null,
+  collectionIndex:  null,
+  paramName:        null,
+  paramValue:       null,
+  status:           null,
+  showUndo:         true,
+  undofunction:     null,
+  arguments:        null, 
+  type:             'warning',
+  onceSticky:       false
 });

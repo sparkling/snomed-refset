@@ -1,5 +1,5 @@
 export default Ember.Component.extend({
-  layoutName: 'select2',
+  layoutName: 'select-two',
   identifier: 'identifier-must-be-set',
   searchType: 'full',
   version_flavour: '',

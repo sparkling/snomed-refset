@@ -37,8 +37,8 @@
   margin-left: 0.1em !important;
 }
 .tabs a {
-	  color: #555;
-	  text-decoration: none;
+    color: #555;
+    text-decoration: none;
 }
 .tabs dd.active {
     background: #FFF;

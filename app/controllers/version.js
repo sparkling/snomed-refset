@@ -1,7 +1,4 @@
-import Version from 'appkit/models/version';
-import Alert from 'appkit/models/alert';
-import Member from 'appkit/models/member';
-import baseUrl from 'appkit/utils/baseurl';
+import Version from '../models/version';
 
 export default Ember.ObjectController.extend({
   needs:            'refset',
@@ -22,15 +19,15 @@ export default Ember.ObjectController.extend({
   }.property('size'),
 
   downloadJsonUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.json';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.json';
   }.property('refsetName', 'publicId'),
 
   downloadXmlUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.xml';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.xml';
   }.property('refsetName', 'publicId'),
 
   downloadRf2Url: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.rf2';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/version/' + this.get('model.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.rf2';
   }.property('refsetName', 'publicId'), 
 
   //ACTIONS

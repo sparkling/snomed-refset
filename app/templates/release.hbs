@@ -24,38 +24,36 @@
 
 <section class="release">
   <!-- HEADING -->
-  <header class="sub">
-    <div class="row">
-      <!-- TITLE -->
-      <div class="small-8 medium-6 columns">
-        <h2 class="subheader">
-          <span>{{refset.title}}</span>
-          <a style="margin-left: 0.5em; color: skyblue" data-options="align:bottom" href="javascript:void(0)" data-dropdown="download-dropdown">
-            <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download" {{bind-attr title="downloadPopupText"}}></span>          
-          </a>
-          <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
-            <li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
-            <li><a target="_blank" {{bind-attr href='downloadXmlUrl'}}>XML</a></li>
-            <li><a target="_blank" {{bind-attr href='downloadRf2Url'}}>RF2</a></li>
-          </ul>
-        </h2>
-      </div>
-      <!-- NAVIGATION -->
-      <nav class="small-4 medium-6 columns navigation top">
-        <div class="button-bar">
-          <ul class="button-group round">
-            <li>{{#link-to 'version' refset snapshot class="button secondary tiny"}}Associated Version{{/link-to}}</li>
-            <li>{{#link-to 'releases' refset class="button secondary tiny"}}Back to Releases{{/link-to}}</li>
-          </ul>
-        </div>
-      </nav>
+  <header class="sub row">
+    <!-- TITLE -->
+    <div class="small-8 medium-6 columns">
+      <h2 class="subheader">
+        <span>{{refset.title}}</span>
+        <a style="margin-left: 0.5em; color: skyblue" data-options="align:bottom" href="javascript:void(0)" data-dropdown="download-dropdown">
+          <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download" {{bind-attr title="downloadPopupText"}}></span>          
+        </a>
+        <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
+          <li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
+          <li><a target="_blank" {{bind-attr href='downloadXmlUrl'}}>XML</a></li>
+          <li><a target="_blank" {{bind-attr href='downloadRf2Url'}}>RF2</a></li>
+        </ul>
+      </h2>
     </div>
-    <div class="row">
-      <div class="description small-8 medium-6 columns">
-        <p style="color: grey">{{title}}</p>
+    <!-- NAVIGATION -->
+    <nav class="small-4 medium-6 columns navigation top">
+      <div class="button-bar">
+        <ul class="button-group round">
+          <li>{{#link-to 'version' refset snapshot class="button secondary tiny"}}Associated Version{{/link-to}}</li>
+          <li>{{#link-to 'releases' refset class="button secondary tiny"}}Back to Releases{{/link-to}}</li>
+        </ul>
       </div>
-    </div>
+    </nav>
   </header>
+  <div class="row">
+    <div class="description small-8 medium-6 columns">
+      <p style="color: grey">{{title}}</p>
+    </div>
+  </div> 
 
   <!-- ********** -->
   <!-- * ALERTS * -->

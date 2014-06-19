@@ -1,5 +1,5 @@
-import Refsets from 'appkit/models/refsets';
-import Concept from 'appkit/models/concept';
+import Refset from '../models/refset';
+import Concept from '../models/concept';
 
 export default Ember.ObjectController.extend({
   error: 'none',
@@ -67,12 +67,8 @@ export default Ember.ObjectController.extend({
     },    
     save: function() {
       Ember.Logger.log('Creating refset');
-      //this.set('controllers.cache.membersPage', '');
-      //this.set('controllers.cache.versionsPage', '');
-      //this.set('controllers.cache.releasesPage', '');
-      //return this.set('error', Refsets.createRefset(this.get('model'), this));
       var _this = this;
-      Refsets.createRefset(this.get('model')).
+      Refset.createRefset(this.get('model')).
         then(function(success){
           _this.transitionToRoute('members', _this.get('model'));
         }, 

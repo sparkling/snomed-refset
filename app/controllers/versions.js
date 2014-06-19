@@ -1,17 +1,17 @@
-import Tag from 'appkit/models/tag';
-import Version from 'appkit/models/version';
-import Alert from 'appkit/models/alert';
-import toEmberObject from 'appkit/utils/to_ember_object';
+import Tag from '../models/tag';
+import Version from '../models/version';
+import Alert from '../models/alert';
+import toEmberObject from '../utils/to_ember_object';
 
 export default Ember.ObjectController.extend({
   needs: ['refset'],
   
-  release:          undefined,
-  alert:            undefined,
-  error:            undefined,
+  release:          null,
+  alert:            null,
+  error:            null,
 
-  sortyBy:          undefined, 
-  sortOrder:        undefined,
+  sortyBy:          null, 
+  sortOrder:        null,
   filter:           '',
   pageSize:         10, 
   displaySetSize:   10,
@@ -19,7 +19,6 @@ export default Ember.ObjectController.extend({
 
   refset:       Ember.computed.alias('controllers.refset.model'),
   refsetName:   Ember.computed.alias('controllers.refset.model.publicId'),
-  //versionsPage: Ember.computed.alias('controllers.cache.versionsPage'),
 
   filterChange: function(){
       Ember.Logger.log('Filter by ' + this.get('filter'));

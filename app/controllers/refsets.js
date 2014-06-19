@@ -1,6 +1,5 @@
-import Refsets from 'appkit/models/refsets';
-import Refset from 'appkit/models/refset';
-import Alert from 'appkit/models/alert';
+import Refset from '../models/refset';
+import Alert from '../models/alert';
 
 export default Ember.ObjectController.extend({
   alert:            '',
@@ -15,7 +14,7 @@ export default Ember.ObjectController.extend({
       Ember.Logger.log('Filter by ' + this.get('filter'));
       this.toggleProperty('resetPagesSwitch');
       var _this = this;
-      Refsets.loadRefsets(this.get('sortBy'), this.get('sortOrder'), this.get('filter'), 0, this.get('pageSize')).
+      Refset.loadRefsets(this.get('sortBy'), this.get('sortOrder'), this.get('filter'), 0, this.get('pageSize')).
         then(function(page){
           _this.set('model', page);
         });
@@ -28,7 +27,7 @@ export default Ember.ObjectController.extend({
       this.set('sortBy', sortBy);
       this.set('sortOrder', sortOrder);
       var _this = this;
-      Refsets.loadRefsets(sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize')).
+      Refset.loadRefsets(sortBy, sortOrder, this.get('filter'), 0, this.get('pageSize')).
         then(function(page){
           _this.set('model', page);
         });
@@ -38,7 +37,7 @@ export default Ember.ObjectController.extend({
       Ember.Logger.log('Displaying page ' + index);
       //alert('sortBy: ' + this.get('sortBy') + ', sortOrder: ' + this.get('sortOrder') + ', filter: ' + this.get('filter'));
       var _this = this;
-      Refsets.loadRefsets(this.get('sortBy'), this.get('sortOrder'), this.get('filter'), index - 1, this.get('pageSize')).
+      Refset.loadRefsets(this.get('sortBy'), this.get('sortOrder'), this.get('filter'), index - 1, this.get('pageSize')).
         then(function(page){
           //alert('new model:' + JSON.stringify(page));
           _this.set('model', page);
@@ -68,7 +67,7 @@ export default Ember.ObjectController.extend({
             undoAlert.set('isError', false);
             undoAlert.set('showUndo', false);
             undoAlert.set('message', "Added back refset '" + refset.get('publicId') + "'");
-            Refsets.loadRefsets(_this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), 0, _this.get('pageSize')).
+            Refset.loadRefsets(_this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), 0, _this.get('pageSize')).
               then(function(page){
                 _this.set('model', page);
               });              
@@ -88,7 +87,7 @@ export default Ember.ObjectController.extend({
           Ember.Logger.log('Delete: success');
           alert.set('isError', false);
           alert.set('message', "Removed refset '" + refset.get('publicId') + "'");
-          Refsets.loadRefsets(_this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), 0, _this.get('pageSize')).
+          Refset.loadRefsets(_this.get('sortBy'), _this.get('sortOrder'), _this.get('filter'), 0, _this.get('pageSize')).
             then(function(page){
               _this.set('model', page);
             });                 

@@ -1,7 +1,6 @@
-import Authenticated from 'appkit/routes/authenticated';
-import Member from 'appkit/models/member';
-import Version from 'appkit/models/version';
-import Refset from 'appkit/models/refset';
+import Authenticated from '../routes/authenticated';
+import Member from '../models/member';
+import Version from '../models/version';
 
 export default Authenticated.extend({
 
@@ -15,7 +14,6 @@ export default Authenticated.extend({
       Member.getMembers(this.modelFor('refset').get('publicId'), "component.fullySpecifiedName", "ASC", "", 0, 10, this).
         then(function(page){
           _this.controllerFor('refset').set('membersPage', page);
-          //_this.set('model', page);
         });
     }
 

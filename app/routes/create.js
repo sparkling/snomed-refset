@@ -1,5 +1,5 @@
-import Refset from 'appkit/models/refset';  
-import Authenticated from 'appkit/routes/authenticated';
+import Refset from '../models/refset';  
+import Authenticated from '../routes/authenticated';
 
 export default Authenticated.extend({
   model: function() {

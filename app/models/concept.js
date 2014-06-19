@@ -1,7 +1,7 @@
 export default Ember.Object.extend({
-  id: '',
-  ontologyId: '',
-  title: '',
-  active: '',
-  effectiveTime: '',
+  id:             null,
+  ontologyId:     null,
+  title:          null,
+  active:         null,
+  effectiveTime:  null
 });

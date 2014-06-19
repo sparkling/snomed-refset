@@ -1,5 +1,5 @@
-import User from 'appkit/models/user';
-import toEmberObject from 'appkit/utils/to_ember_object';
+import User from '../models/user';
+import toEmberObject from '../utils/to_ember_object';
 
 export default Ember.Route.extend({
   
@@ -7,7 +7,7 @@ export default Ember.Route.extend({
     if (window.localStorage.user){
       controller.set('user', JSON.parse(window.localStorage.user));
     }
-  },  
+  },
 
   actions: {
     showModal: function(name) {

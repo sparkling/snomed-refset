@@ -1,12 +1,9 @@
-import Version from 'appkit/models/version';
-import Alert   from 'appkit/models/alert';
-import Member  from 'appkit/models/member';
-import baseUrl from 'appkit/utils/baseurl';
+import Version from '../models/version';
 
 export default Ember.ObjectController.extend({
   needs:            'refset',
   alert:            '',
-  membersPage:          '',
+  membersPage:      '',
   sortyBy:          undefined, 
   sortOrder:        undefined,  
   filter:           '',
@@ -23,15 +20,15 @@ export default Ember.ObjectController.extend({
   }.property('snapshot.size'),
 
   downloadJsonUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('snapshot.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.json';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/version/' + this.get('snapshot.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('snapshot.publicId') + '.json';
   }.property('refsetName', 'snapshot.publicId'),
 
   downloadXmlUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('snapshot.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.xml';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/version/' + this.get('snapshot.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('snapshot.publicId') + '.xml';
   }.property('refsetName', 'snapshot.publicId'),
 
   downloadRf2Url: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/version/' + this.get('snapshot.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('publicId') + '.rf2';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/version/' + this.get('snapshot.publicId') + '/' + this.get('refsetName') + '.version.' + this.get('snapshot.publicId') + '.rf2';
   }.property('refsetName', 'snapshot.publicId'),  
 
   //ACTIONS

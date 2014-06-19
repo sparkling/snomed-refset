@@ -1,14 +1,11 @@
-import Alert from 'appkit/models/alert';
-import toEmberObject from 'appkit/utils/to_ember_object';
-import baseUrl from 'appkit/utils/baseurl';
-
+import Alert from './alert';
+import toEmberObject from '../utils/to_ember_object';
 
 var Version = Ember.Object.extend({
   publicId:    '',
   title:       '',
   description: ''
 });
-
  
 Version.reopenClass({
 
@@ -20,7 +17,7 @@ Version.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/versions" +
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/versions" +
           "?sortBy="    + sortBy + 
           "&sortOrder=" + sortOrder +
           "&filter="    + filter +
@@ -31,7 +28,6 @@ Version.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        //return Ember.A(toEmberObject(success).get('versions'));
         return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
@@ -50,7 +46,7 @@ Version.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/version/" + versionPublicId,
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/version/" + versionPublicId,
         type: "GET",
         data: '',
         dataType: "json"
@@ -73,7 +69,7 @@ Version.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/version/" + versionPublicId + "/members" + 
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/version/" + versionPublicId + "/members" + 
             "?sortBy=" + sortBy + 
             "&sortOrder=" + sortOrder +
             "&filter=" + filter +
@@ -84,10 +80,6 @@ Version.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        //var page = Ember.Object.create();
-        //page.set('totalSize', success.totalSize);
-        //page.set('members', Ember.A(toEmberObject(success).get('members')));
-        //return page;
         return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
@@ -105,7 +97,7 @@ Version.reopenClass({
           Accept: "application/json; charset=utf-8",
                   "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/versions",
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/versions",
         type: "POST",
         data: JSON.stringify(version),
         dataType: "json"

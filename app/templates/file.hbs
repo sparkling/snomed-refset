@@ -1,0 +1,64 @@
+<!-- ********** -->
+<!-- * ALERTS * -->
+<!-- ********** -->
+<section id="alerts">
+  {{render 'undo-alert' controllers.refset.importPendingAlert}}
+</section>
+
+<!-- IMPORT TABS -->
+<div class="row field header">
+  <div class="small-12 columns">
+    <!-- TABS -->
+    <dl class="tabs" data-tab>
+      <dd class="active">
+        {{#link-to 'import.file'}}Import from File{{/link-to}}
+      </dd>
+      <dd>
+        {{#link-to 'import.search'}}Search Snomed{{/link-to}}
+      </dd>
+      <dd>
+        <a href="javascript:void(0)" style="color: grey">Import from Refset (coming)</a>
+        <!--{{#link-to 'import.refset'}}Import from Refset (coming){{/link-to}}-->
+      </dd>      
+    </dl>
+  </div>
+</div>
+
+<form {{action 'import' on="submit"}} id="import-file-form" enctype="multipart/form-data">
+  <!-- ****** -->
+  <!--  FILE  -->
+  <!-- ****** -->
+  <div class="row file">
+    <!-- FILE FORMAT -->
+    <div class="small-4 medium-3 columns file-format field">
+      <label {{bind-attr class=":form-group error.fieldErrors.fileType:error"}}>1. Choose Format</label>
+      {{view 'form-select'
+                  name="fileType"
+                  viewName="select"
+                  contentBinding="fileTypes"
+                  optionLabelPath="content.label"
+                  optionValuePath="content.id"
+                  value=content.fileType
+                  classNames="dropdown"
+                  }}
+      {{#each e in error.fieldErrors.fileType }}
+        <span class="error">{{e}}</span>
+      {{/each}}                  
+    </div><!-- columns file-format -->
+    <!-- UPLOAD -->
+    <div class="small-8 medium-9 columns file-selection field">
+      <label {{bind-attr class=":form-group error.fieldErrors.file:error"}}>2. Select File</label>
+      <input type="file" id="import-file" name="file">
+      {{#each e in error.fieldErrors.file }}
+        <span class="error">{{e}}</span>
+      {{/each}}
+    </div><!-- columns file-selection -->
+  </div><!-- row file -->
+  <!-- MAIN ACTION -->
+  <div class="row action main">
+    <div class="small-12 columns"> 
+      {{#link-to 'members' action='import' class="button small round"}}Import{{/link-to}}
+      {{#link-to 'members' class="button radius small secondary"}}Cancel{{/link-to}}
+    </div>
+  </div>     
+</form>

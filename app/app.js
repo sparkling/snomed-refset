@@ -1,16 +1,11 @@
 import Resolver from 'ember/resolver';
-import registerComponents from './initializers/register_components';
+import loadInitializers from 'ember/load-initializers';
+
+Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
-
-  LOG_ACTIVE_GENERATION: true,
-  LOG_MODULE_RESOLVER: true,
-  LOG_TRANSITIONS: true,
-  LOG_TRANSITIONS_INTERNAL: true,
-  LOG_VIEW_LOOKUPS: true,
-  LOG_BINDINGS: true,
-  modulePrefix: 'appkit', // TODO: loaded via config
-  Resolver: Resolver['default'],
+  modulePrefix: 'snomed-refset-cli', // TODO: loaded via config
+  Resolver: Resolver,
 
   ready: function() {
     return Ember.Logger.log('App.ready()');
@@ -26,18 +21,10 @@ var App = Ember.Application.extend({
   },
   lookupContainer: function() {
     return this.__container__;
-  }
+  }  
 });
 
-//Ember.View.reopen({
-//  didInsertElement : function(){
-//    this._super();
-//    Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
-//  },
-//  afterRenderEvent : function(){
-    // implement this hook in your own subclasses and run your jQuery logic there
-//  }
-//});
+loadInitializers(App, 'snomed-refset-cli');
 
 Ember.Handlebars.registerHelper("ifAllowed", function(activity, fn)
 {
@@ -57,7 +44,6 @@ Ember.Handlebars.registerHelper("ifAllowed", function(activity, fn)
   return Em.Handlebars.bind.call(context, activity, fn, true, func, func);
 
 });
-
 
 // See:
 // https://stackoverflow.com/questions/16124381/combine-linkto-and-action-helpers-in-ember-js

@@ -1,6 +1,6 @@
-import Authenticated from 'appkit/routes/authenticated';
-import Version from 'appkit/models/version';
-import Tag from 'appkit/models/tag';
+import Authenticated from './authenticated';
+import Version from '../models/version';
+import Tag from '../models/tag';
 
 export default Authenticated.extend({
 

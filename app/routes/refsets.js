@@ -1,14 +1,12 @@
-import Authenticated from 'appkit/routes/authenticated';
-import Refsets from 'appkit/models/refsets';
+import Authenticated from '../routes/authenticated';
+import Refset from '../models/refset';
 
 export default Authenticated.extend({
   model: function() {
-    //alert('in model');
-    return Refsets.loadRefsets("title", "ASC", "", 0, 10);
+    return Refset.loadRefsets("title", "ASC", "", 0, 10);
   },
 
   setupController: function (controller, model) {
-    //alert('in setupController');
     this._super(controller, model);
     controller.set('sortBy', "title");
     controller.set('sortOrder', 'ASC');

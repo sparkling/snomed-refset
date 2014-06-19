@@ -1,12 +1,10 @@
-import Member from 'appkit/models/member';
-import Alert from 'appkit/models/alert';
+import Member from '../../models/member';
+import Alert from '../../models/alert';
 
 export default Ember.ArrayController.extend({
   error: '',
   alert: '',
   needs: ['refset','members'],
-
-  //refset:     Ember.computed.alias('controllers.refset.model'),
 
   hasContent: function(){
     //Ember.Logger.log('model is size ' + this.get('model').length);

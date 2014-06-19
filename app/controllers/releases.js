@@ -1,6 +1,5 @@
-import Tag from 'appkit/models/tag';
-import Alert from 'appkit/models/alert';
-import toEmberObject from 'appkit/utils/to_ember_object';
+import Tag from '../models/tag';
+import Alert from '../models/alert';
 
 export default Ember.ObjectController.extend({
   needs: ['refset'],

@@ -1,8 +1,7 @@
-import toEmberObject from 'appkit/utils/to_ember_object';
-import Alert from 'appkit/models/alert';
-import Member from 'appkit/models/member';
-import Version from 'appkit/models/version';
-import baseUrl from 'appkit/utils/baseurl';
+import toEmberObject from '../utils/to_ember_object';
+import Alert from '../models/alert';
+import Member from '../models/member';
+import Version from '../models/version';
 
 export default Ember.ObjectController.extend({
   needs: ['refset'],
@@ -20,7 +19,6 @@ export default Ember.ObjectController.extend({
   refset:     Ember.computed.alias('controllers.refset.model'),
   refsetName: Ember.computed.alias('controllers.refset.model.publicId'),
   memberSize: Ember.computed.alias('controllers.refset.model.memberSize'),
-//  membersPage: Ember.computed.alias('controllers.cache.membersPage'),
 
   hasPendingChanges: function(){
     return this.get('refset.pendingChanges');
@@ -32,15 +30,15 @@ export default Ember.ObjectController.extend({
   }.property('memberSize'),
 
   downloadJsonUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.json';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.json';
   }.property('refsetName'),
 
   downloadXmlUrl: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.xml';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.xml';
   }.property('refsetName'),
 
   downloadRf2Url: function(){
-    return baseUrl() + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.rf2';
+    return ENV.APP.apiBaseUrl + '/' + this.get('refsetName') + '/members/' + this.get('refsetName') + '.unversioned.rf2';
   }.property('refsetName'), 
 
   //ACTIONS
@@ -201,28 +199,4 @@ export default Ember.ObjectController.extend({
       }, 250);
     }
   }
-    //showModal: function(){
-    //  $('#commitModal').data('reveal-init', {
-    //      animation: 'fadeAndPop',
-    //      animation_speed: 250,
-    //      close_on_background_click: false,
-    //      close_on_esc: false,
-    //      dismiss_modal_class: 'close-reveal-modal',
-    //      bg_class: 'reveal-modal-bg',
-    //      bg : $('.reveal-modal-bg'),
-    //      css : {
-    //          open : {
-    //              'opacity': 0,
-    //              'visibility': 'visible',
-    //              'display' : 'block'
-    //          },
-    //          close : {
-    //              'opacity': 1,
-    //              'visibility': 'hidden',
-    //              'display': 'none'
-    //          }
-    //      }
-    //  });
-    //  $('#commitModal').foundation('reveal', 'open');
-    //},
 });

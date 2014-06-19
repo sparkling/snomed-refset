@@ -1,5 +1,5 @@
-import Authenticated from 'appkit/routes/authenticated';
-import Member from 'appkit/models/member';
+import Authenticated from './authenticated';
+import Member from '../models/member';
 
 export default Authenticated.extend({
 

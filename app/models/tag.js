@@ -1,7 +1,4 @@
-import Alert from 'appkit/models/alert';
-import Version from 'appkit/models/version';
-import toEmberObject from 'appkit/utils/to_ember_object';
-import baseUrl from 'appkit/utils/baseurl';
+import toEmberObject from '../utils/to_ember_object';
 
 
 var Tag = Ember.Object.extend({
@@ -23,7 +20,7 @@ Tag.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/tags" +
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/tags" +
           "?sortBy="    + sortBy + 
           "&sortOrder=" + sortOrder +
           "&filter="    + filter +
@@ -34,7 +31,6 @@ Tag.reopenClass({
         dataType: "json"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        //return Ember.A(toEmberObject(success).get('tags'));
         return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
@@ -52,7 +48,7 @@ Tag.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/tag/" + releasePublicId,
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/tag/" + releasePublicId,
         type: "GET",
         data: '',
         dataType: "json"
@@ -74,7 +70,7 @@ Tag.reopenClass({
         Accept: "application/json; charset=utf-8",
                 "Content-Type": "application/json; charset=utf-8"
       },
-      url: baseUrl() + "/" + refsetPublicId + "/tags",
+      url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/tags",
       type: "POST",
       data: JSON.stringify(tag),
       dataType: "json"
@@ -94,7 +90,7 @@ Tag.reopenClass({
         Accept: "application/json; charset=utf-8",
                 "Content-Type": "application/json; charset=utf-8"
       },
-      url: baseUrl() + "/" + refsetPublicId + "/tag/" + tag.get('publicId'),
+      url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/tag/" + tag.get('publicId'),
       type: "DELETE",
       data: '',
       dataType: "json"

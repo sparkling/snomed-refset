@@ -15,9 +15,11 @@
                              valueBinding="source"
                              classNames="dropdown"
                              disabled="disabled"}}
-        {{#each e in error.fieldErrors.source}}
-          <span class="error">{{e}}</span>
-        {{/each}}
+        <span class="errors">
+          {{#each e in error.fieldErrors.source}}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </span>
       </div>
       <div class="field type small-4 medium-3 small-pull-4 medium-pull-6 columns">
         <label {{bind-attr class="error.fieldErrors.type:error"}}>Type</label>
@@ -27,18 +29,22 @@
                             valueBinding="content.type"
                             classNames="dropdown"
                             disabled="disabled"}}
-        {{#each e in error.fieldErrors.type}}
-          <span class="error">{{e}}</span>
-        {{/each}}                            
+        <span class="errors">
+          {{#each e in error.fieldErrors.type}}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </span>        
       </div>
     </div>
     <div class="row">
       <div class="field title small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.title:error"}}>Title</label>
         {{input type="text" name="title" value=title placeholder="Please give a title"}}
-        {{#each e in error.fieldErrors.title }}
-          <span class="error">{{e}}</span>
-        {{/each}}
+        <span class="errors">
+          {{#each e in error.fieldErrors.title }}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </span>
       </div>
     </div>
 
@@ -46,9 +52,11 @@
       <div class="field description small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.description:error"}}>Description</label>
         {{textarea name="description" value=description placeholder="Please give a description"}}
-        {{#each e in error.fieldErrors.description }}
-          <span class="error">{{e}}</span>
-        {{/each}}
+        <span class="errors">
+          {{#each e in error.fieldErrors.description }}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </span>
       </div>
     </div>
 
@@ -57,9 +65,11 @@
         <label {{bind-attr class="error.fieldErrors.publicId:error"}}>Internet address</label>
         {{input type="text" name="publicId" value=publicId placeholder="Please give an internet address"}}
         <label class="preview">http://refset.snomedtool.com/refsets/{{publicId}}</label>
-        {{#each e in error.fieldErrors.publicId }}
-          <span class="error">{{e}}</span>
-        {{/each}}        
+        <span class="errors">
+          {{#each e in error.fieldErrors.publicId }}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </span>
       </div>
     </div>
     <div class="row release">
@@ -83,25 +93,31 @@
 
           </div>      
         </div>
-        {{#each e in error.fieldErrors.snomedReleaseDate}}
-        <div class="field">
-          <span class="error">{{e}}</span>
-        </div>
-        {{/each}}
-        {{#each e in error.fieldErrors.snomedExtension}}
-        <div class="field">
-          <span class="error">{{e}}</span>
-        </div>
-        {{/each}}        
+        <span class="errors">
+          {{#each e in error.fieldErrors.snomedReleaseDate}}
+          <div class="field">
+            <span class="error">{{e}}</span>
+          </div>
+          {{/each}}
+        </span>
+        <span class="errors">
+          {{#each e in error.fieldErrors.snomedExtension}}
+          <div class="field">
+            <span class="error">{{e}}</span>
+          </div>
+          {{/each}}
+        </span>
       </div> <!-- columns -->
     </div> <!-- row -->
     <div class="row">
       <div class="field module small-12 medium-10 large-8 columns">
         <label {{bind-attr class="error.fieldErrors.moduleConcept:error"}}>Default Module</label>
         {{select-two action="changeModuleConcept" identifier=moduleSelectId version_flavour=snomedExtension version_date=snomedReleaseDate}}
-        {{#each e in error.fieldErrors.moduleConcept}}
-          <span class="error">{{e}}</span>
-        {{/each}}        
+        <span class="errors">
+          {{#each e in error.fieldErrors.moduleConcept}}
+            <span class="error">{{e}}</span>
+          {{/each}}
+        </span>
       </div>
     </div>
     <div class="row">
@@ -122,9 +138,11 @@
           <div class="content" id="panel-new">
             <p style="color: grey">Coming soon...</p>
           </div-->
-          {{#each e in error.fieldErrors.refsetConcept}}
-            <span class="error">{{e}}</span>
-          {{/each}}
+          <span class="errors">
+            {{#each e in error.fieldErrors.refsetConcept}}
+              <span class="error">{{e}}</span>
+            {{/each}}
+          </span>
         <!--/div-->
       </div>
     </div>

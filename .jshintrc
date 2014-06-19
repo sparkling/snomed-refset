@@ -1,14 +1,18 @@
 {
-  "predef": [
-    "document",
-    "window",
-    "location",
-    "setTimeout",
-    "Ember",
-    "Em",
-    "DS",
-    "$"
-  ],
+  "predef": {
+    "document": true,
+    "window": true,
+    "location": true,
+    "setTimeout": true,
+    "Ember": true,
+    "Em": true,
+    "DS": true,
+    "$": true,
+    "ENV": true,
+    "module": true,
+    "moment": true,
+    "foundation": true
+  },
   "node" : false,
   "browser" : false,
   "boss" : true,
@@ -33,5 +37,6 @@
   "strict": false,
   "white": false,
   "eqnull": true,
-  "esnext": true
+  "esnext": true,
+  "unused": true
 }

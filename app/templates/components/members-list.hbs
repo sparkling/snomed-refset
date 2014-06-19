@@ -79,19 +79,18 @@
                 {{/if}}
                 {{#if controller.showComponent}}
                 <td>
-                  <!--a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{member.component.title}}</a-->
                   {{component-link member.component}}
                 </td>
                 {{/if}}
                 {{#if controller.showModule}}
                 <td>
-                  <!--a href="https://browser.snomedtools.com/version/1/concept/285326004" target="_blank">{{member.module.title}}</a-->
-                  <!--a href="javascript:void(0)">{{member.module.title}}</a-->
                   {{component-link member.module}}
                 </td>
-                {{/if}}                
+                {{/if}}
                 {{#if controller.showEffective}}
-                <td>{{date-format member.effective}}</td>
+                <td>
+                  {{date-format member.effective}}
+                </td>
                 {{/if}}
                 <td class="info">
                   {{#link-to 'member' member}}<span class="fa fa-info-circle"></span>{{/link-to}}

@@ -1,12 +1,3 @@
-export default Ember.View.extend({
-  didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this, 'processChildElements');
-  },
+import Foundation from './foundation';
 
-  processChildElements: function() {
-    this.$('select.dropdown').easyDropDown({});
-    setTimeout(function(){
-        Em.$(document).foundation();
-    }, 250);    
-  }
-});
+export default Foundation.extend({});

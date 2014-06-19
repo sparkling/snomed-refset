@@ -12,7 +12,7 @@
           {{#link-to 'members' refset}}Refset{{/link-to}}
         </li>        
         <li>
-          {{#link-to 'versions' refset}}versions{{/link-to}}
+          {{#link-to 'versions' refset}}Versions{{/link-to}}
         </li>        
         <li class="current">
           <a href="javascript:void(0)">{{title}}</a>
@@ -24,34 +24,32 @@
 
 <section class="version">
   <!-- HEADING -->
-  <header class="sub">
-    <div class="row">
-      <!-- TITLE -->
-      <div class="small-8 medium-6 columns">
-        <h2 class="subheader">
-          <span>{{refset.title}}</span>
-          <a style="margin-left: 0.5em; color: skyblue" data-options="align:bottom" href="javascript:void(0)" data-dropdown="download-dropdown">
-            <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download" {{bind-attr title="downloadPopupText"}}></span>          
-          </a>
-          <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
-            <li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
-            <li><a target="_blank" {{bind-attr href='downloadXmlUrl'}}>XML</a></li>
-            <li><a target="_blank" {{bind-attr href='downloadRf2Url'}}>RF2</a></li>
-          </ul>
-        </h2>
-      </div>
-      <!-- NAVIGATION -->
-      <nav class="small-6 medium-6 columns navigation top">
-        {{#link-to 'versions' refset class="single button secondary round tiny"}}Return to Versions{{/link-to}}
-      </nav>
+  <header class="row sub">
+    <!-- TITLE -->
+    <div class="small-8 medium-6 columns">
+      <h2 class="subheader">
+        <span>{{refset.title}}</span>
+        <a style="margin-left: 0.5em; color: skyblue" data-options="align:bottom" href="javascript:void(0)" data-dropdown="download-dropdown">
+          <span data-tooltip data-selector="download" data-options="disable_for_touch:false" class="tip-top radius fa fa-cloud-download" {{bind-attr title="downloadPopupText"}}></span>          
+        </a>
+        <ul id="download-dropdown" class="f-dropdown" data-dropdown-content>
+          <li><a target="_blank" {{bind-attr href='downloadJsonUrl'}}>JSON</a></li>
+          <li><a target="_blank" {{bind-attr href='downloadXmlUrl'}}>XML</a></li>
+          <li><a target="_blank" {{bind-attr href='downloadRf2Url'}}>RF2</a></li>
+        </ul>
+      </h2>
     </div>
+    <!-- NAVIGATION -->
+    <nav class="small-6 medium-6 columns navigation top">
+      {{#link-to 'versions' refset class="single button secondary round tiny"}}Return to Versions{{/link-to}}
+    </nav>
+
+  </header>
     <div class="row">
       <div class="description small-8 medium-6 columns">
         <p style="color: grey">{{title}}</p>
       </div>
     </div>
-  </header>
-
 <!-- ********** -->
 <!-- * ALERTS * -->
 <!-- ********** -->

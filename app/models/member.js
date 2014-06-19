@@ -1,7 +1,5 @@
-import Alert from 'appkit/models/alert';
-import toEmberObject from 'appkit/utils/to_ember_object';
-import baseUrl from 'appkit/utils/baseurl';
-
+import toEmberObject from '../utils/to_ember_object';
+import Alert from './alert';
 
 var Member = Ember.Object.extend({
   publicId:  '',
@@ -11,7 +9,6 @@ var Member = Ember.Object.extend({
   active:    '',
   effective: ''
 });
-
  
 Member.reopenClass({
 
@@ -22,7 +19,7 @@ Member.reopenClass({
         Accept: "application/json; charset=utf-8",
                 "Content-Type": "application/json; charset=utf-8"
       },
-      url: baseUrl() + "/" + refsetPublicId + "/members/" + member.get('publicId'),
+      url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/members/" + member.get('publicId'),
       type: "DELETE",
       data: '',
       dataType: "json"
@@ -42,7 +39,7 @@ Member.reopenClass({
         Accept: "application/json; charset=utf-8",
                 "Content-Type": "application/json; charset=utf-8"
       },
-      url: baseUrl() + "/" + refsetPublicId + "/members?type=list",
+      url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/members?type=list",
       type: "POST",
       data: JSON.stringify(members),
       dataType: "json"
@@ -59,14 +56,13 @@ Member.reopenClass({
     Ember.Logger.log('Ajax: Import');
     return Ember.Deferred.promise(function(p) {
       return p.resolve($.ajax({
-        url: baseUrl() + '/' + refsetPublicId + '/members?type=file',
+        url: ENV.APP.apiBaseUrl + '/' + refsetPublicId + '/members?type=file',
         type: "POST",
         processData: false,
         contentType: false,
         data: new window.FormData(formElement)
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
-        //return toEmberObject(success);
       }), function(error) {
         Ember.Logger.log('Ajax: error');
         return toEmberObject(JSON.parse(error.responseText)); 
@@ -82,7 +78,7 @@ Member.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/members/" + memberId,
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/members/" + memberId,
         type: "GET",
         data: '',
         dataType: "json"
@@ -105,7 +101,7 @@ Member.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: baseUrl() + "/" + refsetPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&filter=" + filter + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize,
+        url: ENV.APP.apiBaseUrl + "/" + refsetPublicId + "/members?sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&filter=" + filter + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize,
         type: "GET",
         data: '',
         dataType: "json"

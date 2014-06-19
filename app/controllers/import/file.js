@@ -1,6 +1,5 @@
-import toEmberObject from 'appkit/utils/to_ember_object';
-import Member from 'appkit/models/member';
-import Alert from 'appkit/models/alert';
+import Member from '../../models/member';
+import Alert from '../../models/alert';
 
 export default Ember.Controller.extend({
   needs: ['refset','members'],

@@ -1,3 +1,5 @@
+{{partial "modal/commit"}}
+
 <!-- ************** -->
 <!-- * HEADER NAV * -->
 <!-- ************** -->
@@ -15,47 +17,6 @@
     </div>
   </nav>
 </header>
-
-<!-- COMMIT MODAL -->
-<div id="createVersionModal" class="reveal-modal" data-reveal>
-  <section id="new-version fields"> 
-    <div class="row">
-      <div class="large-12 columns">
-        <h2 class="subheader">Create a new version</h2>
-      </div>
-    </div>
-    <form class="form-group" {{action 'createVersion' on="submit"}}>
-
-      <div class="row">
-        <div class="field title small-12 medium-10 large-8 columns">
-          <label {{bind-attr class="error.fieldErrors.title:error"}}>Title</label>
-          {{input type="text" name="title" value=version.title placeholder="Please give a title"}}
-          {{#each e in error.fieldErrors.title }}
-            <span class="error">{{e}}</span>
-          {{/each}}
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field description small-12 medium-10 large-8 columns">
-          <label {{bind-attr class="error.fieldErrors.description:error"}}>Description</label>
-          {{textarea name="description" value=version.description placeholder="Please give a description"}}
-          {{#each e in error.fieldErrors.description }}
-            <span class="error">{{e}}</span>
-          {{/each}}
-        </div>
-      </div>
-
-      <div class="row action main bottom">
-        <div class="small-12 columns">
-          <button type="submit" class="button radius small">Create Version</button>
-          <button {{action 'cancelCommitModal'}} type="submit" class="button radius small secondary">Cancel</button>
-        </div>
-      </div>    
-    </form>
-  </section>
-</div>
-
 
 <!-- HEADING -->
 <header class="row sub">
@@ -78,7 +39,6 @@
       <ul class="button-group round">
         <li>
           <a href="javascript:void(0)" class="secondary button tiny releases disabled">Rules (coming)</a>
-          <!--{{#link-to 'details'  class="secondary button tiny details disabled"}}Details (coming){{/link-to}}-->
         </li>        
         <li>{{#link-to 'members'  class="secondary button tiny members disabled"}}Members{{/link-to}}</li>
         <li>{{#link-to 'versions' class="secondary button tiny versions"}}Versions{{/link-to}}</li>
@@ -114,8 +74,9 @@
   {{/if}}
   {{render 'undo-alert' alert}}
 </section>
-{{members-list showDeleteMember=showDeleteMember totalMembers=controllers.refset.membersPage.totalSize members=controllers.refset.membersPage.members pageSize=pageSize changePage="changePage" sortMembers="sortMembers" deleteMember="delete" doFilter="doFilter"}}
-  
+
+{{members-list showDeleteMember=showDeleteMember totalMembers=controllers.refset.membersPage.totalSize members=controllers.refset.membersPage.members pageSize=pageSize changePage="changePage" sortMembers="sortMembers" deleteMember="delete" doFilter="doFilter"}}  
+
 <!-- MAIN ACTION -->
 <div class="main action pagination row bottom">
   <!-- ADD ICON -->

@@ -1,30 +1,25 @@
-import toEmberObject from 'appkit/utils/to_ember_object';
+import toEmberObject from '../utils/to_ember_object';
 
 var Login = Ember.Object.extend({
-  username: null,
-  password: null,
+  username:     null,
+  password:     null,
   errorMessage: null
 });
 
 Login.reopenClass({
   authenticate: function(username, password) { 
     Ember.Logger.log('Ajax: authenticate');
-
     var data = {};
     data['username']  = username;
     data['password']  = password;
-    data['queryName'] = 'getUserByNameAuth';
+    data['queryName'] = ENV.APP.authenticationActionSoapName;
     
     return Ember.Deferred.promise(function(p) {
-      //return new Ember.RSVP.Promise(function(resolve, reject){
-      //  resolve('success');
-      //});
       return p.resolve($.ajax({
-        url: 'https://usermanagement.ihtsdotools.org/security-web/query/',
+        url: ENV.APP.authenticationUrl,
         type: "POST",
         data: data
       }).then((function(success) {
-        //alert(JSON.stringify(success));
         Ember.Logger.log('Ajax: success');
         return toEmberObject(success);
       }), function(error) {
@@ -42,7 +37,7 @@ Login.reopenClass({
           Accept: "application/json; charset=utf-8",
           "Content-Type": "application/json; charset=utf-8"
         },
-        url: 'https://usermanagement.ihtsdotools.org/security-web/query/users/' + userId + '/apps/Refset',
+        url: ENV.APP.permissionsUrl.replace('__USER_ID__', userId),
         type: "GET"
       }).then((function(success) {
         Ember.Logger.log('Ajax: success');
@@ -56,6 +51,5 @@ Login.reopenClass({
   },
 
 });
-
 
 export default Login;

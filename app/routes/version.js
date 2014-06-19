@@ -1,5 +1,5 @@
-import Authenticated from 'appkit/routes/authenticated';
-import Version from 'appkit/models/version';
+import Authenticated from './authenticated';
+import Version from '../models/version';
 
 export default Authenticated.extend({
   model: function(params) {

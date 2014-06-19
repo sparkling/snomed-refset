@@ -1,5 +1,5 @@
-import Authenticated from 'appkit/routes/authenticated';
-import Tag from 'appkit/models/tag';
+import Authenticated from './authenticated';
+import Tag from '../models/tag';
 
 export default Authenticated.extend({
   setupController: function(controller, model){

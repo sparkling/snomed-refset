@@ -1,4 +1,4 @@
-import Login from 'appkit/models/login';
+import Login from '../models/login';
 
 export default  Ember.Route.extend({
   model: function(params) {
