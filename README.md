@@ -24,10 +24,9 @@ You can install using the apt package manager, following [these instructions]()
         npm install -g bower
         npm update -g bower
         
-- Less, the css pre-processor
+- Ember CLI, the ember framework tool
 
-        npm install -g less
-
+        npm install -g ember-cli
 ###Create new user
 Create a new user account for running the refset app, and login with this new user before continuing
 
@@ -41,13 +40,10 @@ Create a new user account for running the refset app, and login with this new us
     cd snomed-refset
     npm install
     bower install
-    
-###Start the application
-Start the Grunt web server
+###Build the application
 
-    nohup grunt server &
-    
+    ember build --environment=production
+
 ###Configure an Nginx proxy for the app
-Follow [these instructions](https://github.com/IHTSDO/snomed-publish/tree/master/config/nginx) for how to set up nginx. The Nginx configuration file can also be found at this location.
-    
-    
+
+Follow [these instructions](https://github.com/IHTSDO/snomed-publish/tree/master/config/nginx) for how to set up nginx. The Nginx configuration file for the ember app can also be found at this location.
