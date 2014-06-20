@@ -27,6 +27,7 @@ You can install using the apt package manager, following [these instructions]()
 - Ember CLI, the ember framework tool
 
         npm install -g ember-cli
+
 ###Create new user
 Create a new user account for running the refset app, and login with this new user before continuing
 
