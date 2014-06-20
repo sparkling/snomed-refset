@@ -48,7 +48,7 @@ Create a new user account for running the refset app, and login with this new us
 ###Using a CDN
 It is highly reccomended that you use a CDN for delivering the app resources for optimal resource loading and page speed, as the initial page load is about 1Mb in size. You are free to choose any CDN provider you wish. 
 
-In order to build the app with the correct CDN URL, you need to modify the [Brocoli build file](https://github.com/IHTSDO/snomed-refset/blob/master/package.json) to include this section:
+In order to build the app with the correct CDN URL, you need to modify the [Brocoli build file](https://github.com/IHTSDO/snomed-refset/blob/master/Brocfile.js) to include this section:
 
     fingerprint: {
       enabled: true,
